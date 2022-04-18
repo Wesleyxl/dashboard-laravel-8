@@ -1,0 +1,45 @@
+/** GERAL **/
+.card {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+table button {
+    width: 100%;
+    max-width: 75px;
+}
+.table th, table td {
+    text-align: center;
+}
+.table td {
+    vertical-align: initial;
+}
+
+table tr:hover {
+    background-color: rgba(0,0,0,.1) !important;
+}
+
+.table .table-icons {
+    width: 82px;
+    display: flex;
+    justify-content: space-between;
+}
+.table .table-icons a,
+.table .table-icons button {
+    max-width: 40px;
+}
+
+.card .card-header {
+    height: 50px;
+}
+.card .card-header .input-group {
+    max-width: 300px;
+    height: 38px;
+    position: absolute;
+    right: 15px;
+    top: calc(19px - 25%);
+}
+.card .card-header .input-group button {
+    position: absolute;
+    right: 0;
+    z-index: 10;
+}

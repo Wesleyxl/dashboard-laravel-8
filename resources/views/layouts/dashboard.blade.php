@@ -260,8 +260,8 @@
                             <!-- end highlights -->
 
                             <!-- company -->
-                            <li class="nav-item @yield('li-company')">
-                                <a href="#" class="nav-link @yield('a-company')">
+                            <li class="nav-item @yield('ul-company')">
+                                <a href="#" class="nav-link @yield('li-company')">
                                     <i class="fas fa-building nav-icon"></i>
                                     <p>
                                         Empresas

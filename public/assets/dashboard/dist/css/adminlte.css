@@ -211,6 +211,9 @@ svg {
 table {
   border-collapse: collapse;
 }
+table th, table td {
+  text-align: center;
+}
 
 caption {
   padding-top: 0.75rem;
