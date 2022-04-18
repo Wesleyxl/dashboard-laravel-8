@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Dashboard\HomeController as DashboardHomeController;
+use App\Http\Controllers\Website\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+// developer only
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +19,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::prefix('adm')->group(function () {
+        Route::get('/', [DashboardHomeController::class, 'index'])->name('dashboard-home');
+    });
+});
+
+Route::prefix('/')->group(function () {
+
+    Route::get('/', [HomeController::class, 'index'])->name('website-home');
+});
+
+
+// developer only
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/password/{pass}', function ($pass) {
+
+    $password = Hash::make($pass);
+
+    return response($password);
+});
