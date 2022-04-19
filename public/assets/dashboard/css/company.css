@@ -43,3 +43,12 @@ table tr:hover {
     right: 0;
     z-index: 10;
 }
+
+
+/*create area */
+form .card {
+    margin-bottom: 15px;
+}
+form .card label {
+    margin-bottom: 0;
+}
