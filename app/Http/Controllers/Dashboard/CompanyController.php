@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Company;
 use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
@@ -25,7 +26,10 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('dashboard.empresa.home');
+        $companies = Company::get()->all();
+        return view('dashboard.company.home', array(
+            'companies' => $companies
+        ));
     }
 
     /**
@@ -35,7 +39,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('dashboard.empresa.create');
+        return view('dashboard.company.create');
     }
 
     /**
@@ -63,7 +67,11 @@ class CompanyController extends Controller
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
-        dd($request->all());
+        if (Company::create($request->all())) {
+            return redirect('adm/empresa')->with('success', 'Empresa cadastrada com sucesso!');
+        } else {
+            return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
+        }
     }
 
     /**
@@ -74,7 +82,6 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -85,7 +92,11 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company = Company::find($id);
+
+        return view('dashboard.company.edit', array(
+            'company' => $company
+        ));
     }
 
     /**
@@ -97,7 +108,28 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:256',
+            'email' => 'required|string|email',
+            'code' => 'string',
+            'description' => 'required|string|min:3',
+            'cep' => 'required|string',
+            'uf' => 'required|string',
+            'city' => 'required|string',
+            'neighborhood' => 'required|string',
+            'street' => 'required|string',
+            'number' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator->errors());
+        }
+
+        if (Company::edit($request->all(), $id)) {
+            return redirect('adm/empresa')->with('success', 'Empresa editada com sucesso!');
+        } else {
+            return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
+        }
     }
 
     /**
@@ -108,6 +140,15 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $company = Company::find($id);
+
+        try {
+            //code...
+            $company->delete();
+            return redirect()->back()->with('warning', 'Empresa deletada com sucesso!');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
+        }
     }
 }

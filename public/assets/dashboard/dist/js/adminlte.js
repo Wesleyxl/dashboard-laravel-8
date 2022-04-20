@@ -20,65 +20,6 @@
             : { default: e };
     }
 
-    // search cep
-    $("#search-cep").click(function () {
-        var cep = $("#cep")
-            .val()
-            .replace(/[^0-9]/, "");
-        // console.log(cep);
-
-        if (cep) {
-            var url = "https://viacep.com.br/ws/" + cep + "/json/";
-            $.ajax({
-                url: url,
-                dataType: "jsonp",
-                crossDomain: true,
-                contentType: "application/json",
-                success: function (json) {
-                    if (json.logradouro) {
-                        $("input[name=street]").val(json.logradouro);
-                        $("input[name=neighborhood]").val(json.bairro);
-                        $("input[name=city]").val(json.localidade);
-
-                        $("#uf > option").each(function () {
-                            if (this.value === json.uf) {
-                                $(this).prop("selected", true);
-                            }
-                        });
-                    }
-                },
-            });
-        }
-    });
-
-    $("#reply-sun-to-fri").on("click", function () {
-        var from = $("#monday-from").val();
-        var to = $("#monday-to").val();
-        var lunchFrom = $("#monday-lunch-from").val();
-        var lunchTo = $("#monday-lunch-to").val();
-
-        $("#tuesday-from").val(from);
-        $("#tuesday-to").val(to);
-        $("#tuesday-lunch-from").val(lunchFrom);
-        $("#tuesday-lunch-to").val(lunchTo);
-
-        $("#wednesday-from").val(from);
-        $("#wednesday-to").val(to);
-        $("#wednesday-lunch-from").val(lunchFrom);
-        $("#wednesday-lunch-to").val(lunchTo);
-
-        $("#thursday-from").val(from);
-        $("#thursday-to").val(to);
-        $("#thursday-lunch-from").val(lunchFrom);
-        $("#thursday-lunch-to").val(lunchTo);
-
-        $("#friday-from").val(from);
-        $("#friday-to").val(to);
-        $("#friday-lunch-from").val(lunchFrom);
-        $("#friday-lunch-to").val(lunchTo);
-
-    });
-
     var $__default = /*#__PURE__*/ _interopDefaultLegacy($);
 
     /**

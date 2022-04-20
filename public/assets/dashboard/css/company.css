@@ -44,6 +44,9 @@ table tr:hover {
     z-index: 10;
 }
 
+.fade {
+    transition: opacity 0.5s linear !important;
+}
 
 /*create area */
 form .card {
@@ -56,3 +59,4 @@ form .card label {
 form .img-area img {
     max-width: 400px;
 }
+

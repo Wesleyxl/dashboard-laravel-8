@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="{{ URL::to('/assets/dashboard/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ URL::to('/assets/dashboard/plugins/summernote/summernote-bs4.min.css') }}">
+
+    <!-- jQuery -->
+    <script src="{{ URL::to('/assets/dashboard/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ URL::to('/assets/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </head>
 <body class="sidebar-mini layout-fixed layout-navbar-fixed">
     <div class="wrapper">
@@ -385,16 +390,12 @@
         </div>
         <!-- ./wrapper -->
 
-        <!-- jQuery -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/jquery/jquery.min.js') }}"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="{{ URL::to('/assets/dashboard/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
             $.widget.bridge('uibutton', $.ui.button)
         </script>
-        <!-- Bootstrap 4 -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- ChartJS -->
         <script src="{{ URL::to('/assets/dashboard/plugins/chart.js/Chart.min.js') }}"></script>
         <!-- Sparkline -->

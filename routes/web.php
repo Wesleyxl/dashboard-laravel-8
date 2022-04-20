@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('store', [DashboardBannerController::class, 'store'])->name('dashboard-banner-store');
             Route::get('editar/{id}', [DashboardBannerController::class, 'edit'])->name('dashboard-banner-edit');
             Route::post('update/{id}', [DashboardBannerController::class, 'update'])->name('dashboard-banner-update');
-            Route::post('delete/{id}', [DashboardBannerController::class, 'destroy'])->name('dashboard-banner-destroy');
+            Route::get('delete/{id}', [DashboardBannerController::class, 'destroy'])->name('dashboard-banner-destroy');
         });
 
         Route::prefix('empresa')->group(function () {
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('store', [DashboardCompanyController::class, 'store'])->name('dashboard-company-store');
             Route::get('editar/{id}', [DashboardCompanyController::class, 'edit'])->name('dashboard-company-edit');
             Route::post('update/{id}', [DashboardCompanyController::class, 'update'])->name('dashboard-company-update');
-            Route::post('delete/{id}', [DashboardCompanyController::class, 'destroy'])->name('dashboard-company-destroy');
+            Route::get('delete/{id}', [DashboardCompanyController::class, 'destroy'])->name('dashboard-company-destroy');
         });
 
         Route::prefix('contato')->group(function () {
@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('store', [DashboardContactController::class, 'store'])->name('dashboard-contact-store');
             Route::get('editar/{id}', [DashboardContactController::class, 'edit'])->name('dashboard-contact-edit');
             Route::post('update/{id}', [DashboardContactController::class, 'update'])->name('dashboard-contact-update');
-            Route::post('delete/{id}', [DashboardContactController::class, 'destroy'])->name('dashboard-contact-destroy');
+            Route::get('delete/{id}', [DashboardContactController::class, 'destroy'])->name('dashboard-contact-destroy');
         });
 
         Route::prefix('destaques')->group(function () {
@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('store', [DashboardHighlightController::class, 'store'])->name('dashboard-highlight-store');
             Route::get('editar/{id}', [DashboardHighlightController::class, 'edit'])->name('dashboard-highlight-edit');
             Route::post('update/{id}', [DashboardHighlightController::class, 'update'])->name('dashboard-highlight-update');
-            Route::post('delete/{id}', [DashboardHighlightController::class, 'destroy'])->name('dashboard-highlight-destroy');
+            Route::get('delete/{id}', [DashboardHighlightController::class, 'destroy'])->name('dashboard-highlight-destroy');
         });
 
         Route::prefix('user')->group(function () {
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('store', [DashboardUserController::class, 'store'])->name('dashboard-user-store');
             Route::get('editar/{id}', [DashboardUserController::class, 'edit'])->name('dashboard-user-edit');
             Route::post('update/{id}', [DashboardUserController::class, 'update'])->name('dashboard-user-update');
-            Route::post('delete/{id}', [DashboardUserController::class, 'destroy'])->name('dashboard-user-destroy');
+            Route::get('delete/{id}', [DashboardUserController::class, 'destroy'])->name('dashboard-user-destroy');
         });
     });
 });
