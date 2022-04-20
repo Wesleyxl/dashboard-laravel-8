@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -26,7 +27,6 @@
     <link rel="stylesheet" href="{{ URL::to('/assets/dashboard/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ URL::to('/assets/dashboard/plugins/summernote/summernote-bs4.min.css') }}">
-
     <!-- jQuery -->
     <script src="{{ URL::to('/assets/dashboard/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
@@ -238,31 +238,31 @@
                             </li>
                             <!-- end banner -->
 
-                            <!-- highlights -->
-                            <li class="nav-item @yield('li-highlight')">
-                                <a href="#" class="nav-link @yield('a-highlight')">
-                                    <i class="fas fa-star nav-icon"></i>
+                            <!-- category -->
+                            <li class="nav-item @yield('ul-category')">
+                                <a href="#" class="nav-link @yield('li-category')">
+                                    <i class="fa-solid fa-list"></i>
                                     <p>
-                                        Destaque
+                                        Categorias
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('dashboard-highlight-create') }}" class="nav-link @yield('a-highlight')">
+                                        <a href="{{ route('dashboard-category-create') }}" class="nav-link @yield('a-category-create')">
                                             <i class="fas fa-plus nav-icon"></i>
                                             <p>Cadastrar</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('dashboard-highlight') }}" class="nav-link">
-                                            <i class="fas fa-pencil-alt nav-icon"></i>
-                                            <p>Editar</p>
+                                        <a href="{{ route('dashboard-category') }}" class="nav-link @yield('a-category')">
+                                            <i class="fa-solid fa-eye"></i>
+                                            <p>Visualizar</p>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <!-- end highlights -->
+                            <!-- end company -->
 
                             <!-- company -->
                             <li class="nav-item @yield('ul-company')">
@@ -282,34 +282,54 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('dashboard-company') }}" class="nav-link @yield('a-company')">
-                                            <i class="fas fa-pencil-alt nav-icon"></i>
-                                            <p>Editar</p>
+                                            <i class="fa-solid fa-eye"></i>
+                                            <p>Visualizar</p>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <!-- end company -->
 
-                            <!-- contato -->
-                            <li class="nav-item @yield('li-contact')">
-                                <a href="#" class="nav-link @yield('a-contact')">
-                                    <i class="fas fa-envelope nav-icon"></i>
+                            <!-- highlights -->
+                            <li class="nav-item @yield('li-highlight')">
+                                <a href="#" class="nav-link @yield('a-highlight')">
+                                    <i class="fas fa-star nav-icon"></i>
                                     <p>
-                                        Contatos
+                                        Destaque
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('dashboard-contact-create') }}" class="nav-link @yield('a-contact')">
+                                        <a href="{{ route('dashboard-highlight') }}" class="nav-link">
+                                            <i class="fa-solid fa-eye"></i>
+                                            <p>Visualizar</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- end highlights -->
+
+                            <!-- contato -->
+                            <li class="nav-item @yield('ul-contact')">
+                                <a href="#" class="nav-link @yield('li-contact')">
+                                    <i class="fas fa-envelope nav-icon"></i>
+                                    <p>
+                                        Emails
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('dashboard-email-create') }}" class="nav-link @yield('a-contact-create')">
                                             <i class="fas fa-plus nav-icon"></i>
-                                            <p>Cadastrar</p>
+                                            <p>Enviar</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('dashboard-contact') }}" class="nav-link">
-                                            <i class="fas fa-pencil-alt nav-icon"></i>
-                                            <p>Editar</p>
+                                        <a href="{{ route('dashboard-email') }}" class="nav-link @yield('a-contact')">
+                                            <i class="fa-solid fa-eye"></i>
+                                            <p>visualizar</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -338,89 +358,95 @@
                             </li>
                             <!-- end my account -->
 
-                            <!-- users -->
-                            <li class="nav-item @yield('li-user')">
-                                <a href="#" class="nav-link @yield('a-user')">
-                                    <i class="fas fa-users-cog nav-icon"></i>
-                                    <p>
-                                        Usuários
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('dashboard-user') }}" class="nav-link">
-                                            <i class="fas fa-cog nav-icon"></i>
-                                            <p>Configurar</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- end users -->
+                            {{-- <!-- users -->
+                                <li class="nav-item @yield('li-user')">
+                                    <a href="#" class="nav-link @yield('a-user')">
+                                        <i class="fas fa-users-cog nav-icon"></i>
+                                        <p>
+                                            Usuários
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('dashboard-user') }}" class="nav-link">
+                                                <i class="fas fa-cog nav-icon"></i>
+                                                <p>Configurar</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- end users --> --}}
 
-                        </ul>
-                    </nav>
-                    <!-- /.sidebar-menu -->
+                            </ul>
+                        </nav>
+                        <!-- /.sidebar-menu -->
+                    </div>
+                    <!-- /.sidebar -->
+                </aside>
+
+                <!-- Content Wrapper. Contains page content -->
+                <div class="content-wrapper">
+
+                    <main>
+                        @yield('content')
+                    </main>
+
                 </div>
-                <!-- /.sidebar -->
-            </aside>
+                <!-- /.content-wrapper -->
+                <footer class="main-footer">
+                    <strong>Copyright &copy; 2020-2022 <a href="https://www.wesley-alves.com">Wesley Alves</a>.</strong>
+                    All rights reserved.
+                    <div class="float-right d-none d-sm-inline-block">
+                        <b>Versão</b> 3.5.0
+                    </div>
+                </footer>
 
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-
-                <main>
-                    @yield('content')
-                </main>
-
+                <!-- Control Sidebar -->
+                <aside class="control-sidebar control-sidebar-dark">
+                    <!-- Control sidebar content goes here -->
+                </aside>
+                <!-- /.control-sidebar -->
             </div>
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <strong>Copyright &copy; 2020-2022 <a href="https://www.wesley-alves.com">Wesley Alves</a>.</strong>
-                All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
-                    <b>Versão</b> 3.5.0
-                </div>
-            </footer>
+            <!-- ./wrapper -->
 
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
-        </div>
-        <!-- ./wrapper -->
-
-        <!-- jQuery UI 1.11.4 -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <script>
-            $.widget.bridge('uibutton', $.ui.button)
-        </script>
-        <!-- ChartJS -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/chart.js/Chart.min.js') }}"></script>
-        <!-- Sparkline -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/sparklines/sparkline.js') }}"></script>
-        <!-- JQVMap -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-        <script src="{{ URL::to('/assets/dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-        <!-- daterangepicker -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/moment/moment.min.js') }}"></script>
-        <script src="{{ URL::to('/assets/dashboard/plugins/daterangepicker/daterangepicker.js') }}"></script>
-        <!-- Tempusdominus Bootstrap 4 -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-        <!-- Summernote -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/summernote/summernote-bs4.min.js') }}"></script>
-        <!-- overlayScrollbars -->
-        <script src="{{ URL::to('/assets/dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{ URL::to('/assets/dashboard/dist/js/adminlte.js') }}"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="{{ URL::to('/assets/dashboard/dist/js/demo.js') }}"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="{{ URL::to('/assets/dashboard/dist/js/pages/dashboard.js') }}"></script>
-        <!-- other -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    </body>
-    </html>
+            <!-- jQuery UI 1.11.4 -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+            <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+            <script>
+                $.widget.bridge('uibutton', $.ui.button)
+            </script>
+            <!-- ChartJS -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/chart.js/Chart.min.js') }}"></script>
+            <!-- Sparkline -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/sparklines/sparkline.js') }}"></script>
+            <!-- JQVMap -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+            <script src="{{ URL::to('/assets/dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+            <!-- jQuery Knob Chart -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+            <!-- daterangepicker -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/moment/moment.min.js') }}"></script>
+            <script src="{{ URL::to('/assets/dashboard/plugins/daterangepicker/daterangepicker.js') }}"></script>
+            <!-- Tempusdominus Bootstrap 4 -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+            <!-- Summernote -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/summernote/summernote-bs4.min.js') }}"></script>
+            <!-- overlayScrollbars -->
+            <script src="{{ URL::to('/assets/dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+            <!-- AdminLTE App -->
+            <script src="{{ URL::to('/assets/dashboard/dist/js/adminlte.js') }}"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="{{ URL::to('/assets/dashboard/dist/js/demo.js') }}"></script>
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <script src="{{ URL::to('/assets/dashboard/dist/js/pages/dashboard.js') }}"></script>
+            <!-- other -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script>
+                $(function () {
+                    //Add text editor
+                    $('#compose-textarea').summernote()
+                })
+            </script>
+        </body>
+        </html>

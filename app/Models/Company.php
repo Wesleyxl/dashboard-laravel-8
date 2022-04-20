@@ -82,6 +82,7 @@ class Company extends Model
         $company['phone'] = $request['phone'];
         $company['cellphone'] = $request['cellphone'];
         $company['description'] = $request['description'];
+        $company['category_id'] = $request['category'];
         $company['code'] = $request['code'];
         $company['cep'] = $request['cep'];
         $company['uf'] = $request['uf'];
@@ -174,6 +175,7 @@ class Company extends Model
         $company['phone'] = $request['phone'];
         $company['cellphone'] = $request['cellphone'];
         $company['description'] = $request['description'];
+        $company['category_id'] = $request['category'];
         $company['code'] = $request['code'];
         $company['cep'] = $request['cep'];
         $company['uf'] = $request['uf'];

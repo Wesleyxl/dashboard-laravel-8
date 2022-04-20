@@ -4,9 +4,10 @@
 use App\Http\Controllers\Dashboard\HomeController as DashboardHomeController;
 use App\Http\Controllers\Dashboard\CompanyController as DashboardCompanyController;
 use App\Http\Controllers\Dashboard\BannerController as DashboardBannerController;
-use App\Http\Controllers\Dashboard\ContactController as DashboardContactController;
+use App\Http\Controllers\Dashboard\EmailController as DashboardEmailController;
 use App\Http\Controllers\Dashboard\HighlightController as DashboardHighlightController;
 use App\Http\Controllers\Dashboard\UserController as DashboardUserController;
+use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
 
 use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -48,15 +49,27 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('editar/{id}', [DashboardCompanyController::class, 'edit'])->name('dashboard-company-edit');
             Route::post('update/{id}', [DashboardCompanyController::class, 'update'])->name('dashboard-company-update');
             Route::get('delete/{id}', [DashboardCompanyController::class, 'destroy'])->name('dashboard-company-destroy');
+            Route::get('search', [DashboardCompanyController::class, 'search'])->name('dashboard-company-search');
         });
 
-        Route::prefix('contato')->group(function () {
-            Route::get('/', [DashboardContactController::class, 'index'])->name('dashboard-contact');
-            Route::get('cadastrar', [DashboardContactController::class, 'create'])->name('dashboard-contact-create');
-            Route::post('store', [DashboardContactController::class, 'store'])->name('dashboard-contact-store');
-            Route::get('editar/{id}', [DashboardContactController::class, 'edit'])->name('dashboard-contact-edit');
-            Route::post('update/{id}', [DashboardContactController::class, 'update'])->name('dashboard-contact-update');
-            Route::get('delete/{id}', [DashboardContactController::class, 'destroy'])->name('dashboard-contact-destroy');
+        Route::prefix('categoria')->group(function () {
+            Route::get('/', [DashboardCategoryController::class, 'index'])->name('dashboard-category');
+            Route::get('cadastrar', [DashboardCategoryController::class, 'create'])->name('dashboard-category-create');
+            Route::post('store', [DashboardCategoryController::class, 'store'])->name('dashboard-category-store');
+            Route::get('editar/{id}', [DashboardCategoryController::class, 'edit'])->name('dashboard-category-edit');
+            Route::post('update/{id}', [DashboardCategoryController::class, 'update'])->name('dashboard-category-update');
+            Route::get('delete/{id}', [DashboardCategoryController::class, 'destroy'])->name('dashboard-category-destroy');
+            Route::get('search', [DashboardCategoryController::class, 'search'])->name('dashboard-category-search');
+        });
+
+        Route::prefix('email')->group(function () {
+            Route::get('/', [DashboardEmailController::class, 'index'])->name('dashboard-email');
+            Route::get('cadastrar', [DashboardEmailController::class, 'create'])->name('dashboard-email-create');
+            Route::post('store', [DashboardEmailController::class, 'store'])->name('dashboard-email-store');
+            Route::get('editar/{id}', [DashboardEmailController::class, 'edit'])->name('dashboard-email-edit');
+            Route::post('update/{id}', [DashboardEmailController::class, 'update'])->name('dashboard-email-update');
+            Route::get('delete/{id}', [DashboardEmailController::class, 'destroy'])->name('dashboard-email-destroy');
+            Route::get('ler/{id}', [DashboardEmailController::class, 'show'])->name('dashboard-email-show');
         });
 
         Route::prefix('destaques')->group(function () {

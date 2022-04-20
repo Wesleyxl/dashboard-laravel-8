@@ -88,6 +88,26 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="category">Selecione uma categoria*</label>
+                                <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
+                                    @if (count($categories) < 1)
+                                        <option value="">Não há categoria cadastrada</option>
+                                    @else
+                                        <option value="{{ $company['category_id'] }}">{{ $company['category_name'] }}</option>
+                                        @foreach ($categories as $category)
+                                            @if ($category['id'] != $company['category_id'])
+                                                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @error('category')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -534,7 +554,7 @@
 
                     <div class="btn-area d-flex justify-content-between">
                         <a href="{{ route('dashboard-company') }}" class="btn btn-primary">Voltar</a>
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <button type="submit" class="btn btn-success">Editar</button>
                     </div>
                 </form>
             </div>

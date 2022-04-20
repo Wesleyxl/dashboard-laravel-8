@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 @section('title', 'Dashboard - Empresa')
-@section('ul-company', 'menu-open')
-@section('li-company', 'active')
-@section('a-company', 'active')
+@section('ul-category', 'menu-open')
+@section('li-category', 'active')
+@section('a-category', 'active')
 @section('content')
 
 <!-- links -->
@@ -48,12 +48,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Empresas</h1>
+                <h1 class="m-0">Categorias</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Empresas</li>
+                    <li class="breadcrumb-item active">Categoria</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -68,7 +68,7 @@
             <div class="col-lg-12 m-auto">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Lista de Empresas</h3>
+                        <h3 class="card-title">Lista de Categorias</h3>
 
                         <div class="input-group">
                             <input class="form-control" id="search" type="text" placeholder="Buscar">
@@ -81,39 +81,37 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-0" id="content">
-                        @if (count($companies) >= 1)
+                        @if (count($categories) >= 1)
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th style="width: 82px"></th>
                                     <th style="width: 10px">#</th>
-                                    <th>Código</th>
                                     <th>Nome</th>
-                                    <th>Categoria</th>
+                                    <th>Descrição</th>
                                     <th>Criado em</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $i = 1 @endphp
-                                    @foreach ($companies as $company)
+                                    @foreach ($categories as $category)
                                         <tr>
                                             <td>
                                                 <div class="table-icons">
-                                                    <a class="btn btn-default" alt="Editar" title="Editar" href="{{ route('dashboard-company-edit', ['id' => $company['id']]) }}">
+                                                    <a class="btn btn-default" alt="Editar" title="Editar" href="{{ route('dashboard-category-edit', ['id' => $category['id']]) }}">
                                                         <i class="fa-solid fa-pen"></i>
                                                     </a>
-                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-md-{{ $company['id'] }}">
+                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-md-{{ $category['id'] }}">
                                                         <i class="fa-solid fa-trash-can"></i>
                                                     </button>
                                                 </div>
                                             </td>
                                             <td>{{ $i++ }}</td>
-                                            <td>#{{ $company['code'] }}</td>
-                                            <td>{{ $company['name'] }}</td>
-                                            <td>{{ $company['category_name'] }}</td>
-                                            <td>{{ $company['created_at'] }}</td>
+                                            <td>{{ $category['name'] }}</td>
+                                            <td>{{ $category['description'] }}</td>
+                                            <td>{{ $category['created_at'] }}</td>
                                         </tr>
-                                        <div class="modal fade" id="modal-md-{{ $company['id'] }}">
+                                        <div class="modal fade" id="modal-md-{{ $category['id'] }}">
                                             <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -123,11 +121,11 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>Quer mesmo apagar a empresa <strong>{{ $company['name'] }}</strong>?</p>
+                                                        <p>Quer mesmo apagar a categoria <strong>{{ $category['name'] }}</strong>?</p>
                                                     </div>
                                                     <div class="modal-footer justify-content-between">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                        <a href="{{ route('dashboard-company-destroy', ['id' => $company['id']]) }}" class="btn btn-danger">Apagar</a>
+                                                        <a href="{{ route('dashboard-category-destroy', ['id' => $category['id']]) }}" class="btn btn-danger">Apagar</a>
                                                     </div>
                                                 </div>
                                                 <!-- /.modal-content -->
@@ -137,10 +135,12 @@
 
                                     @endforeach
                                 </tbody>
-                                {{ $companies->links() }}
                             </table>
+                            <div class="link-area">
+                                {{ $categories->links() }}
+                            </div>
                             @else
-                                <h5 class="p-4 m-2">Não há empresas cadastrada</h5>
+                                <h5 class="p-4 m-2">Não há categorias cadastrada</h5>
                             @endif
                         </div>
                         <!-- /.card-body -->
@@ -234,7 +234,7 @@
             });
             $.ajax({
                 type: "GET",
-                url: "{{ url('/adm/empresa/search/') }}",
+                url: "{{ url('/adm/categoria/search/') }}",
                 data: {data: search},
                 success: function(retorno){
                     $('#content').html(retorno);

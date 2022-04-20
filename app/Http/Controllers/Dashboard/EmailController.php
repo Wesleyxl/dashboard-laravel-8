@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+class EmailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.email.home');
     }
 
     /**
@@ -24,7 +24,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.email.send');
     }
 
     /**
@@ -46,7 +46,7 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('dashboard.email.show');
     }
 
     /**

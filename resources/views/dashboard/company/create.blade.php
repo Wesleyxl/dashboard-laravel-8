@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Nome da empresa</label>
+                                <label for="name">Nome da empresa*</label>
                                 <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nome da empresa" value="{{ old('name') }}">
                                 @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">Email da empresa</label>
+                                <label for="email">Email da empresa*</label>
                                 <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email@empresa.com" value="{{ old('email') }}">
                                 @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -81,9 +81,27 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="code">Código de identificação</label>
+                                <label for="code">Código de identificação*</label>
                                 <input type="text" name="code" id="code" class="form-control @error('code') is-invalid @enderror" placeholder="Ex: 1558" value="{{ old('code') }}">
                                 @error('code')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="category">Selecione uma categoria*</label>
+                                <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
+                                    @if (count($categories) < 1)
+                                        <option value="">Não há categoria cadastrada</option>
+                                    @else
+                                        <option value="">Selecione uma categoria</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @error('category')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -92,7 +110,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="description">Descrição</label>
+                                <label for="description">Descrição*</label>
                                 <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" placeholder="Descrição da empresa" rows="5">{{ old('description') }}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -103,7 +121,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="cep">CEP</label>
+                                <label for="cep">CEP*</label>
                                 <input type="text" name="cep" id="cep" class="form-control @error('cep') is-invalid @enderror" placeholder="Digite um CEP" onkeypress="$(this).mask('00000-000')" value="{{ old('cep') }}">
                                 @error('cep')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -112,7 +130,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="uf">Estado</label>
+                                <label for="uf">Estado*</label>
                                 <select name="uf" id="uf" class="form-control @error('uf') is-invalid @enderror">
                                     <option value="">Selecione um Estado</option>
                                     <option value="AC">Acre</option>
@@ -152,7 +170,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="city">Cidade</label>
+                                <label for="city">Cidade*</label>
                                 <input type="text" name="city" id="city" class="form-control @error('city') is-invalid @enderror" placeholder="Digite uma cidade" value="{{ old('city') }}">
                                 @error('city')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -161,7 +179,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="neighborhood">Bairro</label>
+                                <label for="neighborhood">Bairro*</label>
                                 <input type="text" name="neighborhood" id="neighborhood" class="form-control @error('neighborhood') is-invalid @enderror" placeholder="Digite o bairro" value="{{ old('neighborhood') }}">
                                 @error('neighborhood')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -170,7 +188,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="street">Logradouro</label>
+                                <label for="street">Logradouro*</label>
                                 <input type="text" name="street" id="street" class="form-control @error('street') is-invalid @enderror" placeholder="Digite o endereço" value="{{ old('street') }}">
                                 @error('street')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -179,7 +197,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="number">Numero:</label>
+                                <label for="number">Número</label>
                                 <input type="number" id="number" name="number" class="form-control @error('number') is-invalid @enderror" placeholder="000" value="{{ old('number') }}">
                                 @error('number')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -424,7 +442,7 @@
                                 <div class="time-area d-flex">
                                     <div class="form-group">
                                         <label for="saturnday-from">das</label>
-                                        <input type="time" name="saturnday-from" id="saturnday-from" value="{{ old('saturnday-from') }}">Abert
+                                        <input type="time" name="saturnday-from" id="saturnday-from" value="{{ old('saturnday-from') }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="saturnday-to">até</label>
@@ -550,21 +568,25 @@
         var lunchFrom = $("#monday-lunch-from").val();
         var lunchTo = $("#monday-lunch-to").val();
 
+        $("#tuesday-is-open").prop('checked', true);
         $("#tuesday-from").val(from);
         $("#tuesday-to").val(to);
         $("#tuesday-lunch-from").val(lunchFrom);
         $("#tuesday-lunch-to").val(lunchTo);
 
+        $("#wednesday-is-open").prop('checked', true);
         $("#wednesday-from").val(from);
         $("#wednesday-to").val(to);
         $("#wednesday-lunch-from").val(lunchFrom);
         $("#wednesday-lunch-to").val(lunchTo);
 
+        $("#thursday-is-open").prop('checked', true);
         $("#thursday-from").val(from);
         $("#thursday-to").val(to);
         $("#thursday-lunch-from").val(lunchFrom);
         $("#thursday-lunch-to").val(lunchTo);
 
+        $("#friday-is-open").prop('checked', true);
         $("#friday-from").val(from);
         $("#friday-to").val(to);
         $("#friday-lunch-from").val(lunchFrom);

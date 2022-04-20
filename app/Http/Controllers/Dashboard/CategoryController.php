@@ -5,21 +5,10 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\Company;
 use Illuminate\Support\Facades\Validator;
 
-class CompanyController extends Controller
+class CategoryController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -27,17 +16,10 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::orderBy('name', 'asc')
+        $categories = Category::orderBy('name', 'asc')
             ->paginate(10);
-
-        foreach ($companies as $company) {
-            $category_name = Category::select('id', 'name')
-                ->where('id', $company['category_id'])->first();
-            $company['category_name'] = $category_name['name'];
-        }
-
-        return view('dashboard.company.home', array(
-            'companies' => $companies
+        return view('dashboard.category.home', array(
+            'categories' => $categories
         ));
     }
 
@@ -48,10 +30,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $categories = Category::get()->all();
-        return view('dashboard.company.create', array(
-            'categories' => $categories
-        ));
+        return view('dashboard.category.create');
     }
 
     /**
@@ -64,23 +43,15 @@ class CompanyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:256',
-            'email' => 'required|string|email',
-            'code' => 'string',
-            'category' => 'required|string',
             'description' => 'required|string|min:3',
-            'cep' => 'required|string',
-            'uf' => 'required|string',
-            'city' => 'required|string',
-            'neighborhood' => 'required|string',
-            'street' => 'required|string',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
-        if (Company::create($request->all())) {
-            return redirect('adm/empresa')->with('success', 'Empresa cadastrada com sucesso!');
+        if (Category::create($request->all())) {
+            return redirect('adm/categoria')->with('success', 'Categoria cadastrada com sucesso!');
         } else {
             return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
         }
@@ -94,6 +65,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**
@@ -104,17 +76,9 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = Company::find($id);
-        $categories = Category::get()->all();
-
-        $category_name = Category::select('id', 'name')
-            ->where('id', $company['category_id'])->first();
-
-        $company['category_name'] = $category_name['name'];
-
-        return view('dashboard.company.edit', array(
-            'company' => $company,
-            'categories' => $categories
+        $category = Category::find($id);
+        return view('dashboard.category.edit', array(
+            'category' => $category
         ));
     }
 
@@ -129,24 +93,15 @@ class CompanyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:256',
-            'email' => 'required|string|email',
-            'code' => 'string',
-            'category' => 'required|string',
             'description' => 'required|string|min:3',
-            'cep' => 'required|string',
-            'uf' => 'required|string',
-            'city' => 'required|string',
-            'neighborhood' => 'required|string',
-            'street' => 'required|string',
-            'number' => 'required|numeric'
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
-        if (Company::edit($request->all(), $id)) {
-            return redirect('adm/empresa')->with('success', 'Empresa editada com sucesso!');
+        if (Category::edit($request->all(), $id)) {
+            return redirect('adm/categoria')->with('success', 'Categoria editada com sucesso!');
         } else {
             return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
         }
@@ -160,12 +115,12 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $company = Company::find($id);
+        $category = Category::find($id);
 
         try {
             //code...
-            $company->delete();
-            return redirect()->back()->with('warning', 'Empresa deletada com sucesso!');
+            $category->delete();
+            return redirect()->back()->with('warning', 'Categoria deletada com sucesso!');
         } catch (\Throwable $th) {
             //throw $th;
             return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
@@ -174,20 +129,13 @@ class CompanyController extends Controller
 
     public function search(Request $request)
     {
-        $companies = Company::where('name', 'like', '%' . $request['data'] . "%")
-            ->orWhere('code', 'like', '%' . $request['data'] . "%")
+        $categories = Category::where('name', 'like', '%' . $request['data'] . "%")
             ->orWhere('description', 'like', '%' . $request['data'] . "%")
             ->orderBy('name', 'asc')
             ->paginate(10);
 
-        foreach ($companies as $company) {
-            $category_name = Category::select('id', 'name')
-                ->where('id', $company['category_id'])->first();
-            $company['category_name'] = $category_name['name'];
-        }
-
-        return view('dashboard.company.search', array(
-            'companies' => $companies
+        return view('dashboard.category.search', array(
+            'categories' => $categories
         ));
     }
 }

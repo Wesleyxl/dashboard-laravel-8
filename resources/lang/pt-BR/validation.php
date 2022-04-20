@@ -154,6 +154,7 @@ return [
         'address'   => 'endereço',
         'age'       => 'idade',
         'body'      => 'conteúdo',
+        'category'  => 'categoria',
         'cell'      => 'celular',
         'city'      => 'cidade',
         'country'   => 'país',
