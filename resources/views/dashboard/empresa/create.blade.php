@@ -36,19 +36,25 @@
                 <h4>Preencha todos os campos corretamente</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('dashboard-company-store') }}">
+                <form  method="POST" enctype="multipart/form-data" action="{{ route('dashboard-company-store') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Nome da empresa</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Nome da empresa">
+                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nome da empresa" value="{{ old('name') }}">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">Email da empresa</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email@empresa.com">
+                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email@empresa.com" value="{{ old('email') }}">
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -56,13 +62,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Telefone</label>
-                                <input type="text" name="phone" id="phone" class="form-control" placeholder="(11) 1234-5678">
+                                <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="(11) 1234-5678" onkeypress="$(this).mask('(00) 0000-0000')" value="{{ old('phone') }}">
+                                @error('phone')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="cel">Celular</label>
-                                <input type="text" name="cel" id="cel" class="form-control" placeholder="(11) 91234-5678">
+                                <input type="text" name="cellphone" id="cellphone" class="form-control @error('cellphone') is-invalid @enderror" placeholder="(11) 91234-5678" onkeypress="$(this).mask('(00) 00000-0000')" value="{{ old('cellphone') }}">
+                                @error('cellphone')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -70,7 +82,10 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="code">Código de identificação</label>
-                                <input type="text" name="code" id="code" class="form-control" placeholder="Ex: 1558">
+                                <input type="text" name="code" id="code" class="form-control @error('code') is-invalid @enderror" placeholder="Ex: 1558" value="{{ old('code') }}">
+                                @error('code')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -78,7 +93,10 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="description">Descrição</label>
-                                <textarea name="description" id="description" class="form-control" placeholder="Descrição da empresa" rows="5"></textarea>
+                                <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" placeholder="Descrição da empresa" rows="5">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -86,13 +104,48 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="cep">CEP</label>
-                                <input type="text" name="cep" id="cep" class="form-control" placeholder="Digite um CEP">
+                                <input type="text" name="cep" id="cep" class="form-control @error('cep') is-invalid @enderror" placeholder="Digite um CEP" onkeypress="$(this).mask('00000-000')" value="{{ old('cep') }}">
+                                @error('cep')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="state">Estado</label>
-                                <input type="text" name="state" id="state" class="form-control" placeholder="Digite um estado">
+                                <label for="uf">Estado</label>
+                                <select name="uf" id="uf" class="form-control @error('uf') is-invalid @enderror">
+                                    <option value="">Selecione um Estado</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP" id="none">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
+                                @error('uf')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -100,17 +153,51 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="city">Cidade</label>
-                                <input type="text" name="city" id="city" class="form-control" placeholder="Digite uma cidade">
+                                <input type="text" name="city" id="city" class="form-control @error('city') is-invalid @enderror" placeholder="Digite uma cidade" value="{{ old('city') }}">
+                                @error('city')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="neighborhood">Bairro</label>
+                                <input type="text" name="neighborhood" id="neighborhood" class="form-control @error('neighborhood') is-invalid @enderror" placeholder="Digite o bairro" value="{{ old('neighborhood') }}">
+                                @error('neighborhood')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="street">Logradouro</label>
-                                <input type="text" name="street" id="street" class="form-control" placeholder="Digite o endereço">
+                                <input type="text" name="street" id="street" class="form-control @error('street') is-invalid @enderror" placeholder="Digite o endereço" value="{{ old('street') }}">
+                                @error('street')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="number">Numero:</label>
+                                <input type="number" id="number" name="number" class="form-control @error('number') is-invalid @enderror" placeholder="000" value="{{ old('number') }}">
+                                @error('number')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group d-flex flex-column">
+                                <label for="search-cep">Buscar CEP</label>
+                                <button type="button" class="btn btn-secondary" style="max-width: 100px" id="search-cep">
+                                    Buscar
+                                </button>
                             </div>
                         </div>
                     </div>
+
                     <hr>
+
                     <p><strong>Horários de funcionamento</strong></p>
                     <div class="row">
                         <div class="col-md-3">
@@ -393,6 +480,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row m-3 mb-2 d-flex justify-content-center">
+                        <button type="button" id="reply-sun-to-fri" class="btn btn-light">Replicar Seg. à Sex.</button>
+                    </div>
+
+                    <div class="row" style="margin: 10px 0 40px">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="img">Selecione uma image</label>
+                                <input type="file" name="img" id="img" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="img-area">
+                                <img src="" alt="preview" id="preview">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-area d-flex justify-content-between">
+                        <a href="{{ route('dashboard-company') }}" class="btn btn-primary">Voltar</a>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -400,5 +510,18 @@
     <br><br>
 
 </section>
+
+<script>
+    function readImage() {
+        if (this.files && this.files[0]) {
+            var file = new FileReader();
+            file.onload = function(e) {
+                document.getElementById("preview").src = e.target.result;
+            };
+            file.readAsDataURL(this.files[0]);
+        }
+    }
+    document.getElementById("img").addEventListener("change", readImage, false);
+</script>
 
 @endsection

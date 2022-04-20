@@ -52,3 +52,7 @@ form .card {
 form .card label {
     margin-bottom: 0;
 }
+
+form .img-area img {
+    max-width: 400px;
+}

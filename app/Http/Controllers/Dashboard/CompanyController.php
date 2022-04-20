@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
 {
@@ -45,7 +46,24 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:256',
+            'email' => 'required|string|email',
+            'code' => 'string',
+            'description' => 'required|string|min:3',
+            'cep' => 'required|string',
+            'uf' => 'required|string',
+            'city' => 'required|string',
+            'neighborhood' => 'required|string',
+            'street' => 'required|string',
+            'number' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator->errors());
+        }
+
+        dd($request->all());
     }
 
     /**
