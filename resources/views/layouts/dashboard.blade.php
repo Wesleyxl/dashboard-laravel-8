@@ -241,7 +241,7 @@
                             <!-- category -->
                             <li class="nav-item @yield('ul-category')">
                                 <a href="#" class="nav-link @yield('li-category')">
-                                    <i class="fa-solid fa-list"></i>
+                                    <i class="fa-solid fa-list nav-icon"></i>
                                     <p>
                                         Categorias
                                         <i class="right fas fa-angle-left"></i>
