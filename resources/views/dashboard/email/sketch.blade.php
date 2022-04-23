@@ -9,29 +9,18 @@
 <link rel="stylesheet" href="{{ URL::to('/assets/dashboard/css/layout.css') }}">
 <!-- end links -->
 
-@if (session('success'))
-<script>
-    var click = 0;
-    setInterval(() => {
-        if (click == 0) {
-            $("#modal-success").trigger('click');
-            click = 1;
-        }
-    }, 0);
-</script>
-@endif
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Emails</h1>
+                <h1>Rascunhos</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/adm">Home</a></li>
-                    <li class="breadcrumb-item active">Emails</li>
+                    <li class="breadcrumb-item"><a href="/adm/email">Emails</a></li>
+                    <li class="breadcrumb-item active">Rascunhos</li>
                 </ol>
             </div>
         </div>
@@ -39,7 +28,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content email-area">
     <div class="container" style="max-width: 1300px">
         <div class="row">
             <div class="col-md-3">
@@ -57,10 +46,10 @@
                     </div>
                     <div class="card-body p-0">
                         <ul class="nav nav-pills flex-column">
-                            <li class="nav-item active">
-                                <a href="{{ route('dashboard-email') }}" class="nav-link" style="color: #007bff;">
+                            <li class="nav-item">
+                                <a href="{{ route('dashboard-email') }}" class="nav-link">
                                     <i class="fas fa-inbox"></i> Caixa de entrada
-                                    <span class="badge bg-primary float-right">{{ count($unreads) }}</span>
+                                    <span class="badge bg-primary float-right">{{ $unread }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -69,12 +58,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('dashboard-email-sketch') }}" class="nav-link">
+                                <a href="{{ route('dashboard-email-sketch') }}" class="nav-link" style="color: #007bff;">
                                     <i class="far fa-file-alt"></i> rascunhos
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('dashboard-email-trash') }}" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-trash-alt"></i> lixeira
                                 </a>
                             </li>
@@ -115,7 +104,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('dashboard-email-filter', ['filter' => 'other']) }}" class="nav-link">
-                                    <i class="fa-solid fa-circle text-secondary"></i>
+                                    <i class="fa-solid fa-circle text-warning"></i>
                                     Outros
                                 </a>
                             </li>
@@ -129,7 +118,7 @@
             <div class="col-md-9">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">Caixa de entrada</h3>
+                        <h3 class="card-title">Rascunhos</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm">
@@ -146,7 +135,7 @@
                     <!-- /.card-header -->
                     <div class="card-body p-0">
                         <div class="mailbox-controls">
-                            @if(count($unreads) > 0 || count($emails) > 0)
+                            @if(count($emails) > 0)
                             <!-- Check all button -->
                             <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
                             </button>
@@ -183,61 +172,32 @@
                         <div class="table-responsive mailbox-messages">
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                @if(count($unreads) > 0)
-                                        @foreach ($unreads as $unread)
-                                            <tr>
-                                                <td>
-                                                    <div class="icheck-primary">
-                                                        <input type="checkbox" value="" id="check{{ $unread['id'] }}">
-                                                        <label for="check{{ $unread['id'] }}"></label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    @if($unread['label'] == 'service')
-                                                    <i class="fa-solid fa-circle text-success"></i>
-                                                    @elseif ($unread['label'] == 'compliment')
-                                                    <i class="fa-solid fa-circle text-primary"></i>
-                                                    @elseif ($unread['label'] == 'complaint')
-                                                    <i class="fa-solid fa-circle text-danger"></i>
-                                                    @else
-                                                    <i class="fa-solid fa-circle text-secondary"></i>
-                                                    @endif
-                                                    <i class="fas fa-star text-warning" style="margin-left: 5px"></i>
-                                                </td>
-                                                <td class="mailbox-name"><a href="{{ route('dashboard-email-show', ['id' => $unread['id']]) }}">{{ $unread['from'] }}</a></td>
-                                                <td class="mailbox-subject"><b>Assunto</b> - {{ $unread['subject'] }}...
-                                                </td>
-                                                <td class="mailbox-attachment"></td>
-                                                <td class="mailbox-date">5 mins ago</td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                    @if (count($emails) > 0)
+                                    @if(count($emails) > 0)
                                         @foreach ($emails as $email)
-                                            <tr>
-                                                <td>
-                                                    <div class="icheck-primary">
-                                                        <input type="checkbox" value="" id="check{{ $email['id'] }}">
-                                                        <label for="check{{ $email['id'] }}"></label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    @if($email['label'] == 'service')
-                                                        <i class="fa-solid fa-circle text-success"></i>
-                                                    @elseif ($email['label'] == 'compliment')
-                                                        <i class="fa-solid fa-circle text-primary"></i>
-                                                    @elseif ($email['label'] == 'complaint')
-                                                        <i class="fa-solid fa-circle text-danger"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-circle text-secondary"></i>
-                                                    @endif
-                                                </td>
-                                                <td class="mailbox-name"><a href="{{ route('dashboard-email-show', ['id' => $email['id']]) }}">{{ $email['from'] }}</a></td>
-                                                <td class="mailbox-subject"><b>Assunto</b> - {{ $email['subject'] }}...
-                                                </td>
-                                                <td class="mailbox-attachment"></td>
-                                                <td class="mailbox-date">5 mins ago</td>
-                                            </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="icheck-primary">
+                                                    <input type="checkbox" value="{{ $email['oi'] }}" id="check{{ $email['id'] }}">
+                                                    <label for="check{{ $email['id'] }}"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @if($email['label'] == 'service')
+                                                    <i class="fa-solid fa-circle text-success"></i>
+                                                @elseif ($email['label'] == 'compliment')
+                                                    <i class="fa-solid fa-circle text-primary"></i>
+                                                @elseif ($email['label'] == 'complaint')
+                                                    <i class="fa-solid fa-circle text-danger"></i>
+                                                @else
+                                                    <i class="fa-solid fa-circle text-secondary"></i>
+                                                @endif
+                                            </td>
+                                            <td class="mailbox-name"><a href="{{ route('dashboard-email-edit', ['id' => $email['id']]) }}">{{ $email['from'] }}</a></td>
+                                            <td class="mailbox-subject"><b>Assunto</b> - {{ $email['subject'] }}...
+                                            </td>
+                                            <td class="mailbox-attachment"></td>
+                                            <td class="mailbox-date">5 mins ago</td>
+                                        </tr>
                                         @endforeach
                                     @endif
                                 </tbody>
@@ -249,39 +209,39 @@
                     <!-- /.card-body -->
                     <div class="card-footer p-0">
                         <div class="mailbox-controls">
-                            @if(count($unreads) > 0 || count($emails) > 0)
-                            <!-- Check all button -->
-                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                                <i class="far fa-square"></i>
-                            </button>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <i class="far fa-trash-alt"></i>
+                            @if(count($emails))
+                                <!-- Check all button -->
+                                <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                                    <i class="far fa-square"></i>
                                 </button>
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <i class="fas fa-reply"></i>
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <i class="fas fa-share"></i>
-                                </button>
-                            </div>
-                            <!-- /.btn-group -->
-                            <button type="button" class="btn btn-default btn-sm">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                            <div class="float-right">
-                                1-50/200
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-sm">
-                                        <i class="fas fa-chevron-left"></i>
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                     <button type="button" class="btn btn-default btn-sm">
-                                        <i class="fas fa-chevron-right"></i>
+                                        <i class="fas fa-reply"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-share"></i>
                                     </button>
                                 </div>
                                 <!-- /.btn-group -->
-                            </div>
-                            <!-- /.float-right -->
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                                <div class="float-right">
+                                    1-50/200
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                    <!-- /.btn-group -->
+                                </div>
+                                <!-- /.float-right -->
                             @endif
                         </div>
                     </div>
@@ -294,29 +254,5 @@
     </div>
 </section>
 <!-- /.content -->
-
-<!-- modal success -->
-<button type="button" id="modal-success" style="opacity: 0" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-success" id="exampleModalLabel"><strong>Sucesso!</strong></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p> {{ session('success') }}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /.modal -->
 
 @endsection

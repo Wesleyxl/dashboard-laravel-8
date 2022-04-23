@@ -70,6 +70,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update/{id}', [DashboardEmailController::class, 'update'])->name('dashboard-email-update');
             Route::get('delete/{id}', [DashboardEmailController::class, 'destroy'])->name('dashboard-email-destroy');
             Route::get('ler/{id}', [DashboardEmailController::class, 'show'])->name('dashboard-email-show');
+            Route::get('rascunho', [DashboardEmailController::class, 'sketch'])->name('dashboard-email-sketch');
+            Route::get('lixeira', [DashboardEmailController::class, 'trash'])->name('dashboard-email-trash');
+            Route::get('enviados', [DashboardEmailController::class, 'send'])->name('dashboard-email-send');
+            Route::get('filtro/{filter}', [DashboardEmailController::class, 'filter'])->name('dashboard-email-filter');
         });
 
         Route::prefix('destaques')->group(function () {

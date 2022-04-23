@@ -445,7 +445,9 @@
             <script>
                 $(function () {
                     //Add text editor
-                    $('#compose-textarea').summernote()
+                    $('#compose-textarea').summernote({
+                        height: 300,
+                    })
                 })
             </script>
         </body>

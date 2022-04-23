@@ -6,7 +6,7 @@
 @section('content')
 
 <!-- links -->
-<link rel="stylesheet" href="{{ URL::to('/assets/dashboard/css/company.css') }}">
+<link rel="stylesheet" href="{{ URL::to('/assets/dashboard/css/layout.css') }}">
 <!-- end links -->
 
 <!-- Content Header (Page header) -->
@@ -29,7 +29,7 @@
 <!-- /.content-header -->
 
 
-<section class="content">
+<section class="content category">
     <div class="container-fluid">
         <div class="card card-secondary">
             <div class="card-header">

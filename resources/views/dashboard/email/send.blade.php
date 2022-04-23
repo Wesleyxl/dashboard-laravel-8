@@ -5,6 +5,27 @@
 @section('a-contact-create', 'active')
 @section('content')
 
+<!-- links -->
+<link rel="stylesheet" href="{{ URL::to('/assets/dashboard/css/layout.css') }}">
+<style>
+    body {
+        overflow-y: hidden;
+    }
+</style>
+<!-- end links -->
+
+@if (session('error'))
+<script>
+    var click = 0;
+    setInterval(() => {
+        if (click == 0) {
+            $("#modal-error").trigger('click');
+            click = 1;
+        }
+    }, 0);
+</script>
+@endif
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -43,23 +64,23 @@
                     <div class="card-body p-0">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item active">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('dashboard-email') }}" class="nav-link">
                                     <i class="fas fa-inbox"></i> Caixa de entrada
-                                    <span class="badge bg-primary float-right">12</span>
+                                    <span class="badge bg-primary float-right">{{ $unread }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('dashboard-email-send') }}" class="nav-link">
                                     <i class="far fa-envelope"></i> enviados
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('dashboard-email-sketch') }}" class="nav-link">
                                     <i class="far fa-file-alt"></i> rascunhos
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('dashboard-email-trash') }}" class="nav-link">
                                     <i class="far fa-trash-alt"></i> lixeira
                                 </a>
                             </li>
@@ -82,13 +103,28 @@
                     <div class="card-body p-0">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="far fa-circle text-danger"></i> Importantes</a>
+                                <a href="{{ route('dashboard-email-filter', ['filter' => 'service']) }}" class="nav-link">
+                                    <i class="fa-solid fa-circle text-success"></i>
+                                    Atendimento
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="far fa-circle text-warning"></i> Alertas</a>
+                                <a href="{{ route('dashboard-email-filter', ['filter' => 'compliment']) }}" class="nav-link">
+                                    <i class="fa-solid fa-circle text-primary"></i>
+                                    Elogio
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="far fa-circle text-primary"></i> Comuns</a>
+                                <a href="{{ route('dashboard-email-filter', ['filter' => 'complaint']) }}" class="nav-link">
+                                    <i class="fa-solid fa-circle text-danger"></i>
+                                    Reclamação
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('dashboard-email-filter', ['filter' => 'other']) }}" class="nav-link">
+                                    <i class="fa-solid fa-circle text-warning"></i>
+                                    Outros
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -103,23 +139,34 @@
                         <h3 class="card-title">Enviar um novo email</h3>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Para:">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Assunto:">
-                        </div>
-                        <div class="form-group">
-                            <textarea id="compose-textarea" class="form-control" style="height: 300px"></textarea>
+                    <form method="POST" action="{{ route('dashboard-email-store') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <select name="from" id="from" class="form-control @error('from') is-invalid @enderror">>
+                                    <option value="">Selecione um email</option>
+                                    <option value="wesley@gmail.com">wesley@gamil.com</option>
+                                </select>
+                                @error('from')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <div class="btn btn-default btn-file">
-                                    <i class="fas fa-paperclip"></i> Attachment
-                                    <input type="file" name="attachment">
-                                </div>
-                                <p class="help-block">Max. 32MB</p>
+                                <input id="to" name="to" class="form-control @error('to') is-invalid @enderror" placeholder="Para:">
+                                @error('to')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
+                            <div class="form-group">
+                                <input id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" placeholder="Assunto:">
+                                @error('subject')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" id="compose-textarea" class="form-control" style="height: 300px"></textarea>
+                            </div>
+
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -132,11 +179,35 @@
                         <!-- /.card-footer -->
                     </div>
                     <!-- /.card -->
-                </div>
-                <!-- /.col -->
+                </form>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-    @endsection
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+@endsection
+<!-- modal error -->
+<button type="button" id="modal-error" style="opacity: 0" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalError">
+    Launch demo modal
+</button>
+<div class="modal fade" id="exampleModalError" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="exampleModalLabel"><strong>Error!</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> {{ session('error') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->

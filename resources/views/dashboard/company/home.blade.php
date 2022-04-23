@@ -6,7 +6,7 @@
 @section('content')
 
 <!-- links -->
-<link rel="stylesheet" href="{{ URL::to('/assets/dashboard/css/company.css') }}">
+<link rel="stylesheet" href="{{ URL::to('/assets/dashboard/css/layout.css') }}">
 <!-- end links -->
 
 @if (session('success'))
@@ -62,7 +62,7 @@
 <!-- /.content-header -->
 
 
-<section class="content">
+<section class="content company">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 m-auto">
@@ -70,7 +70,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Lista de Empresas</h3>
 
-                        <div class="input-group">
+                        <div class="input-group search-area">
                             <input class="form-control" id="search" type="text" placeholder="Buscar">
                             <div class="input-group-append">
                                 <button class="btn btn-sidebar">
