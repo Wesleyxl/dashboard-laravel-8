@@ -172,7 +172,7 @@
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
             <img src="{{ URL::to('/assets/dashboard/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">{{ config('app.name', 'Dashboard') }}</span>
+            <span class="brand-text font-weight-light">{{ Auth::user()->name }}</span>
         </a>
 
         <!-- Sidebar -->
@@ -339,8 +339,8 @@
                             <li class="nav-header">Configurações</li>
 
                             <!-- my account -->
-                            <li class="nav-item @yield('li-user')">
-                                <a href="#" class="nav-link @yield('a-user')">
+                            <li class="nav-item @yield('ul-user')">
+                                <a href="#" class="nav-link @yield('li-user')">
                                     <i class="fas fa-user-cog nav-icon"></i>
                                     <p>
                                         Minha conta
@@ -349,9 +349,9 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('dashboard-user') }}" class="nav-link">
+                                        <a href="{{ route('dashboard-user') }}" class="nav-link @yield('a-user')">
                                             <i class="fas fa-pencil-alt nav-icon"></i>
-                                            <p>editar</p>
+                                            <p>Configurar</p>
                                         </a>
                                     </li>
                                 </ul>

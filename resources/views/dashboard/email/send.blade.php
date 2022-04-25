@@ -143,10 +143,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <select name="from" id="from" class="form-control @error('from') is-invalid @enderror">>
-                                    <option value="">Selecione um email</option>
-                                    <option value="wesley@gmail.com">wesley@gamil.com</option>
-                                </select>
+                               <input type="email" name="from" id="from" placeholder="De:" class="form-control @error('from') is-invalid @enderror">
                                 @error('from')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
