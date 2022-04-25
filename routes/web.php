@@ -10,6 +10,9 @@ use App\Http\Controllers\Dashboard\UserController as DashboardUserController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
 
 use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\Website\CompanyController;
+use App\Http\Controllers\Website\ContactController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -99,6 +102,16 @@ Route::group(['middleware' => ['auth']], function () {
 Route::prefix('/')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('website-home');
+
+    Route::prefix('empresas')->group(function () {
+        Route::get('/', [CompanyController::class, 'index'])->name('company');
+        Route::get('/{category}/{name}', CompanyController::class, 'show')->name('company-show');
+    });
+
+    Route::prefix('contato')->group(function () {
+        Route::get('/', [ContactController::class, 'index'])->name('contact');
+        Route::post('/', [ContactController::class, 'store'])->name('contact-store');
+    });
 });
 
 

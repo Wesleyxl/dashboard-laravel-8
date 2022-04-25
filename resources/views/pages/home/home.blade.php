@@ -1,5 +1,6 @@
 @extends('layouts.website')
 @section('title', 'Início')
+@section('a-home', 'active')
 @section('content')
 
     <!-- links -->
