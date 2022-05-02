@@ -59,7 +59,34 @@
         </div>
         <!-- end desktop menu -->
         <!-- mobile menu -->
-        <div class="mobile-menu"></div>
+        <div class="mobile-menu">
+            <div class="navigation">
+                <div class="logo">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ URL::to('/assets/website/img/logo.png') }}" alt="Darus Tecnologia" title="Darus Tecnologia">
+                    </a>
+                </div>
+                <div class="btn-area">
+                    <button type="button" id="menu-header-button">
+                        <div class="icon-button" id="icon-open">
+                            <i class="fa-solid fa-bars"></i>
+                        </div>
+                        <div class="icon-button off" id="icon-close">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <nav id="menu-mobile-mav">
+                <ul>
+                    <li><a href="/"  alt="Início" title="Início" class="@yield('a-home')">Início</a></li>
+                    <li><a href="/sobre" alt="Sobre" title="Sobre"  class="@yield('a-about')">Sobre</a></li>
+                    <li><a href="/categorias" alt="Categorias" title="Categorias"  class="@yield('a-category')">Categorias</a></li>
+                    <li><a href="/empresas" alt="Empresas" title="Empresas"  class="@yield('a-company')">Empresas</a></li>
+                    <li><a href="/contato" alt="Contato" title="Contato"  class="@yield('a-contact')">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
         <!-- end mobile menu -->
     </header>
     <!-- end header -->
@@ -76,7 +103,7 @@
 
     <!-- scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ URL::to('/asset/website/js/main.js') }}"></script>
+    <script src="{{ URL::to('/assets/website/js/main.js') }}"></script>
     <!-- end scripts -->
 
 </body>
