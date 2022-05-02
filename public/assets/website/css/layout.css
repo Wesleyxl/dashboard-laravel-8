@@ -9,16 +9,116 @@ body {
     outline: 0;
     box-sizing: border-box;
 }
-a {
+a:hover {
     text-decoration: none;
 }
 li {
     list-style: none;
 }
 /* END GERAL */
-
 /* HEADER */
-
+header {
+    width: 100%;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    background: transparent;
+}
+.mobile-menu {
+    display: none;
+}
+header .desktop-menu {
+    width: 100%;
+    max-width: 1500px;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .desktop-menu nav ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+header .desktop-menu nav ul li {
+    margin: 0 10px;
+}
+header .desktop-menu nav ul li a {
+    font-size: 20px;
+    position: relative;
+    color: #FFFFFF;
+}
+header .desktop-menu nav ul li a:hover {
+    font-weight: bold;
+}
+header .desktop-menu nav ul li a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    left: 0;
+    bottom: -3px;
+    border-radius: 2px;
+    background: #ffffff;
+    transform: scale3d(0,1,1);
+    transform-origin: center;
+    transition: all ease .5s;
+}
+header .desktop-menu nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    left: 25%;
+    bottom: -8px;
+    border-radius: 2px;
+    background: #ffffff;
+    transform: scale3d(0,1,1);
+    transform-origin: center;
+    transition: all ease .5s;
+}
+header .desktop-menu nav ul li a:hover::before {
+    transform: scale3d(1,1,1);
+}
+header .desktop-menu nav ul li a:hover::after {
+    transform: scale3d(1,1,1);
+}
+header .desktop-menu nav ul li .active {
+    font-weight: bold;
+}
+header .desktop-menu nav ul li .active::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    left: 0;
+    bottom: -3px;
+    border-radius: 2px;
+    background: #ffffff;
+    transform: scale3d(1,1,1);
+}
+header .desktop-menu nav ul li .active::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    left: 25%;
+    bottom: -8px;
+    border-radius: 2px;
+    background: #ffffff;
+    transform: scale3d(1,1,1);
+}
+@media (max-width: 760px) {
+    .desktop-menu {
+        display: none;
+    }
+    .mobile-menu {
+        display: flex;
+    }
+}
 /* END HEADER */
 
 /* FOOTER */

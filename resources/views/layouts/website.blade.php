@@ -27,7 +27,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ URL::to('/asset/website/css/layout.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ URL::to('/assets/website/css/layout.css') }}">
     <!-- end links -->
 
     <title>@yield('title')</title>
@@ -36,7 +39,29 @@
 <body>
 
     <!-- header -->
-    <header></header>
+    <header>
+        <!-- desktop menu -->
+        <div class="desktop-menu">
+            <div class="logo">
+                <a href="{{ route('home') }}">
+                    <img src="{{ URL::to('/assets/website/img/logo.png') }}" alt="Darus Tecnologia" title="Darus Tecnologia">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/"  alt="Início" title="Início" class="@yield('a-home')">Início</a></li>
+                    <li><a href="/sobre" alt="Sobre" title="Sobre"  class="@yield('a-about')">Sobre</a></li>
+                    <li><a href="/categorias" alt="Categorias" title="Categorias"  class="@yield('a-category')">Categorias</a></li>
+                    <li><a href="/empresas" alt="Empresas" title="Empresas"  class="@yield('a-company')">Empresas</a></li>
+                    <li><a href="/contato" alt="Contato" title="Contato"  class="@yield('a-contact')">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- end desktop menu -->
+        <!-- mobile menu -->
+        <div class="mobile-menu"></div>
+        <!-- end mobile menu -->
+    </header>
     <!-- end header -->
 
     <!-- content --->

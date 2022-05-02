@@ -4,9 +4,13 @@
 @section('content')
 
     <!-- links -->
-    <link rel="stylesheet" href="{{ URL::to('/assets/website/css/company.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('/assets/website/css/home.css') }}">
     <!-- end links -->
 
-    <h1>Empresas</h1>
+    <!-- Intro -->
+    <section id="intro" class="intro">
+
+    </section>
+    <!-- End Intro -->
 
 @endsection
