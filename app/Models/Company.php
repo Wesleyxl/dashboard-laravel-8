@@ -24,6 +24,9 @@ class Company extends Model
         'img',
         'stars',
 
+        'category_id',
+        'subcategory_id',
+
         'sunday-is-open',
         'sunday-from',
         'sunday-to',
@@ -83,6 +86,7 @@ class Company extends Model
         $company['cellphone'] = $request['cellphone'];
         $company['description'] = $request['description'];
         $company['category_id'] = $request['category'];
+        $company['subcategory_id'] = $request['subcategory'];
         $company['code'] = $request['code'];
         $company['cep'] = $request['cep'];
         $company['uf'] = $request['uf'];
@@ -176,6 +180,7 @@ class Company extends Model
         $company['cellphone'] = $request['cellphone'];
         $company['description'] = $request['description'];
         $company['category_id'] = $request['category'];
+        $company['subcategory_id'] = $request['subcategory'];
         $company['code'] = $request['code'];
         $company['cep'] = $request['cep'];
         $company['uf'] = $request['uf'];

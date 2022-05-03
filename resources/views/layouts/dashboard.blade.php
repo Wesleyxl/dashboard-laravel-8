@@ -404,26 +404,6 @@
                             </li>
                             <!-- end website config -->
 
-                            {{-- <!-- users -->
-                                <li class="nav-item @yield('li-user')">
-                                    <a href="#" class="nav-link @yield('a-user')">
-                                        <i class="fas fa-users-cog nav-icon"></i>
-                                        <p>
-                                            Usuários
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="{{ route('dashboard-user') }}" class="nav-link">
-                                                <i class="fas fa-cog nav-icon"></i>
-                                                <p>Configurar</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- end users --> --}}
-
                             </ul>
                         </nav>
                         <!-- /.sidebar-menu -->

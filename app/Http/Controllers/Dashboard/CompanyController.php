@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use Illuminate\Support\Facades\Validator;
@@ -31,9 +32,13 @@ class CompanyController extends Controller
             ->paginate(10);
 
         foreach ($companies as $company) {
-            $category_name = Category::select('id', 'name')
+            $category_name = Category::select('name')
                 ->where('id', $company['category_id'])->first();
+            $subcategory_name = Subcategory::select('name')
+                ->where('id', $company['subcategory_id'])->first();
+
             $company['category_name'] = $category_name['name'];
+            $company['subcategory_name'] =  $subcategory_name['name'];
         }
 
         return view('dashboard.company.home', array(
@@ -48,9 +53,12 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $categories = Category::get()->all();
+        $categories = Category::orderBy('name', 'asc')->get()->all();
+        $subcategories = Subcategory::orderBy('name', 'asc')->get()->all();
+
         return view('dashboard.company.create', array(
-            'categories' => $categories
+            'categories' => $categories,
+            'subcategories' => $subcategories
         ));
     }
 
@@ -67,6 +75,7 @@ class CompanyController extends Controller
             'email' => 'required|string|email',
             'code' => 'string',
             'category' => 'required|string',
+            'subcategory' => 'required|string',
             'description' => 'required|string|min:3',
             'cep' => 'required|string',
             'uf' => 'required|string',
@@ -105,16 +114,21 @@ class CompanyController extends Controller
     public function edit($id)
     {
         $company = Company::find($id);
-        $categories = Category::get()->all();
+        $categories = Category::orderBy('name', 'asc')->get()->all();
+        $subcategories = Subcategory::orderBy('name', 'asc')->get()->all();
 
-        $category_name = Category::select('id', 'name')
+        $category_name = Category::select('name')
             ->where('id', $company['category_id'])->first();
+        $subcategory_name = Subcategory::select('name')
+            ->where('id', $company['subcategory_id'])->first();
 
         $company['category_name'] = $category_name['name'];
+        $company['category_name'] = $subcategory_name['name'];
 
         return view('dashboard.company.edit', array(
             'company' => $company,
-            'categories' => $categories
+            'categories' => $categories,
+            'subcategories' => $subcategories
         ));
     }
 
@@ -132,6 +146,7 @@ class CompanyController extends Controller
             'email' => 'required|string|email',
             'code' => 'string',
             'category' => 'required|string',
+            'subcategory' => 'required|string',
             'description' => 'required|string|min:3',
             'cep' => 'required|string',
             'uf' => 'required|string',
@@ -181,9 +196,13 @@ class CompanyController extends Controller
             ->paginate(10);
 
         foreach ($companies as $company) {
-            $category_name = Category::select('id', 'name')
+            $category_name = Category::select('name')
                 ->where('id', $company['category_id'])->first();
+            $subcategory_name = Subcategory::select('name')
+                ->where('id', $company['subcategory_id'])->first();
+
             $company['category_name'] = $category_name['name'];
+            $company['subcategory_name'] = $subcategory_name['name'];
         }
 
         return view('dashboard.company.search', array(

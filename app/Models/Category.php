@@ -15,12 +15,12 @@ class Category extends Model
 
     public static function create($request)
     {
-        $company = new Category();
-        $company['name'] = $request['name'];
-        $company['description'] = $request['description'];
+        $category = new Category();
+        $category['name'] = $request['name'];
+        $category['description'] = $request['description'];
 
-        if ($company->save()) {
-            return $company;
+        if ($category->save()) {
+            return $category;
         } else {
             return false;
         }
@@ -29,16 +29,16 @@ class Category extends Model
     public static function edit($request, $id = 0)
     {
         if ($id) {
-            $company = Category::find($id);
+            $category = Category::find($id);
         } else {
             return false;
         }
 
-        $company['name'] = $request['name'];
-        $company['description'] = $request['description'];
+        $category['name'] = $request['name'];
+        $category['description'] = $request['description'];
 
-        if ($company->save()) {
-            return $company;
+        if ($category->save()) {
+            return $category;
         } else {
             return false;
         }
