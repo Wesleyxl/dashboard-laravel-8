@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\EmailController as DashboardEmailController;
 use App\Http\Controllers\Dashboard\HighlightController as DashboardHighlightController;
 use App\Http\Controllers\Dashboard\UserController as DashboardUserController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
+use App\Http\Controllers\Dashboard\SubcategoryController as DashboardSubcategoryController;
 
 use App\Http\Controllers\Website\WebsiteHomeController;
 use App\Http\Controllers\Website\WebsiteCompanyController;
@@ -63,6 +64,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update/{id}', [DashboardCategoryController::class, 'update'])->name('dashboard-category-update');
             Route::get('delete/{id}', [DashboardCategoryController::class, 'destroy'])->name('dashboard-category-destroy');
             Route::get('search', [DashboardCategoryController::class, 'search'])->name('dashboard-category-search');
+        });
+
+        Route::prefix('subcategoria')->group(function () {
+            Route::get('/', [DashboardSubcategoryController::class, 'index'])->name('dashboard-subcategory');
+            Route::get('cadastrar', [DashboardSubcategoryController::class, 'create'])->name('dashboard-subcategory-create');
+            Route::post('store', [DashboardSubcategoryController::class, 'store'])->name('dashboard-subcategory-store');
+            Route::get('editar/{id}', [DashboardSubcategoryController::class, 'edit'])->name('dashboard-subcategory-edit');
+            Route::post('update/{id}', [DashboardSubcategoryController::class, 'update'])->name('dashboard-subcategory-update');
+            Route::get('delete/{id}', [DashboardSubcategoryController::class, 'destroy'])->name('dashboard-subcategory-destroy');
+            Route::get('search', [DashboardSubcategoryController::class, 'search'])->name('dashboard-subcategory-search');
         });
 
         Route::prefix('email')->group(function () {

@@ -18,6 +18,7 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->longText('description');
+            $table->foreignId('subcategory_id');
             $table->foreignId('category_id');
             $table->string('code');
             $table->string('phone')->nullable();
@@ -80,6 +81,10 @@ class CreateCompaniesTable extends Migration
             $table->string('holiday-lunch-from')->nullable();
             $table->string('holiday-lunch-to')->nullable();
 
+            $table->foreign('subcategory_id')
+                ->references('id')
+                ->on('subcategories')
+                ->onUpdate('cascade');
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')

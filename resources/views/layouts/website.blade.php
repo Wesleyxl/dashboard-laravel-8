@@ -98,7 +98,47 @@
     <!-- end content -->
 
     <!-- footer -->
-    <footer></footer>
+    <footer>
+        <div class="container">
+            <div class="title">
+                <div class="text">
+                    <h5>Contate-nos</h5>
+                </div>
+                <div class="icons">
+                    <ul>
+                        <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+                        <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href=""><i class="fa-brands fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="links">
+                <ul>
+                    <li><a href="">
+                        <i class="fa-solid fa-phone"></i>
+                        (11) 1234-4567
+                    </a></li>
+                    <li><a href="">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        (11) 91234-4567
+                    </a></li>
+                </ul>
+                <ul>
+                    <li><a href="">
+                        <i class="fa-regular fa-envelope"></i>
+                        contato@dardustecnologia.com.br
+                    </a></li>
+                    <li><a href="">
+                        <i class="fa-regular fa-clock"></i>
+                        seg à sexta, 9hrs - 18hrs
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copy-area">
+            <p><i class="fa-regular fa-copyright"></i> copyright 2022 - Dardus Tecnologia <span>Desenvolvido por <a href="https://www.wesley-alves.com">Wesley Alves</a></span></p>
+        </div>
+    </footer>
     <!-- end footer -->
 
     <!-- scripts -->

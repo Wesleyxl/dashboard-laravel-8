@@ -213,7 +213,7 @@
                             <li class="nav-header">Páginas</li>
 
                             <!-- banner -->
-                            <li class="nav-item @yield('li-banner')">
+                            {{-- <li class="nav-item @yield('li-banner')">
                                 <a href="#" class="nav-link @yield('a-banner')">
                                     <i class="fas fa-image nav-icon"></i>
                                     <p>
@@ -235,7 +235,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <!-- end banner -->
 
                             <!-- category -->
@@ -262,7 +262,33 @@
                                     </li>
                                 </ul>
                             </li>
-                            <!-- end company -->
+                            <!-- end category -->
+
+                            <!-- subcategory -->
+                            <li class="nav-item @yield('ul-subcategory')">
+                                <a href="#" class="nav-link @yield('li-subcategory')">
+                                    <i class="fa-solid fa-list nav-icon"></i>
+                                    <p>
+                                        Subcategorias
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('dashboard-subcategory-create') }}" class="nav-link @yield('a-subcategory-create')">
+                                            <i class="fas fa-plus nav-icon"></i>
+                                            <p>Cadastrar</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('dashboard-subcategory') }}" class="nav-link @yield('a-subcategory')">
+                                            <i class="fa-solid fa-eye"></i>
+                                            <p>Visualizar</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- end subcategory -->
 
                             <!-- company -->
                             <li class="nav-item @yield('ul-company')">
@@ -357,6 +383,26 @@
                                 </ul>
                             </li>
                             <!-- end my account -->
+
+                            <!-- Website config -->
+                            <li class="nav-item @yield('ul-user')">
+                                <a href="#" class="nav-link @yield('li-user')">
+                                    <i class="fa-solid fa-gears nav-icon"></i>
+                                    <p>
+                                        Website
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('dashboard-user') }}" class="nav-link @yield('a-user')">
+                                            <i class="fas fa-pencil-alt nav-icon"></i>
+                                            <p>Configurar</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- end website config -->
 
                             {{-- <!-- users -->
                                 <li class="nav-item @yield('li-user')">

@@ -217,5 +217,72 @@ header .desktop-menu nav ul li .active::after {
 /* END HEADER */
 
 /* FOOTER */
-
+footer {
+    width: 100%;
+    min-height: 215px;
+    background: linear-gradient(270deg, #211A86 46.88%, #4A73DC 75%);
+}
+footer .title {
+    text-align: center;
+    padding-top: 23px;
+}
+footer .title .text h5 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+}
+footer .title ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+footer .title ul li a {
+    color: #ffffff;
+    font-size: 25px;
+    margin: 0 10px;
+}
+footer .links {
+    padding-top: 20px;
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer .links ul {
+    padding: 0;
+    margin: 0;
+}
+footer .links ul li {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+footer .links ul li a {
+    color: #ffffff;
+}
+footer .links ul li a i {
+    margin-right: 10px;
+}
+footer .copy-area {
+    width: 100%;
+    padding: 5px 0;
+    margin-top: 10px;
+    text-align: center;
+    background: #fffffd;
+}
+footer .copy-area p {
+    margin: 0;
+    padding: 0;
+    color: #000000;
+}
+footer .copy-area span {
+    margin-left: 40px;
+}
+footer .copy-area span a {
+    color: var(--primary-color);
+    font-weight: bold;
+}
 /* FOOTER */
