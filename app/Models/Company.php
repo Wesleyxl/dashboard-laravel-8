@@ -23,6 +23,7 @@ class Company extends Model
         'street',
         'img',
         'stars',
+        'url',
 
         'category_id',
         'subcategory_id',
@@ -94,6 +95,7 @@ class Company extends Model
         $company['neighborhood'] = $request['neighborhood'];
         $company['street'] = $request['street'];
         $company['number'] = $request['number'];
+        $company['url'] = $request['url'];
 
         if (isset($request['sunday-is-open'])) {
             $company['sunday-is-open'] = $request['sunday-is-open'];
@@ -188,6 +190,7 @@ class Company extends Model
         $company['neighborhood'] = $request['neighborhood'];
         $company['street'] = $request['street'];
         $company['number'] = $request['number'];
+        $company['url'] = $request['url'];
 
         if (isset($request['sunday-is-open'])) {
             $company['sunday-is-open'] = $request['sunday-is-open'];

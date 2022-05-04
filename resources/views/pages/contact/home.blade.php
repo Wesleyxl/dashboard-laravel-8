@@ -7,6 +7,5 @@
     <link rel="stylesheet" href="{{ URL::to('/assets/website/css/contact.css') }}">
     <!-- end links -->
 
-    <h1>Contato</h1>
 
 @endsection

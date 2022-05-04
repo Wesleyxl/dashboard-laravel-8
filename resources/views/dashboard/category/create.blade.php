@@ -36,6 +36,7 @@
                 <h4>Preencha todos os campos corretamente</h4>
             </div>
             <div class="card-body">
+                <small class="text-danger">OBS: Os campos com * são campos obrigatórios</small>
                 <form  method="POST" enctype="multipart/form-data" action="{{ route('dashboard-category-store') }}">
                     @csrf
                     <div class="row">
@@ -52,7 +53,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="description">Descrição*</label>
+                                <label for="description">Descrição</label>
                                 <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" placeholder="Descrição da category" rows="5">{{ old('description') }}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>

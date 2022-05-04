@@ -404,77 +404,77 @@
                             </li>
                             <!-- end website config -->
 
-                            </ul>
-                        </nav>
-                        <!-- /.sidebar-menu -->
-                    </div>
-                    <!-- /.sidebar -->
-                </aside>
-
-                <!-- Content Wrapper. Contains page content -->
-                <div class="content-wrapper">
-
-                    <main>
-                        @yield('content')
-                    </main>
-
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
                 </div>
-                <!-- /.content-wrapper -->
-                <footer class="main-footer">
-                    <strong>Copyright &copy; 2020-2022 <a href="https://www.wesley-alves.com">Wesley Alves</a>.</strong>
-                    All rights reserved.
-                    <div class="float-right d-none d-sm-inline-block">
-                        <b>Versão</b> 3.5.0
-                    </div>
-                </footer>
+                <!-- /.sidebar -->
+            </aside>
 
-                <!-- Control Sidebar -->
-                <aside class="control-sidebar control-sidebar-dark">
-                    <!-- Control sidebar content goes here -->
-                </aside>
-                <!-- /.control-sidebar -->
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+
+                <main>
+                    @yield('content')
+                </main>
+
             </div>
-            <!-- ./wrapper -->
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <strong>Copyright &copy; 2020-2022 <a href="https://www.wesley-alves.com">Wesley Alves</a>.</strong>
+                All rights reserved.
+                <div class="float-right d-none d-sm-inline-block">
+                    <b>Versão</b> 3.5.0
+                </div>
+            </footer>
 
-            <!-- jQuery UI 1.11.4 -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-            <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-            <script>
-                $.widget.bridge('uibutton', $.ui.button)
-            </script>
-            <!-- ChartJS -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/chart.js/Chart.min.js') }}"></script>
-            <!-- Sparkline -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/sparklines/sparkline.js') }}"></script>
-            <!-- JQVMap -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-            <script src="{{ URL::to('/assets/dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-            <!-- jQuery Knob Chart -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-            <!-- daterangepicker -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/moment/moment.min.js') }}"></script>
-            <script src="{{ URL::to('/assets/dashboard/plugins/daterangepicker/daterangepicker.js') }}"></script>
-            <!-- Tempusdominus Bootstrap 4 -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-            <!-- Summernote -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/summernote/summernote-bs4.min.js') }}"></script>
-            <!-- overlayScrollbars -->
-            <script src="{{ URL::to('/assets/dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-            <!-- AdminLTE App -->
-            <script src="{{ URL::to('/assets/dashboard/dist/js/adminlte.js') }}"></script>
-            <!-- AdminLTE for demo purposes -->
-            <script src="{{ URL::to('/assets/dashboard/dist/js/demo.js') }}"></script>
-            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-            <script src="{{ URL::to('/assets/dashboard/dist/js/pages/dashboard.js') }}"></script>
-            <!-- other -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script>
-                $(function () {
-                    //Add text editor
-                    $('#compose-textarea').summernote({
-                        height: 300,
-                    })
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery UI 1.11.4 -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- ChartJS -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/chart.js/Chart.min.js') }}"></script>
+        <!-- Sparkline -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/sparklines/sparkline.js') }}"></script>
+        <!-- JQVMap -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+        <script src="{{ URL::to('/assets/dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+        <!-- daterangepicker -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ URL::to('/assets/dashboard/plugins/daterangepicker/daterangepicker.js') }}"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+        <!-- Summernote -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/summernote/summernote-bs4.min.js') }}"></script>
+        <!-- overlayScrollbars -->
+        <script src="{{ URL::to('/assets/dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+        <!-- AdminLTE App -->
+        <script src="{{ URL::to('/assets/dashboard/dist/js/adminlte.js') }}"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="{{ URL::to('/assets/dashboard/dist/js/demo.js') }}"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="{{ URL::to('/assets/dashboard/dist/js/pages/dashboard.js') }}"></script>
+        <!-- other -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $(function () {
+                //Add text editor
+                $('#compose-textarea').summernote({
+                    height: 300,
                 })
-            </script>
-        </body>
-        </html>
+            })
+        </script>
+    </body>
+</html>

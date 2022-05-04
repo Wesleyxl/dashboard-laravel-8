@@ -11,6 +11,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'description',
+        'url'
     ];
 
     public static function create($request)
@@ -18,6 +19,7 @@ class Category extends Model
         $category = new Category();
         $category['name'] = $request['name'];
         $category['description'] = $request['description'];
+        $category['url'] = $request['url'];
 
         if ($category->save()) {
             return $category;
@@ -36,6 +38,7 @@ class Category extends Model
 
         $category['name'] = $request['name'];
         $category['description'] = $request['description'];
+        $category['url'] = $request['url'];
 
         if ($category->save()) {
             return $category;

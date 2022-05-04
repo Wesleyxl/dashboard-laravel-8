@@ -95,11 +95,19 @@
                                     @if (count($categories) < 1)
                                         <option value="">Não há categoria cadastrada</option>
                                     @else
-                                        <option value="{{ $company['category_id'] }}">{{ $company['category_name'] }}</option>
+                                        <option value="">Selecione uma categoria</option>
                                         @foreach ($categories as $category)
-                                            @if ($category['id'] != $company['category_id'])
-                                                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
-                                            @endif
+                                            <optgroup label="{{ $category['name'] }}">
+                                                @foreach ($subcategories as $subcategory)
+                                                    @if($subcategory['category_id'] === $category['id'])
+                                                        @if($subcategory['id'] != $company['subcategory_id'])
+                                                            <option value="{{ $subcategory['id'] }}-{{ $category['id'] }}">{{ $subcategory['name'] }}</option>
+                                                        @else
+                                                            <option selected value="{{ $subcategory['id'] }}-{{ $category['id'] }}">{{ $subcategory['name'] }}</option>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            </optgroup>
                                         @endforeach
                                     @endif
                                 </select>

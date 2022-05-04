@@ -75,7 +75,6 @@ class CompanyController extends Controller
             'email' => 'required|string|email',
             'code' => 'string',
             'category' => 'required|string',
-            'subcategory' => 'required|string',
             'description' => 'required|string|min:3',
             'cep' => 'required|string',
             'uf' => 'required|string',
@@ -83,6 +82,12 @@ class CompanyController extends Controller
             'neighborhood' => 'required|string',
             'street' => 'required|string',
         ]);
+
+        $values = explode("-", $request['category']);
+        $request['subcategory'] = $values[0];
+        $request['category'] = $values[1];
+
+        $request['url'] = static::cleanUrl($request['name']);
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());
@@ -146,7 +151,6 @@ class CompanyController extends Controller
             'email' => 'required|string|email',
             'code' => 'string',
             'category' => 'required|string',
-            'subcategory' => 'required|string',
             'description' => 'required|string|min:3',
             'cep' => 'required|string',
             'uf' => 'required|string',
@@ -155,6 +159,11 @@ class CompanyController extends Controller
             'street' => 'required|string',
             'number' => 'required|numeric'
         ]);
+
+        $values = explode("-", $request['category']);
+        $request['subcategory'] = $values[0];
+        $request['category'] = $values[1];
+        $request['url'] = static::cleanUrl($request['name']);
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());

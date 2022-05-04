@@ -36,13 +36,13 @@
                 <h4>Preencha todos os campos corretamente</h4>
             </div>
             <div class="card-body">
-                <form  method="POST" enctype="multipart/form-data" action="{{ route('dashboard-category-update', ['id' => $category['id']]) }}">
+                <form  method="POST" enctype="multipart/form-data" action="{{ route('dashboard-subcategory-update', ['id' => $subcategory['id']]) }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="name">Nome da categoria*</label>
-                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nome da categoria" value="{{ $category['name'] }}">
+                                <label for="name">Nome da Subcategoria*</label>
+                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nome da subcategoria" value="{{ $subcategory['name'] }}">
                                 @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -52,8 +52,27 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="description">Descrição*</label>
-                                <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" placeholder="Descrição da category" rows="5">{{ $category['description'] }}</textarea>
+                                <label for="category">Categoria*</label>
+                                @if(count($categories) >= 1)
+                                    <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
+                                        <option value="">Selecione uma categoria</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    @else
+                                    <select name="category" id="category" class="form-control @error('category') is-invalid @enderror" readonly>
+                                        <option value="" readonly>Não há categorias cadastradas</option>
+                                    </select>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Descrição</label>
+                                <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" placeholder="Descrição da subcategory" rows="5">{{ $subcategory['description'] }}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -62,7 +81,7 @@
                     </div>
 
                     <div class="btn-area d-flex justify-content-between">
-                        <a href="{{ route('dashboard-category') }}" class="btn btn-primary">Voltar</a>
+                        <a href="{{ route('dashboard-subcategory') }}" class="btn btn-primary">Voltar</a>
                         <button type="submit" class="btn btn-success">Editar</button>
                     </div>
                 </form>
@@ -72,5 +91,14 @@
     <br><br>
 
 </section>
+
+    <script>
+        var category_id = '{{ $subcategory["category_id"] }}'
+        $("#category > option").each(function () {
+            if (this.value === category_id) {
+                $(this).prop("selected", true);
+            }
+        });
+    </script>
 
 @endsection

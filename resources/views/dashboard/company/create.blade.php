@@ -29,6 +29,7 @@
 <!-- /.content-header -->
 
 
+
 <section class="content company">
     <div class="container-fluid">
         <div class="card card-secondary">
@@ -88,9 +89,7 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label for="category">Selecione uma categoria*</label>
                                 <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
@@ -99,29 +98,17 @@
                                     @else
                                         <option value="">Selecione uma categoria</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                            <optgroup label="{{ $category['name'] }}">
+                                                @foreach ($subcategories as $subcategory)
+                                                    @if($subcategory['category_id'] === $category['id'])
+                                                        <option value="{{ $subcategory['id'] }}-{{ $category['id'] }}">{{ $subcategory['name'] }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </optgroup>
                                         @endforeach
                                     @endif
                                 </select>
                                 @error('category')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="subcategory">Selecione uma subcategoria*</label>
-                                <select name="subcategory" id="category" class="form-control @error('subcategory') is-invalid @enderror">
-                                    @if (count($subcategories) < 1)
-                                        <option value="">Não há subcategoria cadastrada</option>
-                                    @else
-                                        <option value="">Selecione uma subcategoria</option>
-                                        @foreach ($subcategories as $subcategory)
-                                            <option value="{{ $subcategory['id'] }}">{{ $subcategory['name'] }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                                @error('subcategory')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

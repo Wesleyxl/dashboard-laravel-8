@@ -52,8 +52,10 @@
 
         @endforeach
     </tbody>
-    {{ $subcategories->links() }}
 </table>
+<div class="link-area" style="margin: 15px 15px -15px 15px">
+    {{ $subcategories->links('pagination::bootstrap-4') }}
+</div>
 @else
 <h5 class="p-4 m-2">Não há subcategorias cadastrada</h5>
 @endif

@@ -10,37 +10,37 @@
 <!-- end links -->
 
 @if (session('success'))
-    <script>
-        var click = 0;
-        setInterval(() => {
-            if (click == 0) {
-                $("#modal-success").trigger('click');
-                click = 1;
-            }
-        }, 0);
-    </script>
+<script>
+    var click = 0;
+    setInterval(() => {
+        if (click == 0) {
+            $("#modal-success").trigger('click');
+            click = 1;
+        }
+    }, 0);
+</script>
 @endif
 @if (session('warning'))
-    <script>
-        var click = 0;
-        setInterval(() => {
-            if (click == 0) {
-                $("#modal-warning").trigger('click');
-                click = 1;
-            }
-        }, 0);
-    </script>
+<script>
+    var click = 0;
+    setInterval(() => {
+        if (click == 0) {
+            $("#modal-warning").trigger('click');
+            click = 1;
+        }
+    }, 0);
+</script>
 @endif
 @if (session('error'))
-    <script>
-        var click = 0;
-        setInterval(() => {
-            if (click == 0) {
-                $("#modal-error").trigger('click');
-                click = 1;
-            }
-        }, 0);
-    </script>
+<script>
+    var click = 0;
+    setInterval(() => {
+        if (click == 0) {
+            $("#modal-error").trigger('click');
+            click = 1;
+        }
+    }, 0);
+</script>
 @endif
 
 <!-- Content Header (Page header) -->
@@ -94,58 +94,58 @@
                             </thead>
                             <tbody>
                                 @php $i = 1 @endphp
-                                    @foreach ($subcategories as $subcategory)
-                                        <tr>
-                                            <td>
-                                                <div class="table-icons">
-                                                    <a class="btn btn-default" alt="Editar" title="Editar" href="{{ route('dashboard-subcategory-edit', ['id' => $subcategory['id']]) }}">
-                                                        <i class="fa-solid fa-pen"></i>
-                                                    </a>
-                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-md-{{ $subcategory['id'] }}">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td>{{ $i++ }}</td>
-                                            <td>{{ $subcategory['name'] }}</td>
-                                            <td>{{ $subcategory['category_name'] }}</td>
-                                            <td>{{ $subcategory['created_at'] }}</td>
-                                        </tr>
-                                        <div class="modal fade" id="modal-md-{{ $subcategory['id'] }}">
-                                            <div class="modal-dialog modal-md">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title text-danger"><strong>Atenção!</strong></h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Quer mesmo apagar a subcategoria <strong>{{ $subcategory['name'] }}</strong>?</p>
-                                                    </div>
-                                                    <div class="modal-footer justify-content-between">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                        <a href="{{ route('dashboard-subcategory-destroy', ['id' => $subcategory['id']]) }}" class="btn btn-danger">Apagar</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
+                                @foreach ($subcategories as $subcategory)
+                                <tr>
+                                    <td>
+                                        <div class="table-icons">
+                                            <a class="btn btn-default" alt="Editar" title="Editar" href="{{ route('dashboard-subcategory-edit', ['id' => $subcategory['id']]) }}">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-md-{{ $subcategory['id'] }}">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
                                         </div>
+                                    </td>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $subcategory['name'] }}</td>
+                                    <td>{{ $subcategory['category_name'] }}</td>
+                                    <td>{{ $subcategory['created_at'] }}</td>
+                                </tr>
+                                <div class="modal fade" id="modal-md-{{ $subcategory['id'] }}">
+                                    <div class="modal-dialog modal-md">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-danger"><strong>Atenção!</strong></h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Quer mesmo apagar a subcategoria <strong>{{ $subcategory['name'] }}</strong>?</p>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                <a href="{{ route('dashboard-subcategory-destroy', ['id' => $subcategory['id']]) }}" class="btn btn-danger">Apagar</a>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
 
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div class="link-area">
-                                {{ $subcategories->links() }}
-                            </div>
-                            @else
-                                <h5 class="p-4 m-2">Não há subcategorias cadastrada</h5>
-                            @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="link-area" style="margin: 15px 15px -15px 15px">
+                            {{ $subcategories->links('pagination::bootstrap-4') }}
                         </div>
-                        <!-- /.card-body -->
+                        @else
+                        <h5 class="p-4 m-2">Não há subcategorias cadastrada</h5>
+                        @endif
                     </div>
-                    <!-- /.card -->
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
             </div>
         </div>
     </div>
@@ -157,20 +157,21 @@
 </button>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title text-success" id="exampleModalLabel"><strong>Sucesso!</strong></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success" id="exampleModalLabel"><strong>Sucesso!</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> {{ session('success') }}</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('dashboard-subcategory-create') }}" class="btn btn-primary">Cadastrar outro</a>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
+            </div>
         </div>
-        <div class="modal-body">
-        <p> {{ session('success') }}</p>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-        </div>
-    </div>
     </div>
 </div>
 <!-- /.modal -->
@@ -180,20 +181,20 @@
 </button>
 <div class="modal fade" id="exampleModalWarning" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title text-warning" id="exampleModalLabel"><strong>Atenção!</strong></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-warning" id="exampleModalLabel"><strong>Atenção!</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> {{ session('warning') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
+            </div>
         </div>
-        <div class="modal-body">
-        <p> {{ session('warning') }}</p>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-        </div>
-    </div>
     </div>
 </div>
 <!-- /.modal -->
@@ -203,20 +204,20 @@
 </button>
 <div class="modal fade" id="exampleModalError" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title text-danger" id="exampleModalLabel"><strong>Error!</strong></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="exampleModalLabel"><strong>Error!</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> {{ session('error') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
+            </div>
         </div>
-        <div class="modal-body">
-        <p> {{ session('error') }}</p>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
-        </div>
-    </div>
     </div>
 </div>
 <!-- /.modal -->

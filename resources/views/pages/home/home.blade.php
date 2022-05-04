@@ -63,24 +63,29 @@
             </div>
             <div class="content">
                 <div class="row">
-                    @for ( $i= 0;  $i< 10; $i++)
-                    <div class="col-md-3">
-                        <div class="card-area">
-                            <div class="card-area-header">
-                                <a href="/categorias" alt="Administração" title="Administração">Administração (47)</a>
+                    @if(count($categories) >= 1)
+                        @foreach ( $categories as $category)
+
+                            <div class="col-md-3">
+                                <div class="card-area">
+                                    <div class="card-area-header">
+                                        <a href="/{{ $category['url'] }}" alt="{{ $category['name'] }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>
+                                    </div>
+                                    <div class="card-area-body">
+                                        <ul>
+                                            @foreach ($subcategories as $subcategory)
+                                                @if($subcategory['category_id'] === $category['id'])
+                                                    <li><a href="/{{ $category['url'] }}/{{ $subcategory['url'] }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-area-body">
-                                <ul>
-                                    <li><a href="#" alt="Financeiro" title="Financeiro">Financeiro (8)</a></li>
-                                    <li><a href="#" alt="Auditoria" title="Auditoria">Auditoria (10)</a></li>
-                                    <li><a href="#" alt="Consultoria" title="Consultoria">Consultoria (10)</a></li>
-                                    <li><a href="#" alt="Logística" title="Logística">Logística (12)</a></li>
-                                    <li><a href="#" alt="Recursos Humanos" title="Recursos Humanos">Recursos humanos (7)</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    @endfor
+                        @endforeach
+                    @else
+                        <h4>Nada para mostrar</h4>
+                    @endif
                 </div>
                 <div class="btn-area">
                     <a href="/categorias" alt="Categorias" title="Categorias">Ver Mais</a>
@@ -100,38 +105,68 @@
                 <div style="top: 50%; left: -35px;" class="swiper-button-prev2" tabindex="0" role="button" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></div>
                 <div class="swiper-containers">
                     <div class="swiper-wrapper">
-                        @for ($i = 0; $i < 10; $i++)
-                        <div class="swiper-slide">
-                            <div class="card-highlights">
-                                <div class="card-highlights-header">
-                                    <div class="top">
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
+                        @foreach ($companies as $company)
+                            <div class="swiper-slide">
+                                <div class="card-highlights">
+                                    <div class="card-highlights-header">
+                                        <div class="top">
+                                            <div class="star">
+                                                @if($company['stars'] <= 10)
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                @elseif($company['stars'] > 10 && $company['stars'] <= 20)
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                @elseif($company['stars'] > 20 && $company['stars'] <= 30)
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                @elseif($company['stars'] > 30 && $company['stars'] <= 40)
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                @else
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                @endif
+                                            </div>
+                                            <div class="button">
+                                                <p>Destaque</p>
+                                            </div>
                                         </div>
-                                        <div class="button">
-                                            <p>Destaque</p>
-                                        </div>
+                                            <div class="link">
+                                                <a href="/{{ $company['category'] }}/{{ $company['subcategory'] }}/{{ $company['url'] }}">Saiba +</a>
+                                            </div>
+                                            @if($company['img'] != null)
+                                                <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
+                                            @else
+                                                <img src="{{ URL::to('/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
+                                            @endif
                                     </div>
-                                        <div class="link">
-                                            <a href="#">Saiba +</a>
+                                    <div class="card-highlights-body">
+                                        <div class="title">
+                                            <p>{{ $company['name'] }}</p>
                                         </div>
-                                        <img src="{{ URL::to('/assets/website/img/home/highlights-img.png') }}" alt="">
-                                </div>
-                                <div class="card-highlights-body">
-                                    <div class="title">
-                                        <p>Acw Distribuidora De Material Elétrico Ltda</p>
-                                    </div>
-                                    <div class="text">
-                                        <p> Av. Papa João Paulo I, 2722 - Cidade Parque Sao Luiz, Guarulhos - SP, 07170-385</p>
+                                        <div class="text">
+                                            <p>{{ $company['street'] }}, {{ $company['number'] }} - {{ $company['neighborhood'] }}, {{ $company['city'] }} - {{ $company['uf'] }}, {{ $company['cep'] }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @endfor
+                        @endforeach
                     </div>
                 </div>
                 <div style="top: 50%; right: -35px;" class="swiper-button-next2" tabindex="0" role="button" aria-label="Next slide"><i class="fas fa-chevron-right"></i></div>

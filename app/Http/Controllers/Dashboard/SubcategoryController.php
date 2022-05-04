@@ -63,6 +63,8 @@ class SubcategoryController extends Controller
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
+        $request['url'] = static::cleanUrl($request['name']);
+
         if (Subcategory::create($request->all())) {
             return redirect('adm/subcategoria')->with('success', 'Subcategoria cadastrada com sucesso!');
         } else {
@@ -89,7 +91,14 @@ class SubcategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subcategory = Subcategory::find($id);
+
+        $categories = Category::orderBy('name')->get()->all();
+
+        return view('dashboard.subcategory.edit', array(
+            'subcategory' => $subcategory,
+            'categories' => $categories
+        ));
     }
 
     /**
@@ -101,7 +110,22 @@ class SubcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:256',
+            'category' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator->errors());
+        }
+
+        $request['url'] = static::cleanUrl($request['name']);
+
+        if (Subcategory::edit($request->all(), $id)) {
+            return redirect('adm/subcategoria')->with('success', 'Subcategoria editada com sucesso!');
+        } else {
+            return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
+        }
     }
 
     /**
@@ -112,7 +136,16 @@ class SubcategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subcategory = Subcategory::find($id);
+
+        try {
+            //code...
+            $subcategory->delete();
+            return redirect()->back()->with('warning', 'Subcategoria deletada com sucesso!');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
+        }
     }
 
     public function search(Request $request)

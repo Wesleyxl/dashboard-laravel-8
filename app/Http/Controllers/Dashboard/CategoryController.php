@@ -43,12 +43,13 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:256',
-            'description' => 'required|string|min:3',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
+
+        $request['url'] = static::cleanUrl($request['name']);
 
         if (Category::create($request->all())) {
             return redirect('adm/categoria')->with('success', 'Categoria cadastrada com sucesso!');
@@ -93,12 +94,13 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:256',
-            'description' => 'required|string|min:3',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
+
+        $request['url'] = static::cleanUrl($request['name']);
 
         if (Category::edit($request->all(), $id)) {
             return redirect('adm/categoria')->with('success', 'Categoria editada com sucesso!');

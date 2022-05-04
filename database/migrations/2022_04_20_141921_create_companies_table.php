@@ -32,6 +32,7 @@ class CreateCompaniesTable extends Migration
             $table->string('img')->nullable();
             $table->integer('stars')->default(0);
             $table->integer('views')->default(0);
+            $table->string('url');
 
             $table->string('sunday-is-open')->nullable();
             $table->string('sunday-from')->nullable();

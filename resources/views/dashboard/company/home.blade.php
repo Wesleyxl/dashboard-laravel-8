@@ -138,8 +138,8 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div style="max-width: 50px; height: 50px;">
-                            {{ $companies->links() }}
+                        <div class="link-area" style="margin: 15px 15px -15px 15px">
+                            {{ $companies->links('pagination::bootstrap-4') }}
                         </div>
                         @else
                         <h5 class="p-4 m-2">Não há empresas cadastrada</h5>

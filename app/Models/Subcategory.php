@@ -12,7 +12,8 @@ class Subcategory extends Model
     protected $fillable = [
         'name',
         'category_id',
-        'description'
+        'description',
+        'url'
     ];
 
     public static function create($request)
@@ -21,6 +22,7 @@ class Subcategory extends Model
         $subcategory['name'] = $request['name'];
         $subcategory['category_id'] = $request['category'];
         $subcategory['description'] = $request['description'];
+        $subcategory['url'] = $request['url'];
 
         if ($subcategory->save()) {
             return $subcategory;
@@ -38,8 +40,9 @@ class Subcategory extends Model
         }
 
         $subcategory['name'] = $request['name'];
-        $subcategory['category_id'] = $request['category_id'];
+        $subcategory['category_id'] = $request['category'];
         $subcategory['description'] = $request['description'];
+        $subcategory['url'] = $request['url'];
 
         if ($subcategory->save()) {
             return $subcategory;

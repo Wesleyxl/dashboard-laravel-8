@@ -36,6 +36,7 @@
                 <h4>Preencha todos os campos corretamente</h4>
             </div>
             <div class="card-body">
+                <small class="text-danger">Os campos com * são campos obrigatórios</small>
                 <form  method="POST" enctype="multipart/form-data" action="{{ route('dashboard-subcategory-store') }}">
                     @csrf
                     <div class="row">

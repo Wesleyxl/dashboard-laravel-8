@@ -9,11 +9,11 @@ use App\Http\Controllers\Dashboard\HighlightController as DashboardHighlightCont
 use App\Http\Controllers\Dashboard\UserController as DashboardUserController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
 use App\Http\Controllers\Dashboard\SubcategoryController as DashboardSubcategoryController;
-
+use App\Http\Controllers\Website\WebsiteAboutController;
 use App\Http\Controllers\Website\WebsiteHomeController;
+use App\Http\Controllers\Website\WebsiteCategoryController;
 use App\Http\Controllers\Website\WebsiteCompanyController;
 use App\Http\Controllers\Website\WebsiteContactController;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -113,6 +113,10 @@ Route::group(['middleware' => ['auth']], function () {
 Route::prefix('/')->group(function () {
 
     Route::get('/', [WebsiteHomeController::class, 'index'])->name('website-home');
+    Route::get('/sobre', [WebsiteAboutController::class, 'index'])->name('website-about');
+    Route::get('/categorias', [WebsiteCategoryController::class, 'index'])->name('website-category');
+    Route::get('/empresas', [WebsiteCompanyController::class, 'index'])->name('website-company');
+    Route::get('/contato', [WebsiteContactController::class, 'index'])->name('website-contact');
 });
 
 
