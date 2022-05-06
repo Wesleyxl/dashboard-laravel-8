@@ -43,7 +43,7 @@
         <!-- desktop menu -->
         <div class="desktop-menu">
             <div class="logo">
-                <a href="{{ route('home') }}">
+                <a href="/">
                     <img src="{{ URL::to('/assets/website/img/logo.png') }}" alt="Darus Tecnologia" title="Darus Tecnologia">
                 </a>
             </div>

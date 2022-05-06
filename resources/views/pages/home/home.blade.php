@@ -69,13 +69,13 @@
                             <div class="col-md-3">
                                 <div class="card-area">
                                     <div class="card-area-header">
-                                        <a href="/{{ $category['url'] }}" alt="{{ $category['name'] }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>
+                                        <a href="/categoria/{{ $category['url'] }}" alt="{{ $category['name'] }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>
                                     </div>
                                     <div class="card-area-body">
                                         <ul>
                                             @foreach ($subcategories as $subcategory)
                                                 @if($subcategory['category_id'] === $category['id'])
-                                                    <li><a href="/{{ $category['url'] }}/{{ $subcategory['url'] }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
+                                                    <li><a href="/categoria/{{ $category['url'] }}/{{ $subcategory['url'] }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -148,7 +148,7 @@
                                             </div>
                                         </div>
                                             <div class="link">
-                                                <a href="/{{ $company['category'] }}/{{ $company['subcategory'] }}/{{ $company['url'] }}">Saiba +</a>
+                                                <a href="/categoria/{{ $company['category'] }}/{{ $company['subcategory'] }}/{{ $company['url'] }}">Saiba +</a>
                                             </div>
                                             @if($company['img'] != null)
                                                 <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
