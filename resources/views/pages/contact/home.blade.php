@@ -25,7 +25,7 @@
             <div class="title">
                 <h1>Contato</h1>
             </div>
-            <p><p>A <strong>Darus Tecnologia</strong> coloca à disposição de seus parceiros e clientes o Canal contato, onde interessados podem enviar elogios, denúncias, sugestões e reclamações de forma anônima ou não.</p></p>
+             <p><p>A <strong>Darus Tecnologia</strong> coloca à disposição de seus parceiros e clientes o Canal contato, onde interessados podem enviar elogios, denúncias, sugestões e reclamações de forma anônima ou não.</p></p>
             <div class="form-area">
                 <form action="">
                     <div class="row">

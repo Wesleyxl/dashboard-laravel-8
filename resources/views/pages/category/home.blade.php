@@ -40,10 +40,10 @@
                                 <div class="list">
                                     <ul>
                                         @foreach ($categories as $category)
-                                            <li><span><a href="/categoria/{{ $category['url'] }}">{{ $category['name'] }}</a></span></li>
+                                            <li><span>{{ $category['name'] }}</span></li>
                                             @foreach ($subcategories as $subcategory)
                                                 @if($subcategory['category_id'] === $category['id'])
-                                                    <li><a href="/categoria/{{ $category['url'] }}/{{ $subcategory['url'] }}">{{ $subcategory['name'] }}</a></li>
+                                                    <li><a href="{{ route('website-subcategory-show', ['category' => $category['url'], 'subcategory' => $subcategory['url']]) }}">{{ $subcategory['name'] }}</a></li>
                                                 @endif
                                             @endforeach
                                             <div class="line"></div>
@@ -63,13 +63,13 @@
                                     <div class="col-md-4">
                                         <div class="card-area">
                                             <div class="card-area-header">
-                                                <a href="/categoria/{{ $category['url'] }}" alt="{{ $category['name'] }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>
+                                                <p>{{ $category['name'] }}</p>
                                             </div>
                                             <div class="card-area-body">
                                                 <ul>
                                                     @foreach ($subcategories as $subcategory)
                                                         @if($subcategory['category_id'] === $category['id'])
-                                                            <li><a href="/categoria/{{ $category['url'] }}/{{ $subcategory['url'] }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
+                                                            <li><a href="{{ route('website-subcategory-show', ['category' => $category['url'], 'subcategory' => $subcategory['url']]) }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
                                                         @endif
                                                     @endforeach
                                                 </ul>
@@ -98,7 +98,7 @@
                 <div style="top: 50%; left: -35px;" class="swiper-button-prev2" tabindex="0" role="button" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></div>
                 <div class="swiper-containers">
                     <div class="swiper-wrapper">
-                        @foreach ($companies as $company)
+                        @foreach ($highlights as $company)
                             <div class="swiper-slide">
                                 <div class="card-highlights">
                                     <div class="card-highlights-header">
@@ -141,7 +141,7 @@
                                             </div>
                                         </div>
                                             <div class="link">
-                                                <a href="/{{ $company['category'] }}/{{ $company['subcategory'] }}/{{ $company['url'] }}">Saiba +</a>
+                                                <a href="{{ route('website-company', ['category' => $company['category'], 'subcategory' => $company['subcategory'], 'company' => $company['url']]) }}">Saiba +</a>
                                             </div>
                                             @if($company['img'] != null)
                                                 <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">

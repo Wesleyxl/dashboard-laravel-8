@@ -41,4 +41,39 @@ class WebsiteHomeController extends Controller
             'companies' => $companies,
         ));
     }
+
+    public function search(Request $request)
+    {
+        $companies = Company::orderBy('name', 'asc')
+            ->where('uf', $request['uf'])
+            ->where('name', 'like', '%' . $request['search'] . '%')
+            ->orWhere('description', 'like', '%' . $request['search'] . '%')
+            ->get()->all();
+
+        $categories = Category::select('id', 'name', 'url')->orderBy('name', 'asc')
+            ->get()->all();
+
+        $subcategories = Subcategory::select('id', 'name', 'url', 'category_id')->orderBy('name', 'asc')
+            ->get()->all();
+
+        foreach ($companies as $company) {
+            $category = Category::select('id', 'url')
+                ->where('id', $company['category_id'])
+                ->get()->first();
+
+            $subcategory = Subcategory::select('id', 'url')
+                ->where('id', $company['subcategory_id'])
+                ->get()
+                ->first();
+
+            $company['category'] = $category['url'];
+            $company['subcategory'] = $subcategory['url'];
+        }
+
+        return view('pages.company.search', array(
+            'companies' => $companies,
+            'categories' => $categories,
+            'subcategories' => $subcategories
+        ));
+    }
 }

@@ -17,8 +17,9 @@
             <p>A <strong>DARDUS TECNOLOGIA</strong> foi criado para valorizar o comércio e serviços locais de todas as regiões do Brasil, dar mais destaque aos serviços prestados pelos nossos clientes e comerciantes que contribuem para o desenvolvimento social dos bairros.</p>
         </div>
         <div class="search-area">
-            <form action="">
-                <input class="form-control" type="text" name="word" id="word" placeholder="Busque por qualquer palavra">
+            <form action="{{ route('website-home-search') }}" method="POST">
+                @csrf
+                <input class="form-control" type="text" name="search" id="word" placeholder="Busque por qualquer palavra">
                 <select name="uf" id="uf" class="form-control @error('uf') is-invalid @enderror">
                     <option value="">Selecione um Local</option>
                     <option value="AC">Acre</option>
@@ -69,13 +70,13 @@
                             <div class="col-md-3">
                                 <div class="card-area">
                                     <div class="card-area-header">
-                                        <a href="/categoria/{{ $category['url'] }}" alt="{{ $category['name'] }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>
+                                        <a href="{{ route('website-category-show', ['category' => $category['url']]) }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>
                                     </div>
                                     <div class="card-area-body">
                                         <ul>
                                             @foreach ($subcategories as $subcategory)
                                                 @if($subcategory['category_id'] === $category['id'])
-                                                    <li><a href="/categoria/{{ $category['url'] }}/{{ $subcategory['url'] }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
+                                                    <li><a href="{{ route('website-subcategory-show', ['category' => $category['url'], 'subcategory' => $subcategory['url']]) }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -88,7 +89,7 @@
                     @endif
                 </div>
                 <div class="btn-area">
-                    <a href="/categorias" alt="Categorias" title="Categorias">Ver Mais</a>
+                    <a href="{{ route('website-category') }}" alt="Categorias" title="Categorias">Ver Mais</a>
                 </div>
             </div>
         </div>
@@ -148,7 +149,7 @@
                                             </div>
                                         </div>
                                             <div class="link">
-                                                <a href="/categoria/{{ $company['category'] }}/{{ $company['subcategory'] }}/{{ $company['url'] }}">Saiba +</a>
+                                                <a href="{{ route('website-company-show', ['category' => $company['category'], 'subcategory' => $company['subcategory'], 'company' => $company['url']]) }}">Saiba +</a>
                                             </div>
                                             @if($company['img'] != null)
                                                 <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">

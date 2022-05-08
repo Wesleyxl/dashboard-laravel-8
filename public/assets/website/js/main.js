@@ -2,7 +2,7 @@
     "use strict";
 
     $(window).on("scroll", function () {
-        if ($(this).scrollTop() > 200) {
+        if ($(this).scrollTop() > 100) {
             // Set position from top to add class
             $("header").addClass("header-appear");
         } else {

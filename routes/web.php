@@ -113,10 +113,20 @@ Route::group(['middleware' => ['auth']], function () {
 Route::prefix('/')->group(function () {
 
     Route::get('/', [WebsiteHomeController::class, 'index'])->name('website-home');
+    Route::post('/buscar/empresas', [WebsiteHomeController::class, 'search'])->name('website-home-search');
+
     Route::get('/sobre', [WebsiteAboutController::class, 'index'])->name('website-about');
-    Route::get('/categorias', [WebsiteCategoryController::class, 'index'])->name('website-category');
+
+    Route::get('/categoria', [WebsiteCategoryController::class, 'index'])->name('website-category');
+    // Route::get('/categoria/{category}', [WebsiteCategoryController::class, 'show'])->name('website-category-show');
+    Route::get('/categoria/{category}/{subcategory}', [WebsiteCategoryController::class, 'showSubcategory'])->name('website-subcategory-show');
+
     Route::get('/empresas', [WebsiteCompanyController::class, 'index'])->name('website-company');
+    Route::get('/categoria/{category}/{subcategory}/empresa/{company}', [WebsiteCompanyController::class, 'show'])->name('website-company-show');
+    Route::post('/empresa/update/{id', [WebsiteCompanyController::class, 'update'])->name('website-empresa-update');
+
     Route::get('/contato', [WebsiteContactController::class, 'index'])->name('website-contact');
+    Route::post('/contato', [WebsiteContactController::class, 'store'])->name('website-contact-store');
 });
 
 

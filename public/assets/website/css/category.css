@@ -127,10 +127,11 @@
     font-weight: bold;
     color: var(--primary-color);
 }
-.category aside .card-area .card-content .list ul li .active {
-    font-weight: bold;
+.category aside .card-area .card-content .list ul li span .active {
     color: var(--primary-color);
-    text-decoration: underline;
+}
+.category aside .card-area .card-content .list ul li .active {
+    color: var(--primary-color);
 }
 .category aside .card-area .card-content .list .line {
     width: 100%;
@@ -153,10 +154,11 @@
     align-items: center;
     border-bottom: 1px solid #c4c4c4;
 }
-.category .content .card-area .card-area-header a {
+.category .content .card-area .card-area-header p {
     font-size: 20px;
     color: var(--primary-color);
     font-weight: bold;
+    margin: 0;
 }
 .category .content .card-area-body {
     padding: 15px;
@@ -231,6 +233,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     overflow: hidden;
+    max-height: 170px;
 }
 .highlights .content .card-highlights .card-highlights-header .link {
     position: absolute;

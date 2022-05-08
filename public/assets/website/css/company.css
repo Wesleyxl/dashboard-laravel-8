@@ -118,6 +118,7 @@
 .company aside .card-area .card-content .list ul span {
     font-weight: bold;
     margin-left: -15px;
+    font-size: 20px;
 }
 .company aside .card-area .card-content .list ul li a {
     color: #000000;
@@ -127,10 +128,13 @@
     font-weight: bold;
     color: var(--primary-color);
 }
+.company aside .card-area .card-content .list ul li span .active {
+    text-decoration: underline;
+    color: var(--primary-color);
+}
 .company aside .card-area .card-content .list ul li .active {
     font-weight: bold;
     color: var(--primary-color);
-    text-decoration: underline;
 }
 .company aside .card-area .card-content .list .line {
     width: 100%;
@@ -231,6 +235,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     overflow: hidden;
+    max-height: 170px;
 }
 .highlights .content .card-highlights .card-highlights-header .link {
     position: absolute;
