@@ -115,7 +115,7 @@
                                            </div>
                                        </div>
                                            <div class="link">
-                                               <a href="/{{ $company['category'] }}/{{ $company['subcategory'] }}/{{ $company['url'] }}">Saiba +</a>
+                                            <a href="{{ url('/categoria/'.$company['category'].'/'.$company['subcategory'].'/empresa/'.$company['url']) }}">Saiba +</a>
                                            </div>
                                            @if($company['img'] != null)
                                                <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">

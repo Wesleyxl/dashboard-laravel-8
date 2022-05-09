@@ -187,18 +187,6 @@
                 </div>
             </div>
 
-            {{-- <!-- SidebarSearch Form -->
-                <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div> --}}
-
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
@@ -211,32 +199,6 @@
                                 </a>
                             </li>
                             <li class="nav-header">Páginas</li>
-
-                            <!-- banner -->
-                            {{-- <li class="nav-item @yield('li-banner')">
-                                <a href="#" class="nav-link @yield('a-banner')">
-                                    <i class="fas fa-image nav-icon"></i>
-                                    <p>
-                                        Banner
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('dashboard-banner-create') }}" class="nav-link @yield('a-banner')">
-                                            <i class="fas fa-plus nav-icon"></i>
-                                            <p>Cadastrar</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('dashboard-banner') }}" class="nav-link">
-                                            <i class="fas fa-pencil-alt nav-icon"></i>
-                                            <p>Editar</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> --}}
-                            <!-- end banner -->
 
                             <!-- category -->
                             <li class="nav-item @yield('ul-category')">
@@ -385,8 +347,8 @@
                             <!-- end my account -->
 
                             <!-- Website config -->
-                            <li class="nav-item @yield('ul-user')">
-                                <a href="#" class="nav-link @yield('li-user')">
+                            <li class="nav-item @yield('ul-website')">
+                                <a href="#" class="nav-link @yield('li-website')">
                                     <i class="fa-solid fa-gears nav-icon"></i>
                                     <p>
                                         Website
@@ -395,7 +357,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('dashboard-user') }}" class="nav-link @yield('a-user')">
+                                        <a href="{{ route('dashboard-website') }}" class="nav-link @yield('a-website')">
                                             <i class="fas fa-pencil-alt nav-icon"></i>
                                             <p>Configurar</p>
                                         </a>
@@ -473,6 +435,9 @@
                 //Add text editor
                 $('#compose-textarea').summernote({
                     height: 300,
+                });
+                $('#compose-textarea2').summernote({
+                    height: 150,
                 })
             })
         </script>

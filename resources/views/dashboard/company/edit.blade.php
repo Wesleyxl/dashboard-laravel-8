@@ -61,6 +61,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="text" id="website" name="website" class="form-control @error('website') is-invalid @enderror" placeholder="www.website.com.br" value="{{ $company['website'] }}">
+                                @error('website')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="phone">Telefone</label>
                                 <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="(11) 1234-5678" onkeypress="$(this).mask('(00) 0000-0000')" value="{{ $company['phone'] }}">
                                 @error('phone')
@@ -124,6 +135,17 @@
                                 <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" placeholder="Descrição da empresa" rows="5">{{ $company['description'] }}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="map">Mapa</label>
+                                <textarea name="map" id="map" rows="5" class="form-control @error('map') is-invalid @enderror" placeholder="Cole o mapa aqui">{{ $company['map'] }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>

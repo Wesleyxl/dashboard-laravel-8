@@ -25,9 +25,7 @@
                 <h1>Sobre</h1>
             </div>
             <div class="text">
-                <p>A Empresa <strong>DARUS TECNOLOGIA</strong>, tem como atividade empresarial a comercialização de espaço publicitário para divulgação de serviços e produtos, em portal de negócios mantido junto à internet, no qual figuram centenas de renomadas empresas, atuantes nos mais variados segmentos da atividade econômica nacional.</p>
-                <p>Sabemos que nos tempos atuais, divulgar pela internet oferece um retorno maior aos divulgadores do que em outras maneiras de divulgação.</p>
-                <p>Com este propósito e, com anúncios acessíveis e com ampla divulgação, o grupo pertencente a <strong>DARUS TECNOLOGIA</strong>, vem oferecer melhores serviços, a todos os seus clientes e parceiros. <strong>DARUS TECNOLOGIA</strong> é a melhor maneira de encontrar e descobrir grandes empresas em sua cidade.</p>
+                <p>{!! $website['about'] !!}</p>
             </div>
         </div>
     </section>
@@ -86,7 +84,7 @@
                                             </div>
                                         </div>
                                             <div class="link">
-                                                <a href="{{ route('website-company-show', ['category' => $company['category'], 'subcategory' => $company['subcategory'], 'company' => $company['url']]) }}">Saiba +</a>
+                                                <a href="{{ url('/categoria/'.$company['category'].'/'.$company['subcategory'].'/empresa/'.$company['url']) }}">Saiba +</a>
                                             </div>
                                             @if($company['img'] != null)
                                                 <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\HighlightController as DashboardHighlightCont
 use App\Http\Controllers\Dashboard\UserController as DashboardUserController;
 use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
 use App\Http\Controllers\Dashboard\SubcategoryController as DashboardSubcategoryController;
+use App\Http\Controllers\Dashboard\WebsiteController as DashboardWebsiteController;
 use App\Http\Controllers\Website\WebsiteAboutController;
 use App\Http\Controllers\Website\WebsiteHomeController;
 use App\Http\Controllers\Website\WebsiteCategoryController;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 // developer only
 use Illuminate\Support\Facades\Hash;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +108,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('editar/{id}', [DashboardUserController::class, 'edit'])->name('dashboard-user-edit');
             Route::post('update/{id}', [DashboardUserController::class, 'update'])->name('dashboard-user-update');
             Route::get('delete/{id}', [DashboardUserController::class, 'destroy'])->name('dashboard-user-destroy');
+        });
+
+        Route::prefix('website')->group(function () {
+            Route::get('/', [DashboardWebsiteController::class, 'index'])->name('dashboard-website');
+            Route::post('/update/{id}', [DashboardWebsiteController::class, 'update'])->name('dashboard-website-update');
         });
     });
 });

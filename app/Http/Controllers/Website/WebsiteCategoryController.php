@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Subcategory;
+use App\Models\WebsiteSettings;
 
 class WebsiteCategoryController extends Controller
 {
@@ -31,10 +32,13 @@ class WebsiteCategoryController extends Controller
             $company['subcategory'] = $subcategory_name['url'];
         }
 
+        $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
+
         return view('pages.category.home', array(
             'categories' => $categories,
             'subcategories' => $subcategories,
-            'highlights' => $highlights
+            'highlights' => $highlights,
+            'website' => $website
         ));
     }
 
@@ -62,12 +66,15 @@ class WebsiteCategoryController extends Controller
             $company['subcategory'] = $subcategory_name['url'];
         }
 
+        $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
+
         return view('pages.category.subcategory', array(
             'categories' => $categories,
             'subcategories' => $subcategories,
             'highlights' => $highlights,
             'companies' => $companies,
-            'categoryFind' => $categoryFind
+            'categoryFind' => $categoryFind,
+            'website' => $website
         ));
     }
 
@@ -100,13 +107,16 @@ class WebsiteCategoryController extends Controller
             $company['subcategory'] = $subcategory_name['url'];
         }
 
+        $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
+
         return view('pages.company.find', array(
             'categories' => $categories,
             'subcategories' => $subcategories,
             'highlights' => $highlights,
             'companies' => $companies,
             'categoryFind' => $categoryFind,
-            'subcategoryFind' => $subcategoryFind
+            'subcategoryFind' => $subcategoryFind,
+            'website' => $website
         ));
     }
 }

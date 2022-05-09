@@ -195,6 +195,39 @@
     color: #ffffff;
     font-size: 20px;
 }
+
+.company .card-company {
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+    padding: 15px;
+}
+.company .card-company .title h2 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.company .card-company .img-area {
+    float: left;
+    margin: 10px;
+}
+.company .card-company .img-area img {
+    width: 100%;
+    max-width: 260px;
+}
+.company .card-company .description {
+    text-indent: 10px;
+    text-align: justify;
+}
+.company .card-company .links {
+    margin: 20px 0;
+}
+.company .card-company .links ul li {
+    margin-bottom: 10px;
+}
+.company .card-company .mapa-area iframe {
+    width: 100%;
+}
 /* End company */
 
 /* Highlights */

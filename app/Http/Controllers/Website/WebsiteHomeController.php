@@ -7,11 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Subcategory;
+use App\Models\WebsiteSettings;
 
 class WebsiteHomeController extends Controller
 {
     public function index()
     {
+
+        $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
+
         $categories = Category::select('id', 'name', 'url')
             ->orderBy('name', 'asc')
             ->limit(12)
@@ -22,12 +26,12 @@ class WebsiteHomeController extends Controller
             ->get()
             ->all();
 
-        $companies = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
+        $highlights = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
             ->orderBy('name', 'asc')
             ->get()
             ->all();
 
-        foreach ($companies as $company) {
+        foreach ($highlights as $company) {
             $category_name = Category::select('url')->where('id', $company['category_id'])->get()->first();
             $subcategory_name = Subcategory::select('url')->where('id', $company['subcategory_id'])->get()->first();
 
@@ -37,8 +41,9 @@ class WebsiteHomeController extends Controller
 
         return view('pages.home.home', array(
             'categories' => $categories,
+            'website' => $website,
             'subcategories' => $subcategories,
-            'companies' => $companies,
+            'highlights' => $highlights,
         ));
     }
 
@@ -70,10 +75,13 @@ class WebsiteHomeController extends Controller
             $company['subcategory'] = $subcategory['url'];
         }
 
+        $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
+
         return view('pages.company.search', array(
             'companies' => $companies,
             'categories' => $categories,
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'website' => $website
         ));
     }
 }

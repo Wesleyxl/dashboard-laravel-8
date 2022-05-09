@@ -62,6 +62,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="text" id="website" name="website" class="form-control @error('website') is-invalid @enderror" placeholder="www.website.com.br" value="{{ old('website') }}">
+                                @error('website')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="phone">Telefone</label>
                                 <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="(11) 1234-5678" onkeypress="$(this).mask('(00) 0000-0000')" value="{{ old('phone') }}">
                                 @error('phone')
@@ -94,7 +105,8 @@
                                 <label for="category">Selecione uma categoria*</label>
                                 <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
                                     @if (count($categories) < 1)
-                                        <option value="">Não há categoria cadastrada</option>
+                                        <option value=""
+                                        >Não há categoria cadastrada</option>
                                     @else
                                         <option value="">Selecione uma categoria</option>
                                         @foreach ($categories as $category)
@@ -121,6 +133,17 @@
                                 <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" placeholder="Descrição da empresa" rows="5">{{ old('description') }}</textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="map">Mapa</label>
+                                <textarea name="map" id="map" rows="5" class="form-control @error('map') is-invalid @enderror" placeholder="Cole o mapa aqui">{{ old('map') }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>

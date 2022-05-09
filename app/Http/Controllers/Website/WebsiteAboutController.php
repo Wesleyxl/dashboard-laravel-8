@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Subcategory;
+use App\Models\WebsiteSettings;
 
 class WebsiteAboutController extends Controller
 {
@@ -30,7 +31,10 @@ class WebsiteAboutController extends Controller
             $company['subcategory'] = $subcategory_name['url'];
         }
 
+        $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
+
         return view('pages.about.home', array(
+            'website' => $website,
             'companies' => $companies
         ));
     }

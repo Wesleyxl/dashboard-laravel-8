@@ -123,10 +123,11 @@
     align-items: center;
     border-bottom: 1px solid #c4c4c4;
 }
-.category .content .card-area .card-area-header a {
+.category .content .card-area .card-area-header p {
     font-size: 20px;
     color: var(--primary-color);
     font-weight: bold;
+    margin: 0;
 }
 .category .content .card-area-body {
     padding: 15px;

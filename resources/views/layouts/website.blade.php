@@ -51,7 +51,7 @@
                 <ul>
                     <li><a href="/"  alt="Início" title="Início" class="@yield('a-home')">Início</a></li>
                     <li><a href="/sobre" alt="Sobre" title="Sobre"  class="@yield('a-about')">Sobre</a></li>
-                    <li><a href="/categorias" alt="Categorias" title="Categorias"  class="@yield('a-category')">Categorias</a></li>
+                    <li><a href="/categoria" alt="Categorias" title="Categorias"  class="@yield('a-category')">Categorias</a></li>
                     <li><a href="/empresas" alt="Empresas" title="Empresas"  class="@yield('a-company')">Empresas</a></li>
                     <li><a href="/contato" alt="Contato" title="Contato"  class="@yield('a-contact')">Contato</a></li>
                 </ul>
@@ -116,17 +116,17 @@
                 <ul>
                     <li><a href="">
                         <i class="fa-solid fa-phone"></i>
-                        (11) 1234-4567
+                        {{ $website['phone'] }}
                     </a></li>
                     <li><a href="">
                         <i class="fa-brands fa-whatsapp"></i>
-                        (11) 91234-4567
+                        {{ $website['cellphone'] }}
                     </a></li>
                 </ul>
                 <ul>
                     <li><a href="">
                         <i class="fa-regular fa-envelope"></i>
-                        contato@dardustecnologia.com.br
+                        {{ $website['email'] }}
                     </a></li>
                     <li><a href="">
                         <i class="fa-regular fa-clock"></i>

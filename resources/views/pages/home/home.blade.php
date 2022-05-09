@@ -14,7 +14,7 @@
             <h2>Plataforma Digital Empresarial</h2>
         </div>
         <div class="welcome-text">
-            <p>A <strong>DARDUS TECNOLOGIA</strong> foi criado para valorizar o comércio e serviços locais de todas as regiões do Brasil, dar mais destaque aos serviços prestados pelos nossos clientes e comerciantes que contribuem para o desenvolvimento social dos bairros.</p>
+            <p>{!! $website['short_about'] !!}</p>
         </div>
         <div class="search-area">
             <form action="{{ route('website-home-search') }}" method="POST">
@@ -70,13 +70,13 @@
                             <div class="col-md-3">
                                 <div class="card-area">
                                     <div class="card-area-header">
-                                        <a href="{{ route('website-category-show', ['category' => $category['url']]) }}" title="{{ $category['name'] }}">{{ $category['name'] }}</a>
+                                        <p>{{ $category['name'] }}</p>
                                     </div>
                                     <div class="card-area-body">
                                         <ul>
                                             @foreach ($subcategories as $subcategory)
                                                 @if($subcategory['category_id'] === $category['id'])
-                                                    <li><a href="{{ route('website-subcategory-show', ['category' => $category['url'], 'subcategory' => $subcategory['url']]) }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
+                                                    <li><a href="{{ url('/categoria/'.$category['url'].'/'.$subcategory['url']) }}" alt="{{ $subcategory['name'] }}" title="{{ $subcategory['name'] }}">{{ $subcategory['name'] }}</a></li>
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -106,7 +106,7 @@
                 <div style="top: 50%; left: -35px;" class="swiper-button-prev2" tabindex="0" role="button" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></div>
                 <div class="swiper-containers">
                     <div class="swiper-wrapper">
-                        @foreach ($companies as $company)
+                        @foreach ($highlights as $company)
                             <div class="swiper-slide">
                                 <div class="card-highlights">
                                     <div class="card-highlights-header">
@@ -149,7 +149,7 @@
                                             </div>
                                         </div>
                                             <div class="link">
-                                                <a href="{{ route('website-company-show', ['category' => $company['category'], 'subcategory' => $company['subcategory'], 'company' => $company['url']]) }}">Saiba +</a>
+                                                <a href="{{ url('/categoria/'.$company['category'].'/'.$company['subcategory'].'/empresa/'.$company['url']) }}">Saiba +</a>
                                             </div>
                                             @if($company['img'] != null)
                                                 <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">

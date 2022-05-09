@@ -12,7 +12,7 @@
        <div class="container">
            <div class="title">
                <h1>Empresas</h1>
-               <p><a href="/">Início</a> - Empresas</p>
+               <p><a href="/">Início</a> - {{ $categoryFind['name'] }} - {{ $subcategoryFind['name'] }} - {{ $company['name'] }}</p>
            </div>
        </div>
    </section>
@@ -40,7 +40,7 @@
                                <div class="list">
                                    <ul id="listCategory">
                                        @foreach ($categories as $category)
-                                           <li><span><a id="category-{{ $category['id'] }}" href="/categoria/{{ $category['url'] }}">{{ $category['name'] }}</a></span></li>
+                                           <li><span id="category-{{ $category['id'] }}">{{ $category['name'] }}</span></li>
                                            @foreach ($subcategories as $subcategory)
                                                @if($subcategory['category_id'] === $category['id'])
                                                    <li><a id="subcategory-{{ $subcategory['id'] }}" href="/categoria/{{ $category['url'] }}/{{ $subcategory['url'] }}">{{ $subcategory['name'] }}</a></li>
@@ -55,7 +55,41 @@
                    </aside>
                </div>
                <div class="col-md-8">
-
+                    <div class="card-company">
+                        <div class="title">
+                            <h2>{{ $company['name'] }}</h2>
+                        </div>
+                        <div class="img-area">
+                            @if($company['img'] != null)
+                                <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
+                            @else
+                                <img src="{{ URL::to('/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
+                            @endif
+                        </div>
+                        <div class="description">
+                            <p><strong>Descrição: </strong>{{ $company['description'] }}</p>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="links">
+                            <ul>
+                                <li><i class="fa-solid fa-phone"></i> {{ $company['phone'] }}</li>
+                                <li><i class="fa-solid fa-mobile-screen"></i> {{ $company['cellphone'] }}</li>
+                                <li><i class="fa-regular fa-envelope"></i> {{ $company['email'] }}</li>
+                                <li><i class="fa-solid fa-location-dot"></i> {{ $company['street'].', '.$company['number'].", ". $company['neighborhood'].' - '.$company['city'].' - '.$company['uf'] }}</li>
+                            </ul>
+                        </div>
+                        <div class="time">
+                            <p><strong>Horário de funcionamento</strong></p>
+                            <ul>
+                                <li><i class="fa-regular fa-calendar-check"></i> </li>
+                                <li><i class="fa-regular fa-clock"></i></li>
+                            </ul>
+                        </div>
+                        <div class="mapa-area">
+                            <p><strong>Mapa: </strong></p>
+                            {!! $company['map'] !!}
+                        </div>
+                    </div>
                </div>
            </div>
        </div>
@@ -115,7 +149,7 @@
                                            </div>
                                        </div>
                                            <div class="link">
-                                               <a href="/{{ $company['category'] }}/{{ $company['subcategory'] }}/{{ $company['url'] }}">Saiba +</a>
+                                            <a href="{{ url('/categoria/'.$company['category'].'/'.$company['subcategory'].'/empresa/'.$company['url']) }}">Saiba +</a>
                                            </div>
                                            @if($company['img'] != null)
                                                <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
@@ -146,8 +180,10 @@
    <script>
 
         var categoryActive = '{{ $categoryFind["id"] }}';
+        var subcategoryActive = '{{ $subcategoryFind["id"] }}';
 
         $(`#category-${categoryActive}`).addClass('active');
+        $(`#subcategory-${subcategoryActive}`).addClass('active');
 
        var documentation = window.innerWidth;
 
