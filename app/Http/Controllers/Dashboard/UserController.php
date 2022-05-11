@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,10 +16,17 @@ class UserController extends Controller
      */
     public function index()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $user = Auth::user();
 
         return view('dashboard.user.home', array(
-            'user' => $user
+            'user' => $user,
+            'notifications' => $notifications
         ));
     }
 

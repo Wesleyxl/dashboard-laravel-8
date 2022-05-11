@@ -27,6 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $company = count(Company::select('id')->get()->all());
         $category = count(Category::select('id')->get()->all());
         $email = count(Email::select('id')->where('status', 'inbox')->get()->all());
@@ -34,7 +40,8 @@ class HomeController extends Controller
         return view('dashboard.home.home', array(
             'company' => $company,
             'email' => $email,
-            'category' => $category
+            'category' => $category,
+            'notifications' => $notifications,
         ));
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Subcategory;
 use App\Models\Category;
+use App\Models\Email;
 use Illuminate\Support\Facades\Validator;
 
 class SubcategoryController extends Controller
@@ -17,6 +18,12 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $subcategories = Subcategory::orderBy('name', 'asc')->paginate(10);
 
         foreach ($subcategories as $subcategory) {
@@ -28,7 +35,8 @@ class SubcategoryController extends Controller
         }
 
         return view('dashboard.subcategory.home', array(
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'notifications' => $notifications
         ));
     }
 
@@ -39,10 +47,17 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $categories = Category::orderBy('name')->get()->all();
 
         return view('dashboard.subcategory.create', array(
-            'categories' => $categories
+            'categories' => $categories,
+            'notifications' => $notifications
         ));
     }
 
@@ -91,13 +106,20 @@ class SubcategoryController extends Controller
      */
     public function edit($id)
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $subcategory = Subcategory::find($id);
 
         $categories = Category::orderBy('name')->get()->all();
 
         return view('dashboard.subcategory.edit', array(
             'subcategory' => $subcategory,
-            'categories' => $categories
+            'categories' => $categories,
+            'notifications' => $notifications
         ));
     }
 
@@ -150,6 +172,12 @@ class SubcategoryController extends Controller
 
     public function search(Request $request)
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $subcategories = Subcategory::where('name', 'like', '%' . $request['data'] . "%")
             ->orWhere('description', 'like', '%' . $request['data'] . "%")
             ->orderBy('name', 'asc')
@@ -164,7 +192,8 @@ class SubcategoryController extends Controller
         }
 
         return view('dashboard.subcategory.search', array(
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'notifications' => $notifications
         ));
     }
 }

@@ -16,6 +16,12 @@ class EmailController extends Controller
      */
     public function index()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $emails = Email::orderBy('id', 'desc')
             ->where('status', 'inbox')
             ->where('read', 1)
@@ -28,7 +34,8 @@ class EmailController extends Controller
 
         return view('dashboard.email.home', array(
             'emails' => $emails,
-            'unreads' => $unreads
+            'unreads' => $unreads,
+            'notifications' => $notifications
         ));
     }
 
@@ -39,10 +46,17 @@ class EmailController extends Controller
      */
     public function create()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $unread = count(Email::select('id')->where('read', 0)->get()->all());
 
         return view('dashboard.email.send', array(
-            'unread' => $unread
+            'unread' => $unread,
+            'notifications' => $notifications
         ));
     }
 
@@ -81,6 +95,12 @@ class EmailController extends Controller
      */
     public function show($id)
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $email = Email::find($id);
         $email['read'] = 1;
         $email->save();
@@ -89,7 +109,8 @@ class EmailController extends Controller
 
         return view('dashboard.email.show', array(
             'email' => $email,
-            'unread' => $unread
+            'unread' => $unread,
+            'notifications' => $notifications
         ));
     }
 
@@ -101,12 +122,19 @@ class EmailController extends Controller
      */
     public function edit($id)
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $email = Email::find($id);
         $unread = count(Email::select('id')->where('read', 0)->get()->all());
 
         return view('dashboard.email.edit', array(
             'email' => $email,
-            'unread' => $unread
+            'unread' => $unread,
+            'notifications' => $notifications
         ));
     }
 
@@ -150,12 +178,19 @@ class EmailController extends Controller
      */
     public function sketch()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $emails = Email::where('status', 'sketch')->get()->all();
         $unread = count(Email::select('id')->where('read', 0)->get()->all());
 
         return view('dashboard.email.sketch', array(
             'emails' => $emails,
-            'unread' => $unread
+            'unread' => $unread,
+            'notifications' => $notifications
         ));
     }
 }

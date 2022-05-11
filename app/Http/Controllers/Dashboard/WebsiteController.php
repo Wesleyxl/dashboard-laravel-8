@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Email;
 use App\Models\WebsiteSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,10 +17,17 @@ class WebsiteController extends Controller
      */
     public function index()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
 
         return view('dashboard.website.create', array(
-            'website' => $website
+            'website' => $website,
+            'notifications' => $notifications
         ));
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Email;
 use Illuminate\Http\Request;
 
 class HighlightController extends Controller
@@ -14,7 +15,11 @@ class HighlightController extends Controller
      */
     public function index()
     {
-        //
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
     }
 
     /**

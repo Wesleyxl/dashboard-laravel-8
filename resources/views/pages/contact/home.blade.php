@@ -27,7 +27,8 @@
             </div>
              <p><p>A <strong>Darus Tecnologia</strong> coloca à disposição de seus parceiros e clientes o Canal contato, onde interessados podem enviar elogios, denúncias, sugestões e reclamações de forma anônima ou não.</p></p>
             <div class="form-area">
-                <form action="">
+                <form action="{{ route('website-contact-store') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,10 +17,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $categories = Category::orderBy('name', 'asc')
             ->paginate(10);
         return view('dashboard.category.home', array(
-            'categories' => $categories
+            'categories' => $categories,
+            'notifications' => $notifications
         ));
     }
 
@@ -30,7 +38,15 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.category.create');
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
+        return view('dashboard.category.create', array(
+            'notifications' => $notifications
+        ));
     }
 
     /**
@@ -77,9 +93,16 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $category = Category::find($id);
         return view('dashboard.category.edit', array(
-            'category' => $category
+            'category' => $category,
+            'notifications' => $notifications
         ));
     }
 
@@ -131,13 +154,20 @@ class CategoryController extends Controller
 
     public function search(Request $request)
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $categories = Category::where('name', 'like', '%' . $request['data'] . "%")
             ->orWhere('description', 'like', '%' . $request['data'] . "%")
             ->orderBy('name', 'asc')
             ->paginate(10);
 
         return view('dashboard.category.search', array(
-            'categories' => $categories
+            'categories' => $categories,
+            'notifications' => $notifications
         ));
     }
 }

@@ -38,4 +38,31 @@ class Controller extends BaseController
 
         return $string;
     }
+
+    // FUNÇÃO PARA EXIBIR O TEMPO CORRIDO
+    public static function runningTime($dateTime)
+    {
+        // data e hora atual
+        $now = strtotime(date('Y/m/d H:i:s'));
+        $time = strtotime($dateTime);
+        $diff = $now - $time;
+
+        // quebrando
+        $seconds = $diff;
+        $minutes = round($diff / 60);
+        $hours = round($diff / 3600);
+        $days = round($diff / 86400);
+        $weeks = round($diff / 604800);
+        $months = round($diff / 2419200);
+        $years = round($diff / 29030400);
+
+        // exibindo a diferencia de tempo
+        if ($seconds <= 60) return "1 min atrás";
+        else if ($minutes <= 60) return $minutes == 1 ? '1 min atrás' : $minutes . ' min atrás';
+        else if ($hours <= 24) return $hours == 1 ? '1 hrs atrás' : $hours . ' hrs atrás';
+        else if ($days <= 7) return $days == 1 ? '1 dia atras' : $days . ' dias atrás';
+        else if ($weeks <= 4) return $weeks == 1 ? '1 semana atrás' : $weeks . ' semanas atrás';
+        else if ($months <= 12) return $months == 1 ? '1 mês atrás' : $months . ' meses atrás';
+        else return $years == 1 ? 'um ano atrás' : $years . ' anos atrás';
+    }
 }

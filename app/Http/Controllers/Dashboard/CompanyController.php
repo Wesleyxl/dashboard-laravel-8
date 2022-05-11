@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Email;
 use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
@@ -28,6 +29,12 @@ class CompanyController extends Controller
      */
     public function index()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $companies = Company::orderBy('name', 'asc')
             ->paginate(10);
 
@@ -42,7 +49,8 @@ class CompanyController extends Controller
         }
 
         return view('dashboard.company.home', array(
-            'companies' => $companies
+            'companies' => $companies,
+            'notifications' => $notifications
         ));
     }
 
@@ -53,12 +61,19 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $categories = Category::orderBy('name', 'asc')->get()->all();
         $subcategories = Subcategory::orderBy('name', 'asc')->get()->all();
 
         return view('dashboard.company.create', array(
             'categories' => $categories,
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'notifications' => $notifications
         ));
     }
 
@@ -118,6 +133,12 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $company = Company::find($id);
         $categories = Category::orderBy('name', 'asc')->get()->all();
         $subcategories = Subcategory::orderBy('name', 'asc')->get()->all();
@@ -133,7 +154,8 @@ class CompanyController extends Controller
         return view('dashboard.company.edit', array(
             'company' => $company,
             'categories' => $categories,
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'notifications' => $notifications
         ));
     }
 
@@ -198,6 +220,12 @@ class CompanyController extends Controller
 
     public function search(Request $request)
     {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
         $companies = Company::where('name', 'like', '%' . $request['data'] . "%")
             ->orWhere('code', 'like', '%' . $request['data'] . "%")
             ->orWhere('description', 'like', '%' . $request['data'] . "%")
@@ -215,7 +243,8 @@ class CompanyController extends Controller
         }
 
         return view('dashboard.company.search', array(
-            'companies' => $companies
+            'companies' => $companies,
+            'notifications' => $notifications
         ));
     }
 }
