@@ -57,6 +57,12 @@
     border-radius: 5px;
     max-width: 300px;
 }
+@media (max-width: 760px) {
+    .company aside .card-area {
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+}
 .company aside .card-area .card-title {
     border-bottom: 1px solid #c4c4c4;
     padding: 10px 5px;
@@ -196,6 +202,67 @@
     font-size: 20px;
 }
 
+.company .company-card {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.company .company-card .star {
+    font-size: 25px;
+    color: #F9CA0A;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-left: 45px;
+}
+.company .company-card .title {
+    width: 100%;
+    display: flex;
+}
+@media (max-width: 760px) {
+    .company .company-card .title {
+        flex-wrap: wrap;
+    }
+}
+.company .company-card .title .img {
+    max-width: 30%;
+    margin-top: -50px;
+}
+.company .company-card .title .img  img {
+    width: 100%;
+    max-width: 150px;
+}
+.company .company-card .title .name {
+    width: 70%;
+    text-align: center;
+}
+.company .company-card .title .name p {
+    font-size: 30px;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin: 0;
+}
+.company .company-card .text-area p {
+    text-align: left;
+    margin: 15px 15px 15px 30px;
+    text-indent: 15px;
+}
+.company .company-card .btn-area {
+    text-align: center;
+    margin: 40px 0 30px;
+}
+.company .company-card .btn-area a {
+    background: var(--primary-color);
+    padding: 10px;
+    border-radius: 5px;
+    color: #ffffff;
+}
+.company .company-card .btn-area a:hover {
+    font-weight: bold;
+    box-shadow: 0px 0px 10px var(--primary-color);
+}
+
 .company .card-company {
     border: 1px solid #c4c4c4;
     border-radius: 10px;
@@ -209,11 +276,12 @@
 }
 .company .card-company .img-area {
     float: left;
-    margin: 10px;
+    margin: 0 30px 30px 0;
+    width: 100%;
+    max-width: 360px;
 }
 .company .card-company .img-area img {
     width: 100%;
-    max-width: 260px;
 }
 .company .card-company .description {
     text-indent: 10px;
@@ -223,6 +291,15 @@
     margin: 20px 0;
 }
 .company .card-company .links ul li {
+    margin-bottom: 10px;
+}
+.company .card-company .star {
+    margin: 0 0 20px;
+    color: #F9CA0A;
+    font-size: 30px;
+    text-align: center;
+}
+.company .card-company .time ul li {
     margin-bottom: 10px;
 }
 .company .card-company .mapa-area iframe {

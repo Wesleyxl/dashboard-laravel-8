@@ -30,10 +30,10 @@
                         <div class="card-area">
                             <div class="card-title">
                                 <p>Faça sua busca</p>
-                                <div class="input-area">
+                                {{-- <div class="input-area">
                                     <input type="text" name="search" id="search" class="form-control">
                                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="card-content">
                                 <p>Categorias</p>

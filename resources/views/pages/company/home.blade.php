@@ -30,10 +30,10 @@
                        <div class="card-area">
                            <div class="card-title">
                                <p>Faça sua busca</p>
-                               <div class="input-area">
+                               {{-- <div class="input-area">
                                    <input type="text" name="search" id="search" class="form-control">
                                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                               </div>
+                               </div> --}}
                            </div>
                            <div class="card-content">
                                <p>Categorias</p>
@@ -55,7 +55,65 @@
                    </aside>
                </div>
                <div class="col-md-8">
-
+                    @foreach ($companies as $company)
+                        <div class="company-card">
+                            <div class="star">
+                                @if($company['stars'] <= 10)
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                @elseif($company['stars'] > 10 && $company['stars'] <= 20)
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                @elseif($company['stars'] > 20 && $company['stars'] <= 30)
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                @elseif($company['stars'] > 30 && $company['stars'] <= 40)
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                @else
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                @endif
+                            </div>
+                            <div class="title">
+                                <div class="img">
+                                    @if($company['img'] != null)
+                                        <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
+                                    @else
+                                        <img src="{{ URL::to('/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
+                                    @endif
+                                </div>
+                                <div class="name">
+                                    <p>{{ $company['name'] }}</p>
+                                </div>
+                            </div>
+                            <div class="text-area">
+                                <p><strong>Descrição</strong>: {{ $company['description'] }}</p>
+                            </div>
+                            <hr>
+                            <div class="street">
+                                <p><i class="fa-solid fa-location-dot"></i> {{ $company['street'] }}, {{ $company['number'] }} - {{ $company['neighborhood'] }}, {{ $company['city'] }} - {{ $company['uf'] }}, {{ $company['cep'] }}</p>
+                            </div>
+                            <div class="btn-area">
+                                <a href="{{ url('/categoria/'.$company['category'].'/'.$company['subcategory'].'/empresa/'.$company['url']) }}">Visualizar</a>
+                            </div>
+                        </div>
+                    @endforeach
                </div>
            </div>
        </div>
@@ -72,7 +130,7 @@
                <div style="top: 50%; left: -35px;" class="swiper-button-prev2" tabindex="0" role="button" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></div>
                <div class="swiper-containers">
                    <div class="swiper-wrapper">
-                       @foreach ($companies as $company)
+                       @foreach ($highlights as $company)
                            <div class="swiper-slide">
                                <div class="card-highlights">
                                    <div class="card-highlights-header">

@@ -57,6 +57,12 @@
     border-radius: 5px;
     max-width: 300px;
 }
+@media (max-width: 760px) {
+    .category aside .card-area {
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+}
 .category aside .card-area .card-title {
     border-bottom: 1px solid #c4c4c4;
     padding: 10px 5px;

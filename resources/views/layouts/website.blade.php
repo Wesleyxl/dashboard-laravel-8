@@ -81,7 +81,7 @@
                 <ul>
                     <li><a href="/"  alt="Início" title="Início" class="@yield('a-home')">Início</a></li>
                     <li><a href="/sobre" alt="Sobre" title="Sobre"  class="@yield('a-about')">Sobre</a></li>
-                    <li><a href="/categorias" alt="Categorias" title="Categorias"  class="@yield('a-category')">Categorias</a></li>
+                    <li><a href="/categoria" alt="Categorias" title="Categorias"  class="@yield('a-category')">Categorias</a></li>
                     <li><a href="/empresas" alt="Empresas" title="Empresas"  class="@yield('a-company')">Empresas</a></li>
                     <li><a href="/contato" alt="Contato" title="Contato"  class="@yield('a-contact')">Contato</a></li>
                 </ul>

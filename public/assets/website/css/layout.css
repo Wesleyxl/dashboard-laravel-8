@@ -19,6 +19,9 @@ a:hover {
 li {
     list-style: none;
 }
+.highlights {
+    overflow-x: hidden !important;
+}
 /* END GERAL */
 /* HEADER */
 header {

@@ -94,7 +94,8 @@ class WebsiteCategoryController extends Controller
         $subcategoryFind = Subcategory::select('id', 'name', 'url')->where('url', $subcategory)->get()->first();
 
 
-        $companies = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'description')
+        $companies = Company::select('id', 'name', 'description', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
+            ->orderBy('name', 'asc')
             ->where('category_id', $categoryFind['id'])
             ->where('subcategory_id', $subcategoryFind['id'])
             ->get()->all();
@@ -105,6 +106,14 @@ class WebsiteCategoryController extends Controller
 
             $company['category'] = $category_name['url'];
             $company['subcategory'] = $subcategory_name['url'];
+        }
+
+        foreach ($companies as $item) {
+            $category_name = Category::select('url')->where('id', $item['category_id'])->get()->first();
+            $subcategory_name = Subcategory::select('url')->where('id', $item['subcategory_id'])->get()->first();
+
+            $item['category'] = $category_name['url'];
+            $item['subcategory'] = $subcategory_name['url'];
         }
 
         $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();

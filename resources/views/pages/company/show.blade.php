@@ -30,10 +30,10 @@
                        <div class="card-area">
                            <div class="card-title">
                                <p>Faça sua busca</p>
-                               <div class="input-area">
+                               {{-- <div class="input-area">
                                    <input type="text" name="search" id="search" class="form-control">
                                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                               </div>
+                               </div> --}}
                            </div>
                            <div class="card-content">
                                <p>Categorias</p>
@@ -56,6 +56,40 @@
                </div>
                <div class="col-md-8">
                     <div class="card-company">
+
+                        <div class="star">
+                            @if($company['stars'] <= 10)
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            @elseif($company['stars'] > 10 && $company['stars'] <= 20)
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            @elseif($company['stars'] > 20 && $company['stars'] <= 30)
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            @elseif($company['stars'] > 30 && $company['stars'] <= 40)
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            @else
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            @endif
+                        </div>
                         <div class="title">
                             <h2>{{ $company['name'] }}</h2>
                         </div>
@@ -76,13 +110,116 @@
                                 <li><i class="fa-solid fa-mobile-screen"></i> {{ $company['cellphone'] }}</li>
                                 <li><i class="fa-regular fa-envelope"></i> {{ $company['email'] }}</li>
                                 <li><i class="fa-solid fa-location-dot"></i> {{ $company['street'].', '.$company['number'].", ". $company['neighborhood'].' - '.$company['city'].' - '.$company['uf'] }}</li>
+                                <li><i class="fa-solid fa-link"></i> {{ $company['website'] }}</li>
                             </ul>
                         </div>
                         <div class="time">
                             <p><strong>Horário de funcionamento</strong></p>
                             <ul>
-                                <li><i class="fa-regular fa-calendar-check"></i> </li>
-                                <li><i class="fa-regular fa-clock"></i></li>
+                                <li>
+                                    <strong>Segunda-Feira:
+                                    @if($company['monday-is-open'])
+                                        </strong> das {{ $company['monday-from'] }}hs até {{ $company['monday-to'] }}hrs - Almoço das {{ $company['monday-lunch-from'] }}hrs até {{ $company['monday-lunch-to'] }}hrs -
+                                        @if($company['monday-from'] <= $currentTime && $company['monday-to'] >= $currentTime)
+                                            <strong class="text-success">Aberto </strong>
+                                        @else
+                                            <strong class="text-danger">Fechado </strong>
+                                        @endif
+                                    @else
+                                        <strong class="text-danger">Fechado</strong>
+                                    @endif
+                                </li>
+                                <li>
+                                    <strong>Terça-Feira:
+                                    @if($company['tuesday-is-open'])
+                                        </strong> das {{ $company['tuesday-from'] }}hs até {{ $company['tuesday-to'] }}hrs - Almoço das {{ $company['tuesday-lunch-from'] }}hrs até {{ $company['tuesday-lunch-to'] }}hrs -
+                                        @if($company['tuesday-from'] <= $currentTime && $company['tuesday-to'] >= $currentTime)
+                                            <strong class="text-success">Aberto </strong>
+                                        @else
+                                            <strong class="text-danger">Fechado </strong>
+                                        @endif
+                                    @else
+                                        <strong class="text-danger">Fechado</strong>
+                                    @endif
+                                </li>
+                                <li>
+                                    <strong>Quarta-Feira:
+                                    @if($company['wednesday-is-open'])
+                                        </strong> das {{ $company['wednesday-from'] }}hs até {{ $company['wednesday-to'] }}hrs - Almoço das {{ $company['wednesday-lunch-from'] }}hrs até {{ $company['wednesday-lunch-to'] }}hrs -
+                                        @if($company['wednesday-from'] <= $currentTime && $company['wednesday-to'] >= $currentTime)
+                                            <strong class="text-success">Aberto </strong>
+                                        @else
+                                            <strong class="text-danger">Fechado </strong>
+                                        @endif
+                                    @else
+                                        <strong class="text-danger">Fechado</strong>
+                                    @endif
+                                </li>
+                                <li>
+                                    <strong>Quinta-Feira:
+                                    @if($company['thursday-is-open'])
+                                        </strong> das {{ $company['thursday-from'] }}hs até {{ $company['thursday-to'] }}hrs - Almoço das {{ $company['thursday-lunch-from'] }}hrs até {{ $company['thursday-lunch-to'] }}hrs -
+                                        @if($company['thursday-from'] <= $currentTime && $company['thursday-to'] >= $currentTime)
+                                            <strong class="text-success">Aberto </strong>
+                                        @else
+                                            <strong class="text-danger">Fechado </strong>
+                                        @endif
+                                    @else
+                                        <strong class="text-danger">Fechado</strong>
+                                    @endif
+                                </li>
+                                <li>
+                                    <strong>Sexta-Feira:
+                                    @if($company['friday-is-open'])
+                                        </strong> das {{ $company['friday-from'] }}hs até {{ $company['friday-to'] }}hrs - Almoço das {{ $company['friday-lunch-from'] }}hrs até {{ $company['friday-lunch-to'] }}hrs -
+                                        @if($company['friday-from'] <= $currentTime && $company['friday-to'] >= $currentTime)
+                                            <strong class="text-success">Aberto </strong>
+                                        @else
+                                            <strong class="text-danger">Fechado </strong>
+                                        @endif
+                                    @else
+                                        <strong class="text-danger">Fechado</strong>
+                                    @endif
+                                </li>
+                                <li>
+                                    <strong>Sábado:
+                                    @if($company['saturnday-is-open'])
+                                        </strong> das {{ $company['saturnday-from'] }}hs até {{ $company['saturnday-to'] }}hrs - Almoço das {{ $company['saturnday-lunch-from'] }}hrs até {{ $company['saturnday-lunch-to'] }}hrs -
+                                        @if($company['saturnday-from'] <= $currentTime && $company['saturnday-to'] >= $currentTime)
+                                            <strong class="text-success">Aberto </strong>
+                                        @else
+                                            <strong class="text-danger">Fechado </strong>
+                                        @endif
+                                    @else
+                                        <strong class="text-danger">Fechado</strong>
+                                    @endif
+                                </li>
+                                <li>
+                                    <strong>Domingo:
+                                    @if($company['sunday-is-open'])
+                                        </strong> das {{ $company['sunday-from'] }}hs até {{ $company['sunday-to'] }}hrs - Almoço das {{ $company['sunday-lunch-from'] }}hrs até {{ $company['sunday-lunch-to'] }}hrs -
+                                        @if($company['sunday-from'] <= $currentTime && $company['sunday-to'] >= $currentTime)
+                                            <strong class="text-success">Aberto </strong>
+                                        @else
+                                            <strong class="text-danger">Fechado </strong>
+                                        @endif
+                                    @else
+                                        <strong class="text-danger">Fechado</strong>
+                                    @endif
+                                </li>
+                                <li>
+                                    <strong>Feriado:
+                                    @if($company['holiday-is-open'])
+                                        </strong> das {{ $company['holiday-from'] }}hs até {{ $company['holiday-to'] }}hrs - Almoço das {{ $company['holiday-lunch-from'] }}hrs até {{ $company['holiday-lunch-to'] }}hrs -
+                                        @if($company['holiday-from'] <= $currentTime && $company['holiday-to'] >= $currentTime)
+                                            <strong class="text-success">Aberto </strong>
+                                        @else
+                                            <strong class="text-danger">Fechado </strong>
+                                        @endif
+                                    @else
+                                        <strong class="text-danger">Fechado</strong>
+                                    @endif
+                                </li>
                             </ul>
                         </div>
                         <div class="mapa-area">
