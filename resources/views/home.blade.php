@@ -4,7 +4,7 @@
 @section('content')
 
     <!-- links -->
-    <link rel="stylesheet" href="{{ URL::to('/assets/website/css/home.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('/public/assets/website/css/home.css') }}">
     <!-- end links -->
 
     <!-- Intro -->
@@ -119,7 +119,7 @@
                                         <div class="link">
                                             <a href="#">Saiba +</a>
                                         </div>
-                                        <img src="{{ URL::to('/assets/website/img/home/highlights-img.png') }}" alt="">
+                                        <img src="{{ URL::to('/public/assets/website/img/home/highlights-img.png') }}" alt="">
                                 </div>
                                 <div class="card-highlights-body">
                                     <div class="title">
@@ -139,8 +139,8 @@
         </div>
     </section>
     <!-- End Highlights -->
-    <link rel="stylesheet" href="{{ URL::to('/assets/website/css/swiper.css') }}">
-    <script src="{{ URL::to('/assets/website/js/swiper.js') }}"></script>
+    <link rel="stylesheet" href="{{ URL::to('/public/assets/website/css/swiper.css') }}">
+    <script src="{{ URL::to('/public/assets/website/js/swiper.js') }}"></script>
     <script>
 
         var documentation = window.innerWidth;

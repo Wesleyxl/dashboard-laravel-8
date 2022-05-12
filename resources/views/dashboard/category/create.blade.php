@@ -6,7 +6,7 @@
 @section('content')
 
 <!-- links -->
-<link rel="stylesheet" href="{{ URL::to('/assets/dashboard/css/layout.css') }}">
+<link rel="stylesheet" href="{{ URL::to('/public/assets/dashboard/css/layout.css') }}">
 <!-- end links -->
 
 <!-- Content Header (Page header) -->

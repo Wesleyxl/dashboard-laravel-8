@@ -4,7 +4,7 @@
 @section('content')
 
 <!-- links -->
-<link rel="stylesheet" href="{{ URL::to('/assets/website/css/company.css') }}">
+<link rel="stylesheet" href="{{ URL::to('/public/assets/website/css/company.css') }}">
 <!-- end links -->
 
 <!-- Banner -->
@@ -95,7 +95,7 @@
                             @if($company['img'] != null)
                             <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
                             @else
-                            <img src="{{ URL::to('/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
+                            <img src="{{ URL::to('/public/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
                             @endif
                         </div>
                         <div class="name">
@@ -178,7 +178,7 @@
                                 @if($company['img'] != null)
                                 <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
                                 @else
-                                <img src="{{ URL::to('/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
+                                <img src="{{ URL::to('/public/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
                                 @endif
                             </div>
                             <div class="card-highlights-body">
@@ -199,8 +199,8 @@
     </div>
 </section>
 <!-- End Highlights -->
-<link rel="stylesheet" href="{{ URL::to('/assets/website/css/swiper.css') }}">
-<script src="{{ URL::to('/assets/website/js/swiper.js') }}"></script>
+<link rel="stylesheet" href="{{ URL::to('/public/assets/website/css/swiper.css') }}">
+<script src="{{ URL::to('/public/assets/website/js/swiper.js') }}"></script>
 <script>
 
     var categoryActive = '{{ $categoryFind["id"] }}';

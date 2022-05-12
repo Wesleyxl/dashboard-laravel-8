@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ URL::to('/assets/website/css/layout.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('/public/assets/website/css/layout.css') }}">
     <!-- end links -->
 
     <title>@yield('title')</title>
@@ -44,7 +44,7 @@
         <div class="desktop-menu">
             <div class="logo">
                 <a href="/">
-                    <img src="{{ URL::to('/assets/website/img/logo.png') }}" alt="Darus Tecnologia" title="Darus Tecnologia">
+                    <img src="{{ URL::to('/public/assets/website/img/logo.png') }}" alt="Darus Tecnologia" title="Darus Tecnologia">
                 </a>
             </div>
             <nav>
@@ -63,7 +63,7 @@
             <div class="navigation">
                 <div class="logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ URL::to('/assets/website/img/logo.png') }}" alt="Darus Tecnologia" title="Darus Tecnologia">
+                        <img src="{{ URL::to('/public/assets/website/img/logo.png') }}" alt="Darus Tecnologia" title="Darus Tecnologia">
                     </a>
                 </div>
                 <div class="btn-area">
@@ -143,7 +143,7 @@
 
     <!-- scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ URL::to('/assets/website/js/main.js') }}"></script>
+    <script src="{{ URL::to('/public/assets/website/js/main.js') }}"></script>
     <!-- end scripts -->
 
 </body>

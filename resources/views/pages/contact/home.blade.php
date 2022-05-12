@@ -4,7 +4,7 @@
 @section('content')
 
     <!-- links -->
-    <link rel="stylesheet" href="{{ URL::to('/assets/website/css/contact.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('/public/assets/website/css/contact.css') }}">
     <!-- end links -->
 
 
