@@ -193,4 +193,72 @@ class EmailController extends Controller
             'notifications' => $notifications
         ));
     }
+
+    public function send()
+    {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
+        $emails = Email::orderBy('id', 'desc')
+            ->where('status', 'send')
+            ->paginate(10);
+
+        $unreads = Email::orderBy('id', 'desc')
+            ->where('read', 0)
+            ->where('status', 'inbox')
+            ->get()->all();
+
+        return view('dashboard.email.send', array(
+            'emails' => $emails,
+            'unreads' => $unreads,
+            'notifications' => $notifications
+        ));
+    }
+
+    public function filter($filter)
+    {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
+        $emails = Email::orderBy('id', 'desc')
+            ->where('status', 'inbox')
+            ->where('label', '=', $filter)
+            ->paginate(10);
+
+        $unreads = Email::orderBy('id', 'desc')
+            ->where('read', 0)
+            ->where('status', 'inbox')
+            ->get()->all();
+
+        return view('dashboard.email.home', array(
+            'emails' => $emails,
+            'unreads' => $unreads,
+            'notifications' => $notifications
+        ));
+    }
+
+    public function sendShow($id)
+    {
+        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
+
+        foreach ($notifications as $notification) {
+            $notification['time'] = static::runningTime($notification['created_at']);
+        }
+
+        $email = Email::find($id);
+
+        $unread = count(Email::select('id')->where('read', 0)->get()->all());
+
+        return view('dashboard.email.sendShow', array(
+            'email' => $email,
+            'unread' => $unread,
+            'notifications' => $notifications
+        ));
+    }
 }

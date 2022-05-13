@@ -239,6 +239,8 @@
                                                 <td class="mailbox-date">5 mins ago</td>
                                             </tr>
                                         @endforeach
+                                    @else
+                                        <th>Nenhum email foi encontrado</th>
                                     @endif
                                 </tbody>
                             </table>
@@ -270,14 +272,9 @@
                                 <i class="fas fa-sync-alt"></i>
                             </button>
                             <div class="float-right">
-                                1-50/200
+                                {{-- 1-50/200 --}}
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-sm">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
+                                    {{ $emails->links('pagination::bootstrap-4') }}
                                 </div>
                                 <!-- /.btn-group -->
                             </div>

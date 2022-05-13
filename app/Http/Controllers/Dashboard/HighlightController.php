@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Email;
+use App\Models\HighLight;
 use Illuminate\Http\Request;
 
 class HighlightController extends Controller
@@ -20,6 +22,13 @@ class HighlightController extends Controller
         foreach ($notifications as $notification) {
             $notification['time'] = static::runningTime($notification['created_at']);
         }
+
+        $highlights = HighLight::get()->all();
+
+        return view('dashboard.highlights.home', array(
+            'highlights' => $highlights,
+            'notifications' => $notifications
+        ));
     }
 
     /**
@@ -85,6 +94,14 @@ class HighlightController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $highlight = HighLight::find($id);
+
+        try {
+            $highlight->delete();
+            return redirect()->back()->with('warning', 'Destaque deletado com sucesso!');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
+        }
     }
 }

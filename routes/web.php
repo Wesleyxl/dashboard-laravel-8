@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('rascunho', [DashboardEmailController::class, 'sketch'])->name('dashboard-email-sketch');
             Route::get('lixeira', [DashboardEmailController::class, 'trash'])->name('dashboard-email-trash');
             Route::get('enviados', [DashboardEmailController::class, 'send'])->name('dashboard-email-send');
+            Route::get('enviados/{id}', [DashboardEmailController::class, 'sendShow'])->name('dashboard-email-send-show');
             Route::get('filtro/{filter}', [DashboardEmailController::class, 'filter'])->name('dashboard-email-filter');
         });
 

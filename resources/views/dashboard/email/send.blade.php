@@ -2,24 +2,19 @@
 @section('title', 'Dashboard - Contato')
 @section('ul-contact', 'menu-open')
 @section('li-contact', 'active')
-@section('a-contact-create', 'active')
+@section('a-contact', 'active')
 @section('content')
 
 <!-- links -->
 <link rel="stylesheet" href="{{ URL::to('/public/assets/dashboard/css/layout.css') }}">
-<style>
-    body {
-        overflow-y: hidden;
-    }
-</style>
 <!-- end links -->
 
-@if (session('error'))
+@if (session('success'))
 <script>
     var click = 0;
     setInterval(() => {
         if (click == 0) {
-            $("#modal-error").trigger('click');
+            $("#modal-success").trigger('click');
             click = 1;
         }
     }, 0);
@@ -31,13 +26,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Enviar</h1>
+                <h1>Emails</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/adm">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard-email') }}">Emails</a></li>
-                    <li class="breadcrumb-item active">Enviar</li>
+                    <li class="breadcrumb-item active">Emails</li>
                 </ol>
             </div>
         </div>
@@ -49,7 +43,7 @@
     <div class="container" style="max-width: 1300px">
         <div class="row">
             <div class="col-md-3">
-                <a href="{{ route('dashboard-email') }}" class="btn btn-primary btn-block mb-3">Voltar para caixa de entrada</a>
+                <a href="{{ route('dashboard-email-create') }}" class="btn btn-primary btn-block mb-3">Enviar</a>
 
                 <div class="card">
                     <div class="card-header">
@@ -66,11 +60,11 @@
                             <li class="nav-item active">
                                 <a href="{{ route('dashboard-email') }}" class="nav-link">
                                     <i class="fas fa-inbox"></i> Caixa de entrada
-                                    <span class="badge bg-primary float-right">{{ $unread }}</span>
+                                    <span class="badge bg-primary float-right">{{ count($unreads) }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('dashboard-email-send') }}" class="nav-link">
+                                <a href="{{ route('dashboard-email-send') }}" class="nav-link"  style="color: #007bff;">
                                     <i class="far fa-envelope"></i> enviados
                                 </a>
                             </li>
@@ -99,7 +93,6 @@
                             </button>
                         </div>
                     </div>
-                    <!-- /.card-header -->
                     <div class="card-body p-0">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
@@ -122,7 +115,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('dashboard-email-filter', ['filter' => 'other']) }}" class="nav-link">
-                                    <i class="fa-solid fa-circle text-warning"></i>
+                                    <i class="fa-solid fa-circle text-secondary"></i>
                                     Outros
                                 </a>
                             </li>
@@ -136,70 +129,182 @@
             <div class="col-md-9">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">Enviar um novo email</h3>
+                        <h3 class="card-title">Enviados</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="Search Mail">
+                                <div class="input-group-append">
+                                    <div class="btn btn-primary">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-tools -->
                     </div>
                     <!-- /.card-header -->
-                    <form method="POST" action="{{ route('dashboard-email-store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="card-body">
-                            <div class="form-group">
-                               <input type="email" name="from" id="from" placeholder="De:" class="form-control @error('from') is-invalid @enderror">
-                                @error('from')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                    <div class="card-body p-0">
+                        <div class="mailbox-controls">
+                            @if(count($unreads) > 0 || count($emails) > 0)
+                            <!-- Check all button -->
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-share"></i>
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <input id="to" name="to" class="form-control @error('to') is-invalid @enderror" placeholder="Para:">
-                                @error('to')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <input id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" placeholder="Assunto:">
-                                @error('subject')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <textarea name="message" id="compose-textarea" class="form-control" style="height: 300px"></textarea>
-                            </div>
-
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
+                            <!-- /.btn-group -->
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
                             <div class="float-right">
-                                <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> enviar para rascunho</button>
-                                <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Enviar</button>
+                                1-50/200
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <!-- /.btn-group -->
                             </div>
-                            <button type="reset" class="btn btn-danger"><i class="fas fa-times"></i> Cancelar</button>
+                            <!-- /.float-right -->
+                            @endif
                         </div>
-                        <!-- /.card-footer -->
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                @if(count($unreads) > 0)
+                                        @foreach ($unreads as $unread)
+                                            <tr>
+                                                <td>
+                                                    <div class="icheck-primary">
+                                                        <input type="checkbox" value="" id="check{{ $unread['id'] }}">
+                                                        <label for="check{{ $unread['id'] }}"></label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    @if($unread['label'] == 'service')
+                                                    <i class="fa-solid fa-circle text-success"></i>
+                                                    @elseif ($unread['label'] == 'compliment')
+                                                    <i class="fa-solid fa-circle text-primary"></i>
+                                                    @elseif ($unread['label'] == 'complaint')
+                                                    <i class="fa-solid fa-circle text-danger"></i>
+                                                    @else
+                                                    <i class="fa-solid fa-circle text-secondary"></i>
+                                                    @endif
+                                                    <i class="fas fa-star text-warning" style="margin-left: 5px"></i>
+                                                </td>
+                                                <td class="mailbox-name"><a href="{{ route('dashboard-email-show', ['id' => $unread['id']]) }}">{{ $unread['from'] }}</a></td>
+                                                <td class="mailbox-subject"><b>Assunto</b> - {{ $unread['subject'] }}...
+                                                </td>
+                                                <td class="mailbox-attachment"></td>
+                                                <td class="mailbox-date">5 mins ago</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    @if (count($emails) > 0)
+                                        @foreach ($emails as $email)
+                                            <tr>
+                                                <td>
+                                                    <div class="icheck-primary">
+                                                        <input type="checkbox" value="" id="check{{ $email['id'] }}">
+                                                        <label for="check{{ $email['id'] }}"></label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    @if($email['label'] == 'service')
+                                                        <i class="fa-solid fa-circle text-success"></i>
+                                                    @elseif ($email['label'] == 'compliment')
+                                                        <i class="fa-solid fa-circle text-primary"></i>
+                                                    @elseif ($email['label'] == 'complaint')
+                                                        <i class="fa-solid fa-circle text-danger"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-circle text-secondary"></i>
+                                                    @endif
+                                                </td>
+                                                <td class="mailbox-name"><a href="{{ route('dashboard-email-send-show', ['id' => $email['id']]) }}">{{ $email['from'] }}</a></td>
+                                                <td class="mailbox-subject"><b>Assunto</b> - {{ $email['subject'] }}...
+                                                </td>
+                                                <td class="mailbox-attachment"></td>
+                                                <td class="mailbox-date">5 mins ago</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                            <!-- /.table -->
+                        </div>
+                        <!-- /.mail-box-messages -->
                     </div>
-                    <!-- /.card -->
-                </form>
+                    <!-- /.card-body -->
+                    <div class="card-footer p-0">
+                        <div class="mailbox-controls">
+                            @if(count($unreads) > 0 || count($emails) > 0)
+                            <!-- Check all button -->
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                                <i class="far fa-square"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fas fa-share"></i>
+                                </button>
+                            </div>
+                            <!-- /.btn-group -->
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <div class="float-right">
+                                {{-- 1-50/200 --}}
+                                <div class="btn-group">
+                                    {{ $emails->links('pagination::bootstrap-4') }}
+                                </div>
+                                <!-- /.btn-group -->
+                            </div>
+                            <!-- /.float-right -->
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
             </div>
             <!-- /.col -->
         </div>
         <!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 <!-- /.content -->
-@endsection
-<!-- modal error -->
-<button type="button" id="modal-error" style="opacity: 0" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalError">
+
+<!-- modal success -->
+<button type="button" id="modal-success" style="opacity: 0" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Launch demo modal
 </button>
-<div class="modal fade" id="exampleModalError" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-danger" id="exampleModalLabel"><strong>Error!</strong></h5>
+                <h5 class="modal-title text-success" id="exampleModalLabel"><strong>Sucesso!</strong></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p> {{ session('error') }}</p>
+                <p> {{ session('success') }}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
@@ -208,3 +313,5 @@
     </div>
 </div>
 <!-- /.modal -->
+
+@endsection
