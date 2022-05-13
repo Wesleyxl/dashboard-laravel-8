@@ -61,6 +61,19 @@ class WebsiteHomeController extends Controller
         $subcategories = Subcategory::select('id', 'name', 'url', 'category_id')->orderBy('name', 'asc')
             ->get()->all();
 
+        $highlights = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
+            ->orderBy('name', 'asc')
+            ->get()
+            ->all();
+
+        foreach ($highlights as $item) {
+            $category_name = Category::select('url')->where('id', $item['category_id'])->get()->first();
+            $subcategory_name = Subcategory::select('url')->where('id', $item['subcategory_id'])->get()->first();
+
+            $item['category'] = $category_name['url'];
+            $item['subcategory'] = $subcategory_name['url'];
+        }
+
         foreach ($companies as $company) {
             $category = Category::select('id', 'url')
                 ->where('id', $company['category_id'])
@@ -81,7 +94,8 @@ class WebsiteHomeController extends Controller
             'companies' => $companies,
             'categories' => $categories,
             'subcategories' => $subcategories,
-            'website' => $website
+            'website' => $website,
+            'highlights' => $highlights
         ));
     }
 }

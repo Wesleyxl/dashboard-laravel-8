@@ -63,7 +63,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         @foreach ($notifications as $notification)
-                            <a href="#" class="dropdown-item">
+                            <a href="{{ url('/adm/email/ler/'.$notification['id']) }}" class="dropdown-item">
                                 <!-- Message Start -->
                                 <div class="media">
                                     {{-- <img src="{{ URL::to('/public/assets/dashboard/dist/img/user1-128x128.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle"> --}}
