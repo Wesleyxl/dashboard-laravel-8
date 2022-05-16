@@ -305,6 +305,21 @@
 .company .card-company .mapa-area iframe {
     width: 100%;
 }
+.company-show .btn-area {
+    margin: 30px 0;
+}
+.company-show .btn-area h6 {
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.company-show button {
+    color: #F9CA0A;
+}
+.company-show p {
+    font-weight: bold;
+}
 /* End company */
 
 /* Highlights */

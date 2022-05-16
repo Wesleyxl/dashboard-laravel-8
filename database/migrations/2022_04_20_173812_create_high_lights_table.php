@@ -17,6 +17,8 @@ class CreateHighLightsTable extends Migration
             $table->id();
             $table->foreignId('company_id');
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onUpdate('cascade');
         });
     }
 

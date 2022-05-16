@@ -90,6 +90,8 @@
                                     <th>Código</th>
                                     <th>Nome</th>
                                     <th>Categoria</th>
+                                    <th>views</th>
+                                    <th>Nota</th>
                                     <th>Criado em</th>
                                 </tr>
                             </thead>
@@ -111,6 +113,8 @@
                                     <td>#{{ $company['code'] }}</td>
                                     <td>{{ $company['name'] }}</td>
                                     <td>{{ $company['category_name'] }}</td>
+                                    <td>{{ $company['views'] }}</td>
+                                    <td>{{ $company['stars'] }}</td>
                                     <td>{{ $company['created_at'] }}</td>
                                 </tr>
                                 <div class="modal fade" id="modal-md-{{ $company['id'] }}">

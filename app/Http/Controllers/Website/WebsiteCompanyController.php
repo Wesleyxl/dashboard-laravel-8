@@ -71,6 +71,9 @@ class WebsiteCompanyController extends Controller
         $categoryFind = Category::where('url', $categoryUrl)->get()->first();
         $subcategoryFind = Subcategory::where('url', $subcategoryUrl)->get()->first();
 
+        $company['views'] = $company['views'] + 1;
+        $company->save();
+
         foreach ($highlights as $companyShow) {
             $category_name = Category::select('url')->where('id', $companyShow['category_id'])->get()->first();
             $subcategory_name = Subcategory::select('url')->where('id', $companyShow['subcategory_id'])->get()->first();
@@ -78,6 +81,7 @@ class WebsiteCompanyController extends Controller
             $companyShow['category'] = $category_name['url'];
             $companyShow['subcategory'] = $subcategory_name['url'];
         }
+
 
         $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
 
@@ -91,5 +95,25 @@ class WebsiteCompanyController extends Controller
             'website' => $website,
             'currentTime' => $currentTime
         ));
+    }
+
+    public function positive($id)
+    {
+        $company = Company::find($id);
+        $company['stars'] = $company['stars'] + 1;
+
+        $company->save();
+        return true;
+    }
+
+    public function negative($id)
+    {
+        $company = Company::find($id);
+        if ($company['stars'] >= 1) {
+            $company['stars'] = $company['stars'] - 1;
+            $company->save();
+        }
+
+        return true;
     }
 }

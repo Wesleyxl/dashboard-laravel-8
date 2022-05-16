@@ -3,9 +3,12 @@
 @section('content')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<div class="container">
+<div class="container" id="login">
     <div class="row justify-content-center">
+
+
         <div class="col-md-8">
+
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 

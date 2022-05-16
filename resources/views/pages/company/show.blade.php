@@ -55,8 +55,7 @@
                    </aside>
                </div>
                <div class="col-md-8">
-                    <div class="card-company">
-
+                    <div class="card-company company-show">
                         <div class="star">
                             @if($company['stars'] <= 10)
                                 <i class="fa-solid fa-star"></i>
@@ -112,6 +111,13 @@
                                 <li><i class="fa-solid fa-location-dot"></i> {{ $company['street'].', '.$company['number'].", ". $company['neighborhood'].' - '.$company['city'].' - '.$company['uf'] }}</li>
                                 <li><i class="fa-solid fa-link"></i> {{ $company['website'] }}</li>
                             </ul>
+                        </div>
+                        <div class="btn-area">
+                            <h6>Avaliar</h6>
+                            <div class="div" id="buttons">
+                                <button id="button-positive" class="btn btn-light">+ <i class="fa-solid fa-star"></i></button>
+                                <button id="button-negative" class="btn btn-light">- <i class="fa-solid fa-star"></i></button>
+                            </div>
                         </div>
                         <div class="time">
                             <p><strong>Horário de funcionamento</strong></p>
@@ -345,6 +351,39 @@
                },
            });
        }
+
+    $('body').on('click', '#button-positive', function(e){
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "GET",
+            url: "{{ url('/avaliar/empresa/positive/'.$company['id']) }}",
+            success: function(retorno){
+                $('#buttons').html("<p>Avaliado</p>");
+            }
+        });
+    });
+
+    $('body').on('click', '#button-negative', function(e){
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "GET",
+            url: "{{ url('/avaliar/empresa/negative/'.$company['id']) }}",
+            success: function(retorno){
+                $('#content').html("<p>Avaliado</p>");
+            }
+        });
+    });
+
    </script>
 
 

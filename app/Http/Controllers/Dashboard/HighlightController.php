@@ -23,7 +23,14 @@ class HighlightController extends Controller
             $notification['time'] = static::runningTime($notification['created_at']);
         }
 
-        $highlights = HighLight::get()->all();
+        $companies = HighLight::get()->all();
+
+        $highlights = array();
+        foreach ($companies as $company) {
+            $company_name = Company::where('id', $company['company_id'])->get()->first();
+            array_push($highlights, $company_name);
+        }
+
 
         return view('dashboard.highlights.home', array(
             'highlights' => $highlights,

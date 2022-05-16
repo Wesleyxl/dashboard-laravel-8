@@ -135,6 +135,9 @@ Route::prefix('/')->group(function () {
 
     Route::get('/contato', [WebsiteContactController::class, 'index'])->name('website-contact');
     Route::post('/contato', [WebsiteContactController::class, 'store'])->name('website-contact-store');
+
+    Route::get('/avaliar/empresa/positive/{id}', [WebsiteCompanyController::class, 'positive'])->name('website-company-positive');
+    Route::get('/avaliar/empresa/negative/{id}', [WebsiteCompanyController::class, 'negative'])->name('website-company-negative');
 });
 
 
