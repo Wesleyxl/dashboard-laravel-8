@@ -8,6 +8,7 @@ use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Email;
+use App\Models\HighLight;
 use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends Controller
@@ -142,6 +143,14 @@ class CompanyController extends Controller
         $company = Company::find($id);
         $categories = Category::orderBy('name', 'asc')->get()->all();
         $subcategories = Subcategory::orderBy('name', 'asc')->get()->all();
+
+        $highlight = HighLight::where('company_id', $company['id'])->get()->first();
+
+        if ($highlight) {
+            $company['highlight'] = true;
+        } else {
+            $company['highlight'] = false;
+        }
 
         $category_name = Category::select('name')
             ->where('id', $company['category_id'])->first();

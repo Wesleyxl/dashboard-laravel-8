@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\HighLight;
 use App\Models\Subcategory;
 use App\Models\WebsiteSettings;
 
@@ -19,17 +20,21 @@ class WebsiteCategoryController extends Controller
         $subcategories = Subcategory::select('id', 'category_id', 'name', 'url')
             ->orderBy('name', "asc")->get()->all();
 
-        $highlights = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
-            ->orderBy('name', 'asc')
-            ->get()
-            ->all();
+        $companies_highlights = HighLight::get()->all();
 
-        foreach ($highlights as $company) {
-            $category_name = Category::select('url')->where('id', $company['category_id'])->get()->first();
-            $subcategory_name = Subcategory::select('url')->where('id', $company['subcategory_id'])->get()->first();
+        $highlights = array();
+        foreach ($companies_highlights as $highlight) {
+            $company_name = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
+                ->where('id', $highlight['company_id'])->get()->first();
+            array_push($highlights, $company_name);
+        }
 
-            $company['category'] = $category_name['url'];
-            $company['subcategory'] = $subcategory_name['url'];
+        foreach ($highlights as $company_highlight) {
+            $category_name = Category::select('url')->where('id', $company_highlight['category_id'])->get()->first();
+            $subcategory_name = Subcategory::select('url')->where('id', $company_highlight['subcategory_id'])->get()->first();
+
+            $company_highlight['category'] = $category_name['url'];
+            $company_highlight['subcategory'] = $subcategory_name['url'];
         }
 
         $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
@@ -49,21 +54,25 @@ class WebsiteCategoryController extends Controller
         $subcategories = Subcategory::select('id', 'category_id', 'name', 'url')
             ->orderBy('name', "asc")->get()->all();
 
-        $highlights = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
-            ->orderBy('name', 'asc')
-            ->get()
-            ->all();
-
 
         $categoryFind = Category::select('id', 'name', 'url')->where('url', $category)->get()->first();
         $companies = Company::orderBy('name', "asc")->where('category_id', $categoryFind['id'])->get()->all();
 
-        foreach ($highlights as $company) {
-            $category_name = Category::select('url')->where('id', $company['category_id'])->get()->first();
-            $subcategory_name = Subcategory::select('url')->where('id', $company['subcategory_id'])->get()->first();
+        $companies_highlights = HighLight::get()->all();
 
-            $company['category'] = $category_name['url'];
-            $company['subcategory'] = $subcategory_name['url'];
+        $highlights = array();
+        foreach ($companies_highlights as $highlight) {
+            $company_name = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
+                ->where('id', $highlight['company_id'])->get()->first();
+            array_push($highlights, $company_name);
+        }
+
+        foreach ($highlights as $company_highlight) {
+            $category_name = Category::select('url')->where('id', $company_highlight['category_id'])->get()->first();
+            $subcategory_name = Subcategory::select('url')->where('id', $company_highlight['subcategory_id'])->get()->first();
+
+            $company_highlight['category'] = $category_name['url'];
+            $company_highlight['subcategory'] = $subcategory_name['url'];
         }
 
         $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
@@ -85,10 +94,6 @@ class WebsiteCategoryController extends Controller
         $subcategories = Subcategory::select('id', 'category_id', 'name', 'url')
             ->orderBy('name', "asc")->get()->all();
 
-        $highlights = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
-            ->orderBy('name', 'asc')
-            ->get()
-            ->all();
 
         $categoryFind = Category::select('id', 'name', 'url')->where('url', $category)->get()->first();
         $subcategoryFind = Subcategory::select('id', 'name', 'url')->where('url', $subcategory)->get()->first();
@@ -100,13 +105,6 @@ class WebsiteCategoryController extends Controller
             ->where('subcategory_id', $subcategoryFind['id'])
             ->get()->all();
 
-        foreach ($highlights as $company) {
-            $category_name = Category::select('url')->where('id', $company['category_id'])->get()->first();
-            $subcategory_name = Subcategory::select('url')->where('id', $company['subcategory_id'])->get()->first();
-
-            $company['category'] = $category_name['url'];
-            $company['subcategory'] = $subcategory_name['url'];
-        }
 
         foreach ($companies as $item) {
             $category_name = Category::select('url')->where('id', $item['category_id'])->get()->first();
@@ -114,6 +112,23 @@ class WebsiteCategoryController extends Controller
 
             $item['category'] = $category_name['url'];
             $item['subcategory'] = $subcategory_name['url'];
+        }
+
+        $companies_highlights = HighLight::get()->all();
+
+        $highlights = array();
+        foreach ($companies_highlights as $highlight) {
+            $company_name = Company::select('id', 'name', 'url', 'street', 'city', 'uf', 'neighborhood', 'number', 'cep', 'stars', 'category_id', 'subcategory_id', 'img')
+                ->where('id', $highlight['company_id'])->get()->first();
+            array_push($highlights, $company_name);
+        }
+
+        foreach ($highlights as $company_highlight) {
+            $category_name = Category::select('url')->where('id', $company_highlight['category_id'])->get()->first();
+            $subcategory_name = Subcategory::select('url')->where('id', $company_highlight['subcategory_id'])->get()->first();
+
+            $company_highlight['category'] = $category_name['url'];
+            $company_highlight['subcategory'] = $subcategory_name['url'];
         }
 
         $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();

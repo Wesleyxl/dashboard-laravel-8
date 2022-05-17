@@ -581,6 +581,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group d-flex flex-column p-2">
+                                <label for="highlights">Colocar em <strong>Destaques</strong></label>
+                                @if ($company['highlight'] === true)
+                                    <input type="checkbox" name="highlights" id="highlights" style="width: 30px; height: 30px;" checked>
+                                @else
+                                    <input type="checkbox" name="highlights" id="highlights" style="width: 30px; height: 30px;">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="btn-area d-flex justify-content-between">
                         <a href="{{ route('dashboard-company') }}" class="btn btn-primary">Voltar</a>

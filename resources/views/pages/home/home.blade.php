@@ -186,6 +186,10 @@
                 slidesPerView: 1,
                 spaceBetween: 30,
                 loop: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
                 navigation: {
                     nextEl: '.swiper-button-next2',
                     prevEl: '.swiper-button-prev2',
@@ -196,6 +200,10 @@
                 slidesPerView: 4,
                 spaceBetween: 30,
                 loop: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
                 navigation: {
                     nextEl: '.swiper-button-next2',
                     prevEl: '.swiper-button-prev2',

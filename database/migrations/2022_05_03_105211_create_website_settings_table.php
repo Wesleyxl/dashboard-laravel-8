@@ -15,6 +15,7 @@ class CreateWebsiteSettingsTable extends Migration
     {
         Schema::create('website_settings', function (Blueprint $table) {
             $table->id();
+            $table->integer('views')->default(0);
             $table->string('phone');
             $table->string('cellphone');
             $table->string('email');

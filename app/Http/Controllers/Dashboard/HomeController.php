@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Email;
+use App\Models\WebsiteSettings;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,6 +34,8 @@ class HomeController extends Controller
             $notification['time'] = static::runningTime($notification['created_at']);
         }
 
+        $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
+
         $company = count(Company::select('id')->get()->all());
         $category = count(Category::select('id')->get()->all());
         $email = count(Email::select('id')->where('status', 'inbox')->get()->all());
@@ -42,6 +45,7 @@ class HomeController extends Controller
             'email' => $email,
             'category' => $category,
             'notifications' => $notifications,
+            'website' => $website
         ));
     }
 }

@@ -223,8 +223,8 @@
                             <!-- end company -->
 
                             <!-- highlights -->
-                            <li class="nav-item @yield('li-highlight')">
-                                <a href="#" class="nav-link @yield('a-highlight')">
+                            <li class="nav-item @yield('ul-highlight')">
+                                <a href="#" class="nav-link @yield('li-highlight')">
                                     <i class="fas fa-star nav-icon"></i>
                                     <p>
                                         Destaque
@@ -233,7 +233,7 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="{{ route('dashboard-highlight') }}" class="nav-link">
+                                        <a href="{{ route('dashboard-highlight') }}" class="nav-link @yield('a-highlight')">
                                             <i class="fa-solid fa-eye"></i>
                                             <p>Visualizar</p>
                                         </a>

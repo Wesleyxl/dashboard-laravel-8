@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
-@section('title', 'Dashboard - Empresa')
-@section('ul-company', 'menu-open')
-@section('li-company', 'active')
-@section('a-company', 'active')
+@section('title', 'Dashboard - Destaques    ')
+@section('ul-highlight', 'menu-open')
+@section('li-highlight', 'active')
+@section('a-highlight', 'active')
 @section('content')
 
 <!-- links -->
@@ -82,72 +82,76 @@
                     <!-- /.card-header -->
                     <div class="card-body content p-0" id="content" >
                         <div class="d-flex justify-content-center">
-                            <a class="btn btn-primary m-3" href="{{ route('dashboard-highlight-create') }}">Editar Destaques</a>
+                            {{-- <a class="btn btn-primary m-3" href="{{ route('dashboard-highlight-create') }}">Editar Destaques</a> --}}
                         </div>
                         <div class="row" style="padding: 15px">
-                            @foreach ($highlights as $company)
-                                <div class="col-md-3">
-                                    <a href="{{ route('dashboard-highlight-destroy', ['id' => $company['id']] ) }}" class="btn btn-danger m-1"><i class="fa-solid fa-xmark"></i></a>
-                                    <div class="card-highlights">
-                                        <div class="card-highlights-header">
-                                            <div class="top">
-                                                <div class="star">
-                                                    @if($company['stars'] <= 10)
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                    @elseif($company['stars'] > 10 && $company['stars'] <= 20)
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                    @elseif($company['stars'] > 20 && $company['stars'] <= 30)
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                    @elseif($company['stars'] > 30 && $company['stars'] <= 40)
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
+                            @if(count($highlights) >= 1)
+                                @foreach ($highlights as $company)
+                                    <div class="col-md-3">
+                                        <a href="{{ route('dashboard-highlight-destroy', ['id' => $company['id']] ) }}" class="btn btn-danger m-1"><i class="fa-solid fa-xmark"></i></a>
+                                        <div class="card-highlights">
+                                            <div class="card-highlights-header">
+                                                <div class="top">
+                                                    <div class="star">
+                                                        @if($company['stars'] <= 10)
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                        @elseif($company['stars'] > 10 && $company['stars'] <= 20)
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                        @elseif($company['stars'] > 20 && $company['stars'] <= 30)
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                        @elseif($company['stars'] > 30 && $company['stars'] <= 40)
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-regular fa-star"></i>
+                                                        @else
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                            <i class="fa-solid fa-star"></i>
+                                                        @endif
+                                                    </div>
+                                                    <div class="button">
+                                                        <p>Destaque</p>
+                                                    </div>
+                                                </div>
+                                                    <div class="link">
+                                                    <a href="#">Saiba +</a>
+                                                    </div>
+                                                    @if($company['img'] != null)
+                                                        <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
                                                     @else
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
+                                                        <img src="{{ URL::to('/public/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
                                                     @endif
-                                                </div>
-                                                <div class="button">
-                                                    <p>Destaque</p>
-                                                </div>
                                             </div>
-                                                <div class="link">
-                                                 <a href="{{ url('/categoria/'.$company['category'].'/'.$company['subcategory'].'/empresa/'.$company['url']) }}">Saiba +</a>
+                                            <div class="card-highlights-body">
+                                                <div class="title">
+                                                    <p>{{ $company['name'] }}</p>
                                                 </div>
-                                                @if($company['img'] != null)
-                                                    <img src="{{ URL::to($company['img']) }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
-                                                @else
-                                                    <img src="{{ URL::to('/public/assets/website/img/no-image.webp') }}" alt="{{ $company['name'] }}" title="{{ $company['name'] }}">
-                                                @endif
-                                        </div>
-                                        <div class="card-highlights-body">
-                                            <div class="title">
-                                                <p>{{ $company['name'] }}</p>
-                                            </div>
-                                            <div class="text">
-                                                <p>{{ $company['street'] }}, {{ $company['number'] }} - {{ $company['neighborhood'] }}, {{ $company['city'] }} - {{ $company['uf'] }}, {{ $company['cep'] }}</p>
+                                                <div class="text">
+                                                    <p>{{ $company['street'] }}, {{ $company['number'] }} - {{ $company['neighborhood'] }}, {{ $company['city'] }} - {{ $company['uf'] }}, {{ $company['cep'] }}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @else
+                                <h1>Nenhuma empresa em destaques</h1>
+                            @endif
                         </div>
                     </div>
                     <!-- /.card-body -->

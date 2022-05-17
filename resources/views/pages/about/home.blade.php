@@ -41,7 +41,7 @@
                 <div style="top: 50%; left: -35px;" class="swiper-button-prev2" tabindex="0" role="button" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></div>
                 <div class="swiper-containers">
                     <div class="swiper-wrapper">
-                        @foreach ($companies as $company)
+                        @foreach ($highlights as $company)
                             <div class="swiper-slide">
                                 <div class="card-highlights">
                                     <div class="card-highlights-header">

@@ -165,6 +165,25 @@ class Company extends Model
             $company['holiday-lunch-to'] = $request['holiday-lunch-to'];
         }
 
+        if (isset($request['highlights'])) {
+            $highlights = HighLight::find($company['id']);
+            if (!$highlights) {
+                $highlight = new HighLight();
+                $highlight['company_id'] = $company['id'];
+                $highlight->save();
+            } else {
+                return true;
+            }
+        } else {
+            $highlights = HighLight::find($company['id']);
+            if (!$highlights) {
+                return true;
+            } else {
+                $highlight = HighLight::where('company_id', $company['id'])->get()->first();
+                $highlight->delete();
+            }
+        }
+
         if ($company->save()) {
             return $company;
         } else {
@@ -260,6 +279,25 @@ class Company extends Model
             $company['holiday-to'] = $request['holiday-to'];
             $company['holiday-lunch-from'] = $request['holiday-lunch-from'];
             $company['holiday-lunch-to'] = $request['holiday-lunch-to'];
+        }
+
+        if (isset($request['highlights'])) {
+            $highlights = HighLight::find($company['id']);
+            if (!$highlights) {
+                $highlight = new HighLight();
+                $highlight['company_id'] = $company['id'];
+                $highlight->save();
+            } else {
+                return true;
+            }
+        } else {
+            $highlights = HighLight::find($company['id']);
+            if (!$highlights) {
+                return true;
+            } else {
+                $highlight = HighLight::where('company_id', $company['id'])->get()->first();
+                $highlight->delete();
+            }
         }
 
         if ($company->save()) {
