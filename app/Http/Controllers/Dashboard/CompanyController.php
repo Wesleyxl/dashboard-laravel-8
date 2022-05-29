@@ -109,7 +109,7 @@ class CompanyController extends Controller
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
-        if (Company::create($request->all())) {
+        if (Company::create($request)) {
             return redirect('adm/empresa')->with('success', 'Empresa cadastrada com sucesso!');
         } else {
             return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');
@@ -200,7 +200,7 @@ class CompanyController extends Controller
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
-        if (Company::edit($request->all(), $id)) {
+        if (Company::edit($request, $id)) {
             return redirect('adm/empresa')->with('success', 'Empresa editada com sucesso!');
         } else {
             return redirect()->back()->with('error', 'Desculpe, algo deu errado durante sua solicitação. Tente outra vez');

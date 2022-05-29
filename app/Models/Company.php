@@ -166,23 +166,21 @@ class Company extends Model
         }
 
         if (isset($request['highlights'])) {
-            $highlights = HighLight::find($company['id']);
-            if (!$highlights) {
-                $highlight = new HighLight();
-                $highlight['company_id'] = $company['id'];
-                $highlight->save();
-            } else {
-                return true;
-            }
-        } else {
-            $highlights = HighLight::find($company['id']);
-            if (!$highlights) {
-                return true;
-            } else {
-                $highlight = HighLight::where('company_id', $company['id'])->get()->first();
-                $highlight->delete();
-            }
+
+            $highlight = new HighLight();
+            $highlight['company_id'] = $company['id'];
         }
+
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+
+
+            $name = $request['url'] . '.' . $image->getClientOriginalExtension();
+            $request->file('img')->move(public_path('assets/image/companies'), $name);
+
+            $company['img'] = 'public/assets/image/companies/' . $name;
+        }
+
 
         if ($company->save()) {
             return $company;
@@ -287,17 +285,32 @@ class Company extends Model
                 $highlight = new HighLight();
                 $highlight['company_id'] = $company['id'];
                 $highlight->save();
-            } else {
-                return true;
             }
         } else {
-            $highlights = HighLight::find($company['id']);
-            if (!$highlights) {
-                return true;
-            } else {
+            $highlights = HighLight::where('company_id', $company['id'])->get()->first();
+            if ($highlights) {
                 $highlight = HighLight::where('company_id', $company['id'])->get()->first();
                 $highlight->delete();
             }
+        }
+
+        if ($request->hasFile('img')) {
+
+            try {
+                //code...
+                unlink($company['img']);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+
+            $image = $request->file('img');
+
+
+            $name = $request['url'] . '.' . $image->getClientOriginalExtension();
+            $request->file('img')->move(public_path('assets/image/companies'), $name);
+
+
+            $company['img'] = 'public/assets/image/companies/' . $name;
         }
 
         if ($company->save()) {

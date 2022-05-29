@@ -577,7 +577,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="img-area">
-                                <img src="" alt="preview" id="preview">
+                                <img src="{{ URL::to($company['img']) }}" name="img" alt="preview" id="preview">
                             </div>
                         </div>
                     </div>

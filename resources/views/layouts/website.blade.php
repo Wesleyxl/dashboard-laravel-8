@@ -62,7 +62,7 @@
         <div class="mobile-menu">
             <div class="navigation">
                 <div class="logo">
-                    <a href="{{ route('home') }}">
+                    <a href="/">
                         <img src="{{ URL::to('/public/assets/website/img/logo.png') }}" alt="Darus Tecnologia" title="Darus Tecnologia">
                     </a>
                 </div>

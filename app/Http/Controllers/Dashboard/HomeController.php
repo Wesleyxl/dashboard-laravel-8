@@ -28,24 +28,40 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
 
-        foreach ($notifications as $notification) {
-            $notification['time'] = static::runningTime($notification['created_at']);
+        function isMobileDevice()
+        {
+            return preg_match(
+                "/(android|avantgo|blackberry|bolt|boost|cricket|docomo
+        |fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i",
+                $_SERVER["HTTP_USER_AGENT"]
+            );
+        }
+        if (isMobileDevice()) {
+            dd("Mobile Browser Detected");
+        } else {
+            dd("Mobile Browser Not Detected");
         }
 
-        $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
 
-        $company = count(Company::select('id')->get()->all());
-        $category = count(Category::select('id')->get()->all());
-        $email = count(Email::select('id')->where('status', 'inbox')->get()->all());
+        // $notifications = Email::orderBy('id', 'asc')->where('read', '=', 0)->get()->all();
 
-        return view('dashboard.home.home', array(
-            'company' => $company,
-            'email' => $email,
-            'category' => $category,
-            'notifications' => $notifications,
-            'website' => $website
-        ));
+        // foreach ($notifications as $notification) {
+        //     $notification['time'] = static::runningTime($notification['created_at']);
+        // }
+
+        // $website = WebsiteSettings::orderBy('id', 'asc')->get()->first();
+
+        // $company = count(Company::select('id')->get()->all());
+        // $category = count(Category::select('id')->get()->all());
+        // $email = count(Email::select('id')->where('status', 'inbox')->get()->all());
+
+        // return view('dashboard.home.home', array(
+        //     'company' => $company,
+        //     'email' => $email,
+        //     'category' => $category,
+        //     'notifications' => $notifications,
+        //     'website' => $website
+        // ));
     }
 }
