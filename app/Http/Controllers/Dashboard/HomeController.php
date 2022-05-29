@@ -29,18 +29,28 @@ class HomeController extends Controller
     public function index()
     {
 
-        function isMobileDevice()
-        {
-            return preg_match(
-                "/(android|avantgo|blackberry|bolt|boost|cricket|docomo
-        |fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i",
-                $_SERVER["HTTP_USER_AGENT"]
-            );
-        }
-        if (isMobileDevice()) {
-            dd("Mobile Browser Detected");
+        //Detect special conditions devices
+        $iPod    = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
+        $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+        $iPad    = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
+        $Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
+        $webOS   = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
+
+        //do something with this information
+        if ($iPod || $iPhone) {
+            //browser reported as an iPhone/iPod touch -- do something here
+            return "<h1 style='margin: 20px auto'>Iphone</h1>";
+        } else if ($iPad) {
+            //browser reported as an iPad -- do something here
+            return "<h1 style='margin: 20px auto'>Ipad</h1>";
+        } else if ($Android) {
+            //browser reported as an Android device -- do something here
+            return "<h1 style='margin: 20px auto'>Android</h1>";
+        } else if ($webOS) {
+            //browser reported as a webOS device -- do something here
+            return "<h1 style='margin: 20px auto'>WenOs</h1>";
         } else {
-            dd("Mobile Browser Not Detected");
+            return "<h1 style='margin: 20px auto'>Sei lá</h1>";
         }
 
 
