@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="description">Descrição</label>
@@ -79,7 +79,7 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="btn-area d-flex justify-content-between">
                         <a href="{{ route('dashboard-subcategory') }}" class="btn btn-primary">Voltar</a>

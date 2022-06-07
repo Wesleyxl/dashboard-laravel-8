@@ -34,6 +34,7 @@
             </div>
             <div class="card-body">
                 <form  method="POST" enctype="multipart/form-data" action="{{ route('dashboard-user-store') }}">
+                    @csrf
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">

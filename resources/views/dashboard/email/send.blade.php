@@ -43,7 +43,7 @@
     <div class="container" style="max-width: 1300px">
         <div class="row">
             <div class="col-md-3">
-                <a href="{{ route('dashboard-email-create') }}" class="btn btn-primary btn-block mb-3">Enviar</a>
+                {{-- <a href="{{ route('dashboard-email-create') }}" class="btn btn-primary btn-block mb-3">Enviar</a> --}}
 
                 <div class="card">
                     <div class="card-header">
@@ -73,11 +73,11 @@
                                     <i class="far fa-file-alt"></i> rascunhos
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('dashboard-email-trash') }}" class="nav-link">
                                     <i class="far fa-trash-alt"></i> lixeira
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <!-- /.card-body -->

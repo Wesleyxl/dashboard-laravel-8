@@ -216,9 +216,11 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         $company = Company::find($id);
+        $highlight = HighLight::where('company_id', $id)->get()->first();
 
         try {
             //code...
+            $highlight->delete();
             $company->delete();
             return redirect()->back()->with('warning', 'Empresa deletada com sucesso!');
         } catch (\Throwable $th) {

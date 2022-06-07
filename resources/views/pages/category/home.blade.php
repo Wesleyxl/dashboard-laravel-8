@@ -88,6 +88,7 @@
     </section>
     <!-- End Category -->
 
+    @if(count($highlights) >= 1)
     <!-- Highlights -->
     <section class="highlights" id="highlights">
         <div class="container" style="position: relative;">
@@ -167,6 +168,7 @@
         </div>
     </section>
     <!-- End Highlights -->
+    @endif
     <link rel="stylesheet" href="{{ URL::to('/public/assets/website/css/swiper.css') }}">
     <script src="{{ URL::to('/public/assets/website/js/swiper.js') }}"></script>
     <script>

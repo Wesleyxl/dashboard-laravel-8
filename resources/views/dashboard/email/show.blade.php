@@ -67,11 +67,11 @@
                                     <i class="far fa-file-alt"></i> rascunhos
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('dashboard-email-trash') }}" class="nav-link">
                                     <i class="far fa-trash-alt"></i> lixeira
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <!-- /.card-body -->
@@ -147,10 +147,10 @@
                     <!-- /.card-body -->
 
                     <!-- /.card-footer -->
-                    <div class="card-footer">
+                    {{-- <div class="card-footer">
                         <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
                         <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
-                    </div>
+                    </div> --}}
                     <!-- /.card-footer -->
                 </div>
                 <!-- /.card -->
